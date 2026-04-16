@@ -1,0 +1,233 @@
+:root {
+    --primary-color: #2b3a8f;
+    --primary-color-hover: #202d81;
+    --accent-color: #3b82f6;
+    --border-radius: 8px;
+    --nav-height: 54px;
+    --background-blur: blur(8px);
+}
+
+/* Modernize Navigation Bar */
+#judge0-site-navigation {
+    height: var(--nav-height) !important;
+    padding: 0 1rem !important;
+    backdrop-filter: var(--background-blur);
+    -webkit-backdrop-filter: var(--background-blur);
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: none !important;
+    display: flex;
+    align-items: center;
+}
+
+body.inverted #judge0-site-navigation {
+    background-color: rgba(27, 28, 29, 0.8) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#judge0-site-navigation .item {
+    padding: 0.5rem 0.75rem !important;
+    margin: 0 0.25rem !important;
+    border-radius: var(--border-radius) !important;
+}
+
+#judge0-site-navigation .item::before {
+    display: none !important;
+}
+
+#judge0-site-navigation .ui.dropdown .menu {
+    border-radius: var(--border-radius) !important;
+    margin-top: 5px !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+#judge0-logo {
+    height: 32px !important;
+    width: auto !important;
+}
+
+/* Run Button Modernization */
+#run-btn {
+    border-radius: var(--border-radius) !important;
+    background-color: var(--accent-color) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2) !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 0.75rem 1.25rem !important;
+}
+
+#run-btn:hover {
+    background-color: #2563eb !important;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3) !important;
+    transform: translateY(-1px);
+}
+
+#run-btn i.icon {
+    margin: 0 !important;
+}
+
+#run-btn:active {
+    transform: translateY(0);
+}
+
+/* Global Rounded Corners & Inputs */
+.ui.selection.dropdown,
+.ui.input input,
+.ui.button,
+.ui.modal,
+.ui.segment {
+    border-radius: var(--border-radius) !important;
+}
+
+.ui.input input:focus {
+    border-color: var(--accent-color) !important;
+}
+
+.ui.selection.dropdown:focus {
+    border-color: var(--accent-color) !important;
+}
+
+/* Typography */
+body, .ui.button, .ui.input input, .ui.dropdown, .ui.label {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+#judge0-status-line, .lm_tab, .monaco-editor {
+    font-family: "JetBrains Mono", monospace !important;
+}
+
+/* Golden Layout Modernization */
+.lm_header {
+    background: transparent !important;
+    height: 36px !important;
+}
+
+.lm_tab {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 15px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    margin-right: 2px !important;
+    color: #666 !important;
+    font-family: "JetBrains Mono", monospace !important;
+    font-size: 12px !important;
+    transition: all 0.2s ease !important;
+    border-top: 2px solid transparent !important;
+}
+
+body.inverted .lm_tab {
+    color: #aaa !important;
+}
+
+.lm_tab.lm_active {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: var(--accent-color) !important;
+    border-top: 2px solid var(--accent-color) !important;
+}
+
+body.inverted .lm_tab.lm_active {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.lm_content {
+    background: white !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 0 0 var(--border-radius) var(--border-radius) !important;
+}
+
+body.inverted .lm_content {
+    background: #1e1e1e !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.lm_splitter {
+    background: transparent !important;
+    opacity: 0.1;
+    transition: opacity 0.2s ease;
+}
+
+.lm_splitter:hover {
+    background: var(--accent-color) !important;
+    opacity: 0.5;
+}
+
+/* AI Assistant Chat Modernization */
+#judge0-chat-container {
+    border: none !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden;
+}
+
+.judge0-user-message {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+    border-radius: 16px 16px 4px 16px !important;
+    padding: 10px 16px !important;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2) !important;
+    margin-bottom: 1rem !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+}
+
+.judge0-ai-message {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+    border-radius: 16px 16px 16px 4px !important;
+    padding: 10px 16px !important;
+    margin: 1rem 1rem 0 1rem !important;
+    max-width: 85% !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+#judge0-chat-messages {
+    padding: 1rem !important;
+}
+
+#judge0-chat-input-container {
+    padding: 1rem !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+#judge0-chat-user-input {
+    border-radius: 20px !important;
+    padding-left: 1.5rem !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body.inverted #judge0-chat-user-input {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+#judge0-chat-send-button {
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    margin-left: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+body.inverted .judge0-ai-message {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Status Line */
+#judge0-status-line {
+    border-radius: 4px 0 0 0 !important;
+    padding: 4px 8px !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+    backdrop-filter: var(--background-blur);
+}
+
+body.inverted #judge0-status-line {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
