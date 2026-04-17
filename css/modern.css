@@ -386,11 +386,13 @@ body.inverted #judge0-mobile-menu-modal .ui.vertical.menu > .item:not(:last-chil
 .ui.dropdown .menu {
     max-height: 300px !important;
     overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
 }
 
 #judge0-mobile-menu-modal .ui.dropdown .menu {
-    max-height: 250px !important;
+    max-height: 40vh !important;
     z-index: 10001 !important;
+    -webkit-overflow-scrolling: touch;
 }
 
 #judge0-mobile-menu-modal {
