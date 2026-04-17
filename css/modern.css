@@ -64,7 +64,7 @@ body.inverted #judge0-site-navigation {
 }
 
 #run-btn i.icon {
-    margin: 0 0.5rem 0 0 !important;
+    margin: 0 !important;
 }
 
 #run-btn:active {
@@ -226,35 +226,4 @@ body.inverted .judge0-ai-message {
 
 body.inverted #judge0-status-line {
     background: rgba(255, 255, 255, 0.05) !important;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .judge0-hide-on-mobile {
-        display: none !important;
-    }
-
-    #judge0-site-navigation {
-        padding: 0 0.5rem !important;
-        overflow-x: auto;
-        overflow-y: hidden;
-    }
-
-    #judge0-site-navigation .item {
-        padding: 0.5rem 0.5rem !important;
-        margin: 0 0.1rem !important;
-    }
-
-    #select-language + .ui.dropdown {
-        max-width: 120px !important;
-        min-width: 80px !important;
-    }
-
-    #run-btn {
-        padding: 0.75rem 0.75rem !important;
-    }
-
-    #run-btn i.icon {
-        margin: 0 !important;
-    }
 }

@@ -53,7 +53,7 @@ var layoutConfig = {
         reorderEnabled: true
     },
     content: [{
-        type: window.innerWidth < 768 ? "stack" : configuration.get("appOptions.mainLayout"),
+        type: configuration.get("appOptions.mainLayout"),
         content: [{
             type: "component",
             width: 66,

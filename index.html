@@ -94,8 +94,7 @@
 <body>
     <div id="judge0-site-navigation" class="ui top fixed borderless menu judge0-showNavigation">
         <div class="ui simple dropdown item judge0-showFileMenu">
-            <i class="file icon"></i>
-            <span class="text judge0-hide-on-mobile">File</span>
+            <span class="text">File</span>
             <i class="dropdown icon"></i>
             <div class="menu judge0-file-menu">
                 <div id="judge0-open-file-btn" class="item">
@@ -109,26 +108,16 @@
                 </div>
             </div>
         </div>
-        <div class="ui simple dropdown item judge0-showHelpMenu">
-            <i class="help circle icon"></i>
-            <span class="text judge0-hide-on-mobile">Help</span>
-            <i class="dropdown icon"></i>
-            <div class="menu judge0-file-menu">
-                <a href="/embed" class="link text item" target="_blank"><i class="external square alternate icon"></i>Embed Guide</a>
-                <a href="PRIVACY.md" class="link text item" target="_blank"><i class="external square alternate icon"></i>Privacy Policy</a>
-                <a href="TERMS.md" class="link text item" target="_blank"><i class="external square alternate icon"></i>Terms of Service</a>
-            </div>
-        </div>
         <div class="item judge0-showSelectLanguage">
             <select id="select-language" class="ui search selection dropdown"></select>
         </div>
-        <div class="item judge0-showCompilerOptions judge0-hide-on-mobile">
+        <div class="item judge0-showCompilerOptions">
             <div class="ui left icon transparent input">
                 <i class="flag icon"></i>
                 <input id="compiler-options" type="text" placeholder="Compiler options"></input>
             </div>
         </div>
-        <div class="item judge0-showCommandLineArguments judge0-hide-on-mobile">
+        <div class="item judge0-showCommandLineArguments">
             <div class="ui left icon transparent input">
                 <i class="terminal icon"></i>
                 <input id="command-line-arguments" type="text" placeholder="Command line arguments"></input>
@@ -137,7 +126,7 @@
         <div class="item judge0-showRunButton">
             <button id="run-btn" class="ui primary labeled icon button" data-content="+↵">
                 <i class="play icon"></i>
-                <span class="judge0-hide-on-mobile">Run Code</span>
+                Run Code
             </button>
         </div>
         <div class="right menu">
@@ -147,11 +136,11 @@
             <div class="item judge0-showPuterSignInOutButton">
                 <button id="judge0-sign-in-btn" class="ui basic button">
                     <i class="sign-in icon"></i>
-                    <span class="judge0-hide-on-mobile">Sign in with Puter</span>
+                    Sign in with Puter
                 </button>
                 <button id="judge0-sign-out-btn" class="ui basic button" data-content="Sign out">
                     <i class="sign-out icon"></i>
-                    <span id="judge0-puter-username" class="judge0-hide-on-mobile">Sign out</span>
+                    <span id="judge0-puter-username">Sign out</span>
                 </button>
             </div>
         </div>
