@@ -398,7 +398,7 @@ async function loadLangauges() {
                     let language = data[i];
                     let option = new Option(language.name, language.id);
                     option.setAttribute("flavor", CE);
-                    option.setAttribute("langauge_mode", getEditorLanguageMode(language.name));
+                    option.setAttribute("language_mode", getEditorLanguageMode(language.name));
 
                     if (language.id !== 89) {
                         options.push(option);
@@ -418,7 +418,7 @@ async function loadLangauges() {
                         let language = data[i];
                         let option = new Option(language.name, language.id);
                         option.setAttribute("flavor", EXTRA_CE);
-                        option.setAttribute("langauge_mode", getEditorLanguageMode(language.name));
+                        option.setAttribute("language_mode", getEditorLanguageMode(language.name));
 
                         if (options.findIndex((t) => (t.text === option.text)) === -1 && language.id !== 89) {
                             options.push(option);
@@ -430,7 +430,7 @@ async function loadLangauges() {
                 options.sort((a, b) => a.text.localeCompare(b.text));
                 $selectLanguage.append(options);
                 $("#select-language-mobile").append($(options).clone());
-                $("#select-language-mobile").parent().dropdown({
+                $("#select-language-mobile").dropdown({
                     fullTextSearch: true,
                     message: {
                         noResults: "No language found."
@@ -443,7 +443,7 @@ async function loadLangauges() {
 };
 
 async function loadSelectedLanguage(skipSetDefaultSourceCodeName = false) {
-    monaco.editor.setModelLanguage(sourceEditor.getModel(), $selectLanguage.find(":selected").attr("langauge_mode"));
+    monaco.editor.setModelLanguage(sourceEditor.getModel(), $selectLanguage.find(":selected").attr("language_mode"));
 
     if (!skipSetDefaultSourceCodeName) {
         setSourceCodeName((await getSelectedLanguage()).source_file);
@@ -535,7 +535,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     $selectLanguage.change(function (event, data) {
         let skipSetDefaultSourceCodeName = (data && data.skipSetDefaultSourceCodeName) || !!gPuterFile;
         loadSelectedLanguage(skipSetDefaultSourceCodeName);
-        $("#select-language-mobile").parent().dropdown("set selected", $selectLanguage.val());
+        $("#select-language-mobile").dropdown("set selected", $selectLanguage.val());
     });
 
     $("#select-language-mobile").change(function (event, data) {
@@ -820,7 +820,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         $("#judge0-mobile-menu-modal").modal({
             centered: false,
             onVisible: function() {
-                $("#select-language-mobile").parent().dropdown("set selected", $selectLanguage.val());
+                $("#select-language-mobile").dropdown("set selected", $selectLanguage.val());
             }
         }).modal("show");
     });
