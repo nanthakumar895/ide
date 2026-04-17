@@ -306,3 +306,78 @@ body.inverted #judge0-mobile-menu-modal .ui.vertical.menu > .item:not(:last-chil
     letter-spacing: 0.05em !important;
     color: var(--accent-color) !important;
 }
+
+/* Footer improvements */
+#judge0-mobile-footer .item {
+    transition: background 0.2s ease, color 0.2s ease !important;
+}
+
+#judge0-mobile-footer .item.active {
+    color: var(--accent-color) !important;
+    font-weight: 600 !important;
+    background: rgba(59, 130, 246, 0.05) !important;
+}
+
+#judge0-mobile-footer .item i.icon {
+    margin-bottom: 4px !important;
+}
+
+/* Prominent Run Button in Footer */
+#judge0-mobile-run-btn {
+    position: relative;
+}
+
+#judge0-mobile-run-btn .run-icon-container {
+    background: var(--accent-color);
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+    transition: transform 0.2s ease;
+}
+
+#judge0-mobile-run-btn:active .run-icon-container {
+    transform: scale(0.9);
+}
+
+#judge0-mobile-run-btn .play.icon {
+    margin: 0 !important;
+    font-size: 1.1rem !important;
+}
+
+#judge0-mobile-footer .item {
+    min-width: 0 !important;
+    padding: 0.5rem 0.1rem !important;
+}
+
+#judge0-mobile-footer span {
+    font-size: 9px !important;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* Glassmorphism for Footer */
+@media (max-width: 768px) {
+    #judge0-mobile-footer {
+        background: rgba(255, 255, 255, 0.8) !important;
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+        height: 65px !important;
+    }
+
+    body.inverted #judge0-mobile-footer {
+        background: rgba(17, 24, 39, 0.8) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    #judge0-site-content {
+        height: calc(100vh - 54px - 65px) !important; /* nav height - footer height */
+    }
+}

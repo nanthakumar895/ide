@@ -47,12 +47,42 @@ var timeStart;
 var sqliteAdditionalFiles;
 var languages = {};
 
+var isMobile = window.matchMedia("(max-width: 768px)").matches;
+
 var layoutConfig = {
     settings: {
         showPopoutIcon: false,
-        reorderEnabled: true
+        reorderEnabled: !isMobile,
+        stackedHeaderElementId: isMobile ? "judge0-mobile-footer" : null
     },
-    content: [{
+    content: isMobile ? [{
+        type: "stack",
+        content: [{
+            type: "component",
+            componentName: "source",
+            id: "source",
+            title: "Source",
+            isClosable: false
+        }, {
+            type: "component",
+            componentName: "stdin",
+            id: "stdin",
+            title: "Input",
+            isClosable: false
+        }, {
+            type: "component",
+            componentName: "stdout",
+            id: "stdout",
+            title: "Output",
+            isClosable: false
+        }, {
+            type: "component",
+            componentName: "ai",
+            id: "ai",
+            title: "AI Assistant",
+            isClosable: false
+        }]
+    }] : [{
         type: configuration.get("appOptions.mainLayout"),
         content: [{
             type: "component",
@@ -200,8 +230,12 @@ function run() {
     stdoutEditor.setValue("");
     $statusLine.html("");
 
-    let x = layout.root.getItemsById("stdout")[0];
-    x.parent.header.parent.setActiveContentItem(x);
+    if (isMobile) {
+        $("#judge0-mobile-stdout-btn").click();
+    } else {
+        let x = layout.root.getItemsById("stdout")[0];
+        x.parent.header.parent.setActiveContentItem(x);
+    }
 
     let sourceValue = encode(sourceEditor.getValue());
     let stdinValue = encode(stdinEditor.getValue());
@@ -469,9 +503,10 @@ function clear() {
 
 function refreshSiteContentHeight() {
     const navigationHeight = document.getElementById("judge0-site-navigation").offsetHeight;
+    const footerHeight = (isMobile ? document.getElementById("judge0-mobile-footer").offsetHeight : 0);
 
     const siteContent = document.getElementById("judge0-site-content");
-    siteContent.style.height = `${window.innerHeight}px`;
+    siteContent.style.height = `${window.innerHeight - footerHeight}px`;
     siteContent.style.paddingTop = `${navigationHeight}px`;
 }
 
@@ -489,7 +524,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     refreshSiteContentHeight();
 
-    console.log("Modern IDE is active.");
+
 
     $selectLanguage = $("#select-language");
     $selectLanguage.change(function (event, data) {
@@ -705,6 +740,51 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
 
         layout.init();
+
+        const switchToView = (componentId) => {
+            if (!layout || !layout.isInitialised) {
+                return;
+            }
+            const items = layout.root.getItemsById(componentId);
+            if (items.length > 0) {
+                const item = items[0];
+                let p = item.parent;
+                while (p && p.type !== "stack" && p.parent) {
+                    p = p.parent;
+                }
+                if (p && p.type === "stack") {
+                    p.setActiveContentItem(item);
+                }
+            }
+        };
+
+        $("#judge0-mobile-code-btn").on("click", function() {
+            $("#judge0-mobile-footer .item").removeClass("active");
+            $(this).addClass("active");
+            switchToView("source");
+        });
+
+        $("#judge0-mobile-stdin-btn").on("click", function() {
+            $("#judge0-mobile-footer .item").removeClass("active");
+            $(this).addClass("active");
+            switchToView("stdin");
+        });
+
+        $("#judge0-mobile-run-btn").on("click", function() {
+            run();
+        });
+
+        $("#judge0-mobile-stdout-btn").on("click", function() {
+            $("#judge0-mobile-footer .item").removeClass("active");
+            $(this).addClass("active");
+            switchToView("stdout");
+        });
+
+        $("#judge0-mobile-ai-btn").on("click", function() {
+            $("#judge0-mobile-footer .item").removeClass("active");
+            $(this).addClass("active");
+            switchToView("ai");
+        });
     });
 
     let superKey = "⌘";

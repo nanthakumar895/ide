@@ -264,6 +264,31 @@
 
     <div id="judge0-status-line" class="ui bottom right attached mini label judge0-showStatusLine"></div>
 
+    <div id="judge0-mobile-footer" class="ui bottom fixed borderless five item menu">
+        <a id="judge0-mobile-code-btn" class="active item">
+            <i class="code icon"></i>
+            <span>Code</span>
+        </a>
+        <a id="judge0-mobile-stdin-btn" class="item">
+            <i class="keyboard icon"></i>
+            <span>Input</span>
+        </a>
+        <a id="judge0-mobile-run-btn" class="item">
+            <div class="run-icon-container">
+                <i class="play icon"></i>
+            </div>
+            <span>Run</span>
+        </a>
+        <a id="judge0-mobile-stdout-btn" class="item">
+            <i class="terminal icon"></i>
+            <span>Output</span>
+        </a>
+        <a id="judge0-mobile-ai-btn" class="item">
+            <i class="magic icon"></i>
+            <span>AI</span>
+        </a>
+    </div>
+
     <script>
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("sw.js").then(() => console.log("Service Worker Registered"));
