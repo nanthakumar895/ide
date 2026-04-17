@@ -495,12 +495,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     $selectLanguage.change(function (event, data) {
         let skipSetDefaultSourceCodeName = (data && data.skipSetDefaultSourceCodeName) || !!gPuterFile;
         loadSelectedLanguage(skipSetDefaultSourceCodeName);
-        $("#select-language-mobile").val($selectLanguage.val()).change();
+        $("#select-language-mobile").parent().dropdown("set selected", $selectLanguage.val());
     });
 
     $("#select-language-mobile").change(function (event, data) {
-        if ($selectLanguage.val() !== $(this).val()) {
-            $selectLanguage.val($(this).val()).trigger("change");
+        const val = $(this).val();
+        if ($selectLanguage.val() !== val) {
+            $selectLanguage.dropdown("set selected", val);
         }
     });
 
@@ -730,7 +731,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     document.getElementById("judge0-save-btn").addEventListener("click", saveAction);
 
     $("#judge0-mobile-menu-btn").on("click", function() {
-        $("#judge0-mobile-menu-modal").modal("show");
+        $("#judge0-mobile-menu-modal").modal({
+            centered: false,
+            onVisible: function() {
+                $("#select-language-mobile").parent().dropdown("set selected", $selectLanguage.val());
+            }
+        }).modal("show");
     });
 
     $("#judge0-mobile-open-btn").on("click", function() {
