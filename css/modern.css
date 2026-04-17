@@ -382,10 +382,14 @@ body.inverted #judge0-mobile-menu-modal .ui.vertical.menu > .item:not(:last-chil
     }
 }
 
-/* Fix for dropdowns inside modals */
-#judge0-mobile-menu-modal .ui.dropdown .menu {
-    max-height: 200px !important;
+/* Fix for dropdowns and ensuring they are scrollable */
+.ui.dropdown .menu {
+    max-height: 300px !important;
     overflow-y: auto !important;
+}
+
+#judge0-mobile-menu-modal .ui.dropdown .menu {
+    max-height: 250px !important;
     z-index: 10001 !important;
 }
 
@@ -405,7 +409,8 @@ body.inverted #judge0-mobile-menu-modal .ui.vertical.menu > .item:not(:last-chil
 }
 
 /* Specific fix for language dropdown items */
-#judge0-mobile-select-language-container .menu .item {
+#select-language-mobile ~ .menu .item,
+#select-language ~ .menu .item {
     padding: 0.8rem 1rem !important;
     font-size: 1rem !important;
 }
