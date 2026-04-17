@@ -227,3 +227,49 @@ body.inverted .judge0-ai-message {
 body.inverted #judge0-status-line {
     background: rgba(255, 255, 255, 0.05) !important;
 }
+
+/* Mobile adjustments */
+#judge0-mobile-footer, #judge0-mobile-menu-btn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    #judge0-mobile-menu-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem !important;
+    }
+
+    #judge0-mobile-footer {
+        display: flex;
+        z-index: 1000;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.8) !important;
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+
+    body.inverted #judge0-mobile-footer {
+        background: rgba(17, 24, 39, 0.8) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    #judge0-site-content {
+        height: calc(100vh - 50px - 60px) !important; /* nav height - footer height */
+    }
+
+    /* Hide desktop-only elements on mobile */
+    .judge0-showCommandLineArguments,
+    .judge0-showCompilerOptions,
+    .judge0-showSelectLanguage,
+    .judge0-showFileMenu,
+    .judge0-showThemeButton,
+    .judge0-showPuterSignInOutButton {
+        display: none !important;
+    }
+
+    .lm_header {
+        display: none !important;
+    }
+}

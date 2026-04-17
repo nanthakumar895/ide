@@ -395,6 +395,8 @@ async function loadLangauges() {
             }).always(function () {
                 options.sort((a, b) => a.text.localeCompare(b.text));
                 $selectLanguage.append(options);
+                $("#select-language-mobile").append($(options).clone());
+                $("#select-language-mobile").parent().dropdown();
                 resolve();
             });
         });
@@ -493,12 +495,32 @@ document.addEventListener("DOMContentLoaded", async function () {
     $selectLanguage.change(function (event, data) {
         let skipSetDefaultSourceCodeName = (data && data.skipSetDefaultSourceCodeName) || !!gPuterFile;
         loadSelectedLanguage(skipSetDefaultSourceCodeName);
+        $("#select-language-mobile").val($selectLanguage.val()).change();
+    });
+
+    $("#select-language-mobile").change(function (event, data) {
+        if ($selectLanguage.val() !== $(this).val()) {
+            $selectLanguage.val($(this).val()).trigger("change");
+        }
     });
 
     await loadLangauges();
 
     $compilerOptions = $("#compiler-options");
+    $("#compiler-options-mobile").on("input", function() {
+        $compilerOptions.val($(this).val());
+    });
+    $compilerOptions.on("input", function() {
+        $("#compiler-options-mobile").val($(this).val());
+    });
+
     $commandLineArguments = $("#command-line-arguments");
+    $("#command-line-arguments-mobile").on("input", function() {
+        $commandLineArguments.val($(this).val());
+    });
+    $commandLineArguments.on("input", function() {
+        $("#command-line-arguments-mobile").val($(this).val());
+    });
 
     $runBtn = $("#run-btn");
     $runBtn.click(run);
@@ -706,6 +728,32 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     document.getElementById("judge0-open-file-btn").addEventListener("click", openAction);
     document.getElementById("judge0-save-btn").addEventListener("click", saveAction);
+
+    $("#judge0-mobile-menu-btn").on("click", function() {
+        $("#judge0-mobile-menu-modal").modal("show");
+    });
+
+    $("#judge0-mobile-open-btn").on("click", function() {
+        $("#judge0-mobile-menu-modal").modal("hide");
+        openAction();
+    });
+
+    $("#judge0-mobile-save-btn").on("click", function() {
+        $("#judge0-mobile-menu-modal").modal("hide");
+        saveAction();
+    });
+
+    $("#judge0-mobile-theme-toggle-btn").on("click", function() {
+        $("#judge0-theme-toggle-btn").click();
+    });
+
+    $("#judge0-mobile-sign-in-btn").on("click", function() {
+        $("#judge0-sign-in-btn").click();
+    });
+
+    $("#judge0-mobile-sign-out-btn").on("click", function() {
+        $("#judge0-sign-out-btn").click();
+    });
 
     window.onmessage = function (e) {
         if (!e.data) {

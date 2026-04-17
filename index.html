@@ -143,6 +143,62 @@
                     <span id="judge0-puter-username">Sign out</span>
                 </button>
             </div>
+            <div id="judge0-mobile-menu-btn" class="icon link item">
+                <i class="bars icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <div id="judge0-mobile-menu-modal" class="ui modal">
+        <div class="header">
+            Menu
+        </div>
+        <div class="content">
+            <div class="ui fluid vertical menu">
+                <div class="item">
+                    <div class="header">File</div>
+                    <div class="menu">
+                        <a id="judge0-mobile-open-btn" class="item">
+                            <i class="file icon"></i> Open File...
+                        </a>
+                        <a id="judge0-mobile-save-btn" class="item">
+                            <i class="save icon"></i> Save
+                        </a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="header">Language</div>
+                    <div class="ui fluid search selection dropdown" id="judge0-mobile-select-language-container">
+                        <select id="select-language-mobile"></select>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="header">Options</div>
+                    <div class="ui fluid icon input" style="margin-bottom: 0.5rem;">
+                        <i class="flag icon"></i>
+                        <input id="compiler-options-mobile" type="text" placeholder="Compiler options">
+                    </div>
+                    <div class="ui fluid icon input">
+                        <i class="terminal icon"></i>
+                        <input id="command-line-arguments-mobile" type="text" placeholder="Command line arguments">
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="header">Settings & Account</div>
+                    <a id="judge0-mobile-theme-toggle-btn" class="item">
+                        <i class="sun icon"></i> Change Theme
+                    </a>
+                    <a id="judge0-mobile-sign-in-btn" class="item">
+                        <i class="sign-in icon"></i> Sign in with Puter
+                    </a>
+                    <a id="judge0-mobile-sign-out-btn" class="item">
+                        <i class="sign-out icon"></i> Sign out (<span id="judge0-puter-username-mobile"></span>)
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui cancel button">Close</div>
         </div>
     </div>
 
