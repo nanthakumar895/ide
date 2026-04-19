@@ -531,7 +531,10 @@ function refreshLayoutSize() {
 
 window.addEventListener("resize", refreshLayoutSize);
 document.addEventListener("DOMContentLoaded", async function () {
-    $(".ui.selection.dropdown").dropdown();
+    $("#select-language").dropdown();
+    $(".ui.dropdown:not(#select-language)").dropdown({
+        on: "click"
+    });
     $("[data-content]").popup({
         lastResort: "left center"
     });
@@ -553,6 +556,29 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     $runBtn = $("#run-btn");
     $runBtn.click(run);
+
+    $("#mobile-run-btn").click(run);
+    $("#mobile-submit-btn").click(function() {
+        $("#submit-btn").click();
+    });
+
+    $("#mobile-testcase-btn").click(function() {
+        let x = layout.root.getItemsById("stdout")[0];
+        if (x) {
+            x.parent.header.parent.setActiveContentItem(x);
+        }
+        // Toggle icon
+        const icon = $(this).find("i");
+        if (icon.hasClass("up")) {
+            icon.removeClass("up").addClass("down");
+        } else {
+            icon.removeClass("down").addClass("up");
+        }
+    });
+
+    $(".theme-toggle-mobile").click(function() {
+        $("#procode-theme-toggle-btn").click();
+    });
 
     window.addEventListener("problemLoaded", function(e) {
         window.currentProblem = e.detail;
