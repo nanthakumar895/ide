@@ -1,16 +1,16 @@
-# Terms of Service for Judge0 IDE
+# Terms of Service for ProCode IDE
 Effective Date: 2024-03-27
 
-These Terms of Service ("Terms") govern your access to and use of the Judge0 IDE website and services ("Service"), provided by Judge0 d.o.o. ("Company", "we", "us", or "our"). By accessing or using our Service, available at https://ide.judge0.com, you agree to be bound by these Terms and our Privacy Policy. If you do not agree to these Terms, you may not access or use our Service.
+These Terms of Service ("Terms") govern your access to and use of the ProCode IDE website and services ("Service"), provided by Judge0 d.o.o. ("Company", "we", "us", or "our"). By accessing or using our Service, available at https://procode.example.com, you agree to be bound by these Terms and our Privacy Policy. If you do not agree to these Terms, you may not access or use our Service.
 
 ## 1. Use of Our Service
-Judge0 IDE provides an online code editor and compiler.
+ProCode IDE provides an online code editor and compiler.
 You are responsible for the code you write and submit for compilation and execution on our Service.
 You agree not to use our Service for any illegal or unauthorized purpose.
 
 ## 2. User Responsibilities
-You agree to use Judge0 IDE only for lawful purposes and in a way that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the Service.
-Prohibited behavior includes harassing or causing distress or inconvenience to any other user, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within Judge0 IDE.
+You agree to use ProCode IDE only for lawful purposes and in a way that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the Service.
+Prohibited behavior includes harassing or causing distress or inconvenience to any other user, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within ProCode IDE.
 
 ## 3. Intellectual Property Rights
 The Service and its original content, features, and functionality are and will remain the exclusive property of Judge0 d.o.o. and its licensors.
@@ -18,7 +18,7 @@ Your use of our Service does not grant you any ownership rights to our Service o
 
 ## 4. User Content
 You retain all rights to the source code you submit to our Service.
-By submitting code to Judge0 IDE, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, and display your content solely for the purpose of providing and improving our Service.
+By submitting code to ProCode IDE, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, and display your content solely for the purpose of providing and improving our Service.
 
 ## 5. Termination
 We may terminate or suspend your access to our Service immediately, without prior notice or liability, for any reason whatsoever, including, without limitation, if you breach the Terms.
@@ -37,4 +37,4 @@ In no event shall Judge0 d.o.o., nor its directors, employees, partners, agents,
 These Terms shall be governed and construed in accordance with the laws of Croatia, without regard to its conflict of law provisions.
 
 ## 10. Contact Us
-If you have any questions about these Terms, please contact us at terms@judge0.com.
+If you have any questions about these Terms, please contact us at terms@procode.example.com.

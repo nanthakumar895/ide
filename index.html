@@ -24,8 +24,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.9/goldenlayout.min.js" integrity="sha256-NhJAZDfGgv4PiB+GVlSrPdh3uc75XXYSM4su8hgTchI=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.9/css/goldenlayout-base.css" integrity="sha512-rGtzJyDE8egZ/OScuBNLW1EIhRydcfrZo14oTvZwRLzEZu+s8foCtwi0XhXsKnhuoQAwJ7POFARWdU4fBL7FbQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link id="judge0-golden-layout-dark-theme-stylesheet" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.9/css/goldenlayout-dark-theme.css" integrity="sha512-XfcBrEH69BhsZ0XpvPyzOLgikhAvIG6Znbi6yKi1Jh1iYaOXSXvljWFerhcUl5LYLCuV61KhfCydQ1+MNxnilg==" crossorigin="anonymous" referrerpolicy="no-referrer" disabled>
-    <link id="judge0-golden-layout-light-theme-stylesheet" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.9/css/goldenlayout-light-theme.css" integrity="sha512-/S3N+v8cRHW2GJvM3v9FGHAKOhNgws+V1dYZb1fBxRd9XIwpqZFZB0jug+2HHf64eURsJLqVzCVn92pQTFHHow==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link id="procode-golden-layout-dark-theme-stylesheet" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.9/css/goldenlayout-dark-theme.css" integrity="sha512-XfcBrEH69BhsZ0XpvPyzOLgikhAvIG6Znbi6yKi1Jh1iYaOXSXvljWFerhcUl5LYLCuV61KhfCydQ1+MNxnilg==" crossorigin="anonymous" referrerpolicy="no-referrer" disabled>
+    <link id="procode-golden-layout-light-theme-stylesheet" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.9/css/goldenlayout-light-theme.css" integrity="sha512-/S3N+v8cRHW2GJvM3v9FGHAKOhNgws+V1dYZb1fBxRd9XIwpqZFZB0jug+2HHf64eURsJLqVzCVn92pQTFHHow==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <script src="./vendor/monaco-editor-0.44.0/min/vs/loader.js"></script>
     <script src="./vendor/monaco-editor-0.44.0/min/vs/editor/editor.main.nls.js"></script>
@@ -47,35 +47,36 @@
     <script type="module" src="js/query.js"></script>
     <script type="module" src="js/style.js"></script>
     <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/problems.js"></script>
 
     <link type="text/css" rel="stylesheet" href="css/ide.css">
     <link type="text/css" rel="stylesheet" href="css/semantic.css">
     <link type="text/css" rel="stylesheet" href="css/site.css">
     <link type="text/css" rel="stylesheet" href="css/modern.css">
 
-    <title>Judge0 IDE</title>
-    <meta name="title" content="Judge0 IDE">
-    <meta name="description" content="Free and open-source online code editor and compiler">
-    <meta name="author" content="Judge0 d.o.o.">
+    <title>ProCode IDE</title>
+    <meta name="title" content="ProCode IDE">
+    <meta name="description" content="Modern online code editor and learning platform">
+    <meta name="author" content="ProCode">
     <meta name="keywords" content="online editor, online code editor, online ide, online compiler, online interpreter, run code online, learn programming online,
     online debugger, programming in browser, online code runner, online code execution, debug online, debug C code online, debug C++ code online,
     programming online, snippet, snippets, code snippet, code snippets, pastebin, execute code, programming in browser, run c online, run C++ online,
     run java online, run python online, run ruby online, run c# online, run rust online, run pascal online, run basic online">
 
-    <meta property="og:url" content="https://ide.judge0.com">
+    <meta property="og:url" content="https://procode.example.com">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Judge0 IDE">
+    <meta property="og:title" content="ProCode IDE">
     <meta property="og:image" content="https://raw.githubusercontent.com/judge0/ide/refs/heads/master/.github/wallpaper.png">
-    <meta property="og:image:alt" content="Judge0 IDE">
-    <meta property="og:description" content="Free and open-source online code editor and compiler">
-    <meta property="og:site_name" content="Judge0 IDE">
+    <meta property="og:image:alt" content="ProCode IDE">
+    <meta property="og:description" content="Modern online code editor and learning platform">
+    <meta property="og:site_name" content="ProCode IDE">
     <meta property="og:locale" content="en_US">
 
-    <meta property="twitter:url" content="https://ide.judge0.com">
+    <meta property="twitter:url" content="https://procode.example.com">
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Judge0 IDE">
+    <meta property="twitter:title" content="ProCode IDE">
     <meta property="twitter:image" content="https://raw.githubusercontent.com/judge0/ide/refs/heads/master/.github/wallpaper.png">
-    <meta property="twitter:description" content="Free and open-source online code editor and compiler">
+    <meta property="twitter:description" content="Modern online code editor and learning platform">
 
     <link rel="shortcut icon" href="/favicons/favicon.ico">
 
@@ -83,7 +84,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-180x180.png">
-    <meta name="apple-mobile-web-app-title" content="Judge0 IDE">
+    <meta name="apple-mobile-web-app-title" content="ProCode IDE">
 
     <link rel="manifest" href="/manifest.json">
 
@@ -92,88 +93,188 @@
 </head>
 
 <body>
-    <div id="judge0-site-navigation" class="ui top fixed borderless menu judge0-showNavigation">
-        <a id="judge0-header" href="https://judge0.com" target="_blank" class="header item judge0-showLogo">
-            <img id="judge0-logo" src="./images/icon_var2_rounded_512.png">
-        </a>
-        <div class="item">
+    <div id="procode-problem-list-drawer" class="problem-list-drawer">
+        <div class="drawer-header">
+            <div class="header-left">
+                <span class="drawer-title">Problem List <i class="chevron right icon" style="font-size: 0.8em; margin-left: 5px;"></i></span>
+            </div>
+            <div class="header-right">
+                <div class="solved-progress">
+                    <div class="progress-circle"></div>
+                    <span>22/3906 Solved</span>
+                </div>
+                <button id="close-drawer-btn" class="ui icon button drawer-close">
+                    <i class="close icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="drawer-search-bar">
+            <div class="ui left icon input search-input-container">
+                <i class="search icon"></i>
+                <input type="text" id="problem-search" placeholder="Search questions">
+            </div>
+            <div class="search-actions">
+                <button class="ui icon button"><i class="exchange icon" style="transform: rotate(90deg);"></i></button>
+                <button class="ui icon button filter-active"><i class="filter icon"></i></button>
+            </div>
+        </div>
+
+        <div id="problem-items-container" class="problem-items">
+            <!-- Problem items will be injected here by JS -->
+        </div>
+    </div>
+
+    <div id="procode-site-navigation" class="ui top fixed borderless menu procode-showNavigation">
+        <div class="header item logo-item">
+            <div class="modern-logo">
+                <div class="inner-logo"></div>
+            </div>
+        </div>
+        <div id="problem-list-btn" class="item link">
             <i class="list icon"></i>
             <span class="text">Problem List</span>
         </div>
-        <div class="item">
+        <div class="item nav-arrow">
             <i class="chevron left icon"></i>
         </div>
-        <div class="item">
+        <div class="item nav-arrow">
             <i class="chevron right icon"></i>
         </div>
-        <div class="item">
+        <div class="item nav-arrow">
             <i class="random icon"></i>
         </div>
 
-        <div class="ui simple dropdown item judge0-showFileMenu">
-            <span class="text">File</span>
-            <i class="dropdown icon"></i>
-            <div class="menu judge0-file-menu">
-                <div id="judge0-open-file-btn" class="item">
+        <div class="ui simple dropdown item file-menu-item">
+            <div class="file-btn-capsule">
+                <span class="text">File</span>
+                <i class="dropdown icon"></i>
+            </div>
+            <div class="menu procode-file-menu">
+                <div id="procode-open-file-btn" class="item">
                     <span class="description">+O</span>
                     <span class="text"><i class="file icon"></i>Open File...</span>
                     <input type="file" id="open-file-input" style="display: none;">
                 </div>
-                <div id="judge0-save-btn" class="item">
+                <div id="procode-save-btn" class="item">
                     <span class="description">+S</span>
                     <span class="text"><i class="save icon"></i>Save</span>
                 </div>
             </div>
         </div>
 
-        <div class="item judge0-showSelectLanguage">
+        <div class="item language-selector-item">
             <select id="select-language" class="ui search selection dropdown"></select>
         </div>
 
-        <div class="item" style="flex-grow: 1; justify-content: center; display: flex;">
+        <div class="item play-submit-group" style="flex-grow: 1; justify-content: center; display: flex;">
             <div class="ui buttons">
-                <button id="run-btn" class="ui button" data-content="+↵">
+                <button id="run-btn" class="ui icon button run-btn-modern" data-content="+↵">
                     <i class="play icon"></i>
                 </button>
-                <button id="submit-btn" class="ui positive button">
+                <button id="submit-btn" class="ui positive button submit-btn-modern">
                     <i class="cloud upload icon"></i>
                     Submit
                 </button>
             </div>
         </div>
 
-        <div class="right menu">
-            <div id="judge0-theme-toggle-btn" class="icon link item judge0-showThemeButton" data-content="">
-                <i id="judge0-theme-toggle-btn-icon" class="sun icon"></i>
+        <div class="right menu header-icons">
+            <div id="procode-theme-toggle-btn" class="icon link item theme-toggle" title="Theme">
+                <i id="procode-theme-toggle-btn-icon" class="moon icon"></i>
             </div>
-            <div class="item">
+            <div class="item auth-item">
+                <div id="procode-sign-in-btn" class="link item" title="Sign in">
+                    <i class="sign-in icon"></i>
+                </div>
+                <div id="procode-sign-out-btn" class="link item procode-hidden" title="Sign out">
+                    <i class="sign-out icon"></i>
+                    <span id="procode-puter-username">Sign Out</span>
+                </div>
+            </div>
+            <div class="item" title="Apps">
                 <i class="th icon"></i>
             </div>
-            <div class="item">
+            <div class="item" title="Settings">
                 <i class="setting icon"></i>
             </div>
-            <div class="item">
+            <div class="item" title="Streak">
                 <i class="fire icon"></i>
                 <span>0</span>
             </div>
-            <div class="item">
+            <div class="item" title="Timer">
                 <i class="stopwatch icon"></i>
             </div>
-            <div class="item">
+            <div class="item" title="Add User">
                 <i class="user plus icon"></i>
             </div>
-            <div class="item">
-                <i class="user circle icon"></i>
+            <div class="ui dropdown item profile-dropdown">
+                <div class="profile-capsule">
+                    <i class="user circle icon"></i>
+                </div>
+                <div class="menu">
+                    <div class="header mobile-only-item">Quick Actions</div>
+                    <div class="item mobile-only-item theme-toggle-mobile">
+                        <i class="moon icon"></i> Theme
+                    </div>
+                    <div class="item mobile-only-item">
+                        <i class="fire icon"></i> Streak (0)
+                    </div>
+                    <div class="item mobile-only-item">
+                        <i class="stopwatch icon"></i> Timer
+                    </div>
+                    <div class="item mobile-only-item">
+                        <i class="user plus icon"></i> Add User
+                    </div>
+                    <div class="item mobile-only-item">
+                        <i class="th icon"></i> Apps
+                    </div>
+                    <div class="divider mobile-only-item"></div>
+                    <div class="header">My Account</div>
+                    <div class="item"><i class="user icon"></i> Profile</div>
+                    <div class="item"><i class="settings icon"></i> Settings</div>
+                    <div class="divider"></div>
+                    <div id="header-sign-in-item" class="item"><i class="sign-in icon"></i> Sign In</div>
+                </div>
             </div>
-            <div class="item">
-                <button class="ui orange basic button">Premium</button>
+            <div class="item premium-item">
+                <button class="ui orange button premium-btn-modern">Premium</button>
             </div>
         </div>
     </div>
 
-    <div id="judge0-site-content"></div>
+    <div id="procode-site-content"></div>
 
-    <div id="judge0-problem-description" style="display: none;">
+    <div id="procode-test-result-container" style="display: none;">
+        <div class="test-result-header">
+            <div class="result-status-container">
+                <span id="test-result-status" class="result-status">Accepted</span>
+                <span id="test-result-runtime" class="result-runtime">Runtime: 0 ms</span>
+            </div>
+            <div class="result-actions">
+                <span class="diff-link">Diff</span>
+            </div>
+        </div>
+        <div id="test-case-tabs" class="test-case-tabs">
+            <!-- Tabs will be injected here -->
+        </div>
+        <div class="test-case-details">
+            <div class="detail-item">
+                <div class="detail-label">Input</div>
+                <div id="test-case-input" class="detail-value"></div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Output</div>
+                <div id="test-case-output" class="detail-value"></div>
+            </div>
+            <div id="expected-output-container" class="detail-item">
+                <div class="detail-label">Expected</div>
+                <div id="test-case-expected" class="detail-value"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="procode-problem-description" style="display: none;">
         <div class="ui basic segment description-container">
             <h1 class="ui header">29. Divide Two Integers</h1>
             <div class="ui labels">
@@ -197,7 +298,7 @@
         </div>
     </div>
 
-    <div id="judge0-site-modal" class="ui modal">
+    <div id="procode-site-modal" class="ui modal">
         <div class="header">
             <span id="title"></span>
         </div>
@@ -214,17 +315,17 @@
         </div>
     </div>
 
-    <div id="judge0-chat-container" class="ui segment">
+    <div id="procode-chat-container" class="ui segment" style="display: none;">
         <div class="ui top attached borderless menu">
             <div class="item">
                 <div class="ui toggle checked checkbox">
-                    <input id="judge0-inline-suggestions" type="checkbox" checked="">
+                    <input id="procode-inline-suggestions" type="checkbox" checked="">
                     <label>Inline Suggestions</label>
                 </div>
             </div>
             <div class="right menu">
                 <div class="fitted item">
-                    <select id="judge0-chat-model-select" class="ui search selection dropdown item">
+                    <select id="procode-chat-model-select" class="ui search selection dropdown item">
                         <option>gpt-4o-mini</option>
                         <option>gpt-4o</option>
                         <option>o3-mini</option>
@@ -244,20 +345,47 @@
                 </div>
             </div>
         </div>
-        <div id="judge0-chat-messages"></div>
-        <div id="judge0-chat-input-container" class="ui basic segment">
-            <form id="judge0-chat-form" class="ui fluid action input">
-                <input id="judge0-chat-user-input" type="text">
-                <button id="judge0-chat-send-button" class="ui primary icon button" type="submit">
+        <div id="procode-chat-messages"></div>
+        <div id="procode-chat-input-container" class="ui basic segment">
+            <form id="procode-chat-form" class="ui fluid action input">
+                <input id="procode-chat-user-input" type="text">
+                <button id="procode-chat-send-button" class="ui primary icon button" type="submit">
                     <i class="arrow up icon"></i>
                 </button>
             </form>
         </div>
     </div>
 
-    <div id="judge0-status-line" class="ui bottom right attached mini label judge0-showStatusLine"></div>
+    <div id="procode-status-line" class="ui bottom right attached mini label procode-showStatusLine"></div>
 
-    <a href="https://judge0.com" target="_blank" class="ui bottom center attached mini label judge0-showCopyright">© 2016-2026 Judge0 d.o.o. – All Rights Reserved. • A Croatian 🇭🇷 company</a>
+    <div id="mobile-footer" class="mobile-footer">
+        <button id="mobile-description-btn" class="ui icon button mobile-footer-btn">
+            <i class="file text icon"></i>
+            <span>Description</span>
+        </button>
+        <button id="mobile-editor-btn" class="ui icon button mobile-footer-btn">
+            <i class="code icon"></i>
+            <span>Editor</span>
+        </button>
+        <button id="mobile-testcase-btn" class="ui icon button mobile-footer-btn">
+            <i class="terminal icon"></i>
+            <span>Testcase</span>
+        </button>
+        <div class="mobile-footer-actions">
+            <button id="mobile-run-btn" class="ui icon button mobile-footer-btn run-btn">
+                <i class="play icon"></i>
+                <span>Run</span>
+            </button>
+            <button id="mobile-submit-btn" class="ui icon button mobile-footer-btn submit-btn">
+                <i class="cloud upload icon"></i>
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="ui bottom center attached mini label procode-showCopyright">
+        <span>© 2016-2026 ProCode – All Rights Reserved.</span>
+    </div>
 
     <script>
         if ("serviceWorker" in navigator) {
