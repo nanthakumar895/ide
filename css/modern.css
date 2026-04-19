@@ -13,16 +13,17 @@
     padding: 0 1rem !important;
     backdrop-filter: var(--background-blur);
     -webkit-backdrop-filter: var(--background-blur);
-    background-color: rgba(255, 255, 255, 0.8) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
-    box-shadow: none !important;
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
     display: flex;
     align-items: center;
+    z-index: 1001 !important;
 }
 
 body.inverted #judge0-site-navigation {
-    background-color: rgba(27, 28, 29, 0.8) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background-color: #111827 !important;
+    border-bottom: 1px solid #374151 !important;
 }
 
 #judge0-site-navigation .item {
@@ -104,8 +105,14 @@ body, .ui.button, .ui.input input, .ui.dropdown, .ui.label {
 
 /* Golden Layout Modernization */
 .lm_header {
-    background: transparent !important;
+    background: #f9fafb !important;
     height: 36px !important;
+    border-bottom: 1px solid #e5e7eb !important;
+}
+
+body.inverted .lm_header {
+    background: #1f2937 !important;
+    border-bottom: 1px solid #374151 !important;
 }
 
 .lm_tab {
