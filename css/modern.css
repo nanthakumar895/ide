@@ -42,33 +42,38 @@ body.inverted #judge0-site-navigation {
 }
 
 
-/* Run Button Modernization */
+/* Run Button Modernization - New Design */
 #run-btn {
-    border-radius: var(--border-radius) !important;
-    background-color: var(--accent-color) !important;
+    border-radius: 50px !important; /* Pill shape */
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
     color: white !important;
     font-weight: 600 !important;
-    transition: all 0.2s ease !important;
-    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
     border: none !important;
     display: flex !important;
     align-items: center !important;
-    gap: 8px !important;
-    padding: 0.75rem 1.25rem !important;
+    gap: 10px !important;
+    padding: 0.6rem 1.5rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-size: 0.85rem !important;
 }
 
 #run-btn:hover {
-    background-color: #2563eb !important;
-    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3) !important;
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3) !important;
+    transform: translateY(-2px);
 }
 
 #run-btn i.icon {
     margin: 0 !important;
+    font-size: 0.9rem !important;
 }
 
 #run-btn:active {
     transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2) !important;
 }
 
 /* Global Rounded Corners & Inputs */
@@ -331,32 +336,42 @@ body.inverted #judge0-mobile-menu-modal .ui.vertical.menu > .item:not(:last-chil
     margin-bottom: 4px !important;
 }
 
-/* Prominent Run Button in Footer */
+/* Prominent Run Button in Footer - No Text Design */
 #judge0-mobile-run-btn {
     position: relative;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 #judge0-mobile-run-btn .run-icon-container {
-    background: var(--accent-color);
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
     color: white;
-    width: 42px;
-    height: 42px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 4px;
-    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
-    transition: transform 0.2s ease;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-5px); /* Slightly raised */
+    border: 3px solid white; /* Ring effect */
+}
+
+body.inverted #judge0-mobile-run-btn .run-icon-container {
+    border-color: #111827;
 }
 
 #judge0-mobile-run-btn:active .run-icon-container {
-    transform: scale(0.9);
+    transform: translateY(-2px) scale(0.9);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
 }
 
 #judge0-mobile-run-btn .play.icon {
     margin: 0 !important;
-    font-size: 1.1rem !important;
+    font-size: 1.2rem !important;
+    margin-left: 2px !important; /* Visual centering for play icon */
 }
 
 #judge0-mobile-footer .item {
