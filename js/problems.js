@@ -1,55 +1,117 @@
 const problems = [
-    { id: 1, title: "Two Sum", difficulty: "Easy", solved: true },
-    { id: 2, title: "Add Two Numbers", difficulty: "Medium", solved: false },
-    { id: 3, title: "Longest Substring Without Repeating Characters", difficulty: "Medium", solved: true },
-    { id: 4, title: "Median of Two Sorted Arrays", difficulty: "Hard", solved: true },
-    { id: 5, title: "Longest Palindromic Substring", difficulty: "Medium", solved: true },
-    { id: 6, title: "Zigzag Conversion", difficulty: "Medium", solved: true },
-    { id: 7, title: "Reverse Integer", difficulty: "Medium", solved: true },
-    { id: 8, title: "String to Integer (atoi)", difficulty: "Medium", solved: true },
-    { id: 9, title: "Palindrome Number", difficulty: "Easy", solved: true },
-    { id: 10, title: "Regular Expression Matching", difficulty: "Hard", solved: false },
-    { id: 11, title: "Container With Most Water", difficulty: "Medium", solved: false },
-    { id: 12, title: "Integer to Roman", difficulty: "Medium", solved: false },
-    { id: 13, title: "Roman to Integer", difficulty: "Easy", solved: false },
-    { id: 14, title: "Longest Common Prefix", difficulty: "Easy", solved: false },
-    { id: 15, title: "3Sum", difficulty: "Medium", solved: false },
-    { id: 16, title: "3Sum Closest", difficulty: "Medium", solved: false },
-    { id: 17, title: "Letter Combinations of a Phone Number", difficulty: "Medium", solved: false },
-    { id: 18, title: "4Sum", difficulty: "Medium", solved: false },
-    { id: 19, title: "Remove Nth Node From End of List", difficulty: "Medium", solved: false },
-    { id: 20, title: "Valid Parentheses", difficulty: "Easy", solved: false },
-    { id: 21, title: "Merge Two Sorted Lists", difficulty: "Easy", solved: false },
-    { id: 22, title: "Generate Parentheses", difficulty: "Medium", solved: false },
-    { id: 23, title: "Merge k Sorted Lists", difficulty: "Hard", solved: false },
-    { id: 24, title: "Swap Nodes in Pairs", difficulty: "Medium", solved: false },
-    { id: 25, title: "Reverse Nodes in k-Group", difficulty: "Hard", solved: false },
-    { id: 26, title: "Remove Duplicates from Sorted Array", difficulty: "Easy", solved: false },
-    { id: 27, title: "Remove Element", difficulty: "Easy", solved: false },
-    { id: 28, title: "Find the Index of the First Occurrence in a String", difficulty: "Easy", solved: false },
-    { id: 29, title: "Divide Two Integers", difficulty: "Medium", solved: false },
-    { id: 30, title: "Substring with Concatenation of All Words", difficulty: "Hard", solved: false },
-    { id: 31, title: "Next Permutation", difficulty: "Medium", solved: false },
-    { id: 32, title: "Longest Valid Parentheses", difficulty: "Hard", solved: false },
-    { id: 33, title: "Search in Rotated Sorted Array", difficulty: "Medium", solved: false },
-    { id: 34, title: "Find First and Last Position of Element in Sorted Array", difficulty: "Medium", solved: false },
-    { id: 35, title: "Search Insert Position", difficulty: "Easy", solved: false },
-    { id: 36, title: "Valid Sudoku", difficulty: "Medium", solved: false },
-    { id: 37, title: "Sudoku Solver", difficulty: "Hard", solved: false },
-    { id: 38, title: "Count and Say", difficulty: "Medium", solved: false },
-    { id: 39, title: "Combination Sum", difficulty: "Medium", solved: false },
-    { id: 40, title: "Combination Sum II", difficulty: "Medium", solved: false },
-    { id: 41, title: "First Missing Positive", difficulty: "Hard", solved: false },
-    { id: 42, title: "Trapping Rain Water", difficulty: "Hard", solved: false },
-    { id: 43, title: "Multiply Strings", difficulty: "Medium", solved: false },
-    { id: 44, title: "Wildcard Matching", difficulty: "Hard", solved: false },
-    { id: 45, title: "Jump Game II", difficulty: "Medium", solved: false },
-    { id: 46, title: "Permutations", difficulty: "Medium", solved: false },
-    { id: 47, title: "Permutations II", difficulty: "Medium", solved: false },
-    { id: 48, title: "Rotate Image", difficulty: "Medium", solved: false },
-    { id: 49, title: "Group Anagrams", difficulty: "Medium", solved: false },
-    { id: 50, title: "Pow(x, n)", difficulty: "Medium", solved: false }
+    {
+        id: 1,
+        title: "Two Sum",
+        difficulty: "Easy",
+        solved: true,
+        description: `
+            <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
+            <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the <em>same</em> element twice.</p>
+            <p>You can return the answer in any order.</p>
+
+            <h3>Example 1:</h3>
+            <div class="ui segment">
+                <p><strong>Input:</strong> nums = [2,7,11,15], target = 9</p>
+                <p><strong>Output:</strong> [0,1]</p>
+                <p><strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].</p>
+            </div>
+
+            <h3>Example 2:</h3>
+            <div class="ui segment">
+                <p><strong>Input:</strong> nums = [3,2,4], target = 6</p>
+                <p><strong>Output:</strong> [1,2]</p>
+            </div>
+        `
+    },
+    {
+        id: 2,
+        title: "Add Two Numbers",
+        difficulty: "Medium",
+        solved: false,
+        description: `
+            <p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in <strong>reverse order</strong>, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.</p>
+            <p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+
+            <h3>Example 1:</h3>
+            <div class="ui segment">
+                <p><strong>Input:</strong> l1 = [2,4,3], l2 = [5,6,4]</p>
+                <p><strong>Output:</strong> [7,0,8]</p>
+                <p><strong>Explanation:</strong> 342 + 465 = 807.</p>
+            </div>
+        `
+    },
+    {
+        id: 29,
+        title: "Divide Two Integers",
+        difficulty: "Medium",
+        solved: false,
+        description: `
+            <p>Given two integers <code>dividend</code> and <code>divisor</code>, divide two integers <strong>without</strong> using multiplication, division, and mod operator.</p>
+            <p>The integer division should truncate toward zero, which means losing its fractional part. For example, <code>8.345</code> would be truncated to <code>8</code>, and <code>-2.7335</code> would be truncated to <code>-2</code>.</p>
+            <p>Return <em>the quotient after dividing</em> <code>dividend</code> by <code>divisor</code>.</p>
+            <p><strong>Note:</strong> Assume we are dealing with an environment that could only store integers within the <strong>32-bit</strong> signed integer range: [−2<sup>31</sup>, 2<sup>31</sup> − 1]. For this problem, if the quotient is <strong>strictly greater than</strong> 2<sup>31</sup> − 1, then return 2<sup>31</sup> − 1, and if the quotient is <strong>strictly less than</strong> −2<sup>31</sup>, then return −2<sup>31</sup>.</p>
+
+            <h3>Example 1:</h3>
+            <div class="ui segment">
+                <p><strong>Input:</strong> dividend = 10, divisor = 3</p>
+                <p><strong>Output:</strong> 3</p>
+                <p><strong>Explanation:</strong> 10/3 = 3.33333.. which is truncated to 3.</p>
+            </div>
+
+            <h3>Example 2:</h3>
+            <div class="ui segment">
+                <p><strong>Input:</strong> dividend = 7, divisor = -3</p>
+                <p><strong>Output:</strong> -2</p>
+                <p><strong>Explanation:</strong> 7/-3 = -2.33333.. which is truncated to -2.</p>
+            </div>
+        `
+    }
 ];
+
+// Fill with more mock data if needed
+for (let i = 3; i <= 50; i++) {
+    if (i === 29) continue;
+    problems.push({
+        id: i,
+        title: `Mock Problem ${i}`,
+        difficulty: i % 3 === 0 ? "Hard" : (i % 2 === 0 ? "Medium" : "Easy"),
+        solved: i % 5 === 0,
+        description: `<p>This is a mock description for problem ${i}.</p>`
+    });
+}
+problems.sort((a, b) => a.id - b.id);
+
+function loadProblem(id) {
+    const problem = problems.find(p => p.id === id);
+    if (!problem) return;
+
+    const container = document.getElementById("judge0-problem-description");
+    if (!container) return;
+
+    const difficultyColor = problem.difficulty === "Easy" ? "green" : (problem.difficulty === "Medium" ? "yellow" : "red");
+
+    container.innerHTML = `
+        <div class="ui basic segment description-container">
+            <h1 class="ui header">${problem.id}. ${problem.title}</h1>
+            <div class="ui labels">
+                <div class="ui ${difficultyColor} label">${problem.difficulty}</div>
+                <div class="ui basic label"><i class="tag icon"></i> Topics</div>
+                <div class="ui basic label"><i class="lock icon"></i> Companies</div>
+            </div>
+            <div class="problem-content" style="margin-top: 20px;">
+                ${problem.description}
+            </div>
+        </div>
+    `;
+
+    // Update active state in drawer
+    document.querySelectorAll(".problem-item").forEach(el => {
+        el.classList.remove("active");
+        if (el.dataset.id == id) {
+            el.classList.add("active");
+        }
+    });
+}
 
 function renderProblems(filter = "") {
     const container = document.getElementById("problem-items-container");
@@ -62,7 +124,8 @@ function renderProblems(filter = "") {
 
     filteredProblems.forEach(p => {
         const item = document.createElement("div");
-        item.className = `problem-item ${p.id === 1 ? 'active' : ''}`;
+        item.className = "problem-item";
+        item.dataset.id = p.id;
 
         const difficultyClass = `diff-${p.difficulty.toLowerCase()}`;
         const shortDiff = p.difficulty === "Medium" ? "Med." : p.difficulty;
@@ -78,10 +141,11 @@ function renderProblems(filter = "") {
         `;
 
         item.onclick = () => {
-            document.querySelectorAll(".problem-item").forEach(el => el.classList.remove("active"));
-            item.classList.add("active");
-            // Here you would typically load the problem content
-            console.log(`Loading problem: ${p.title}`);
+            loadProblem(p.id);
+            // Optionally close drawer on mobile or small screens
+            // if (window.innerWidth < 768) {
+            //     document.getElementById("judge0-problem-list-drawer").classList.remove("open");
+            // }
         };
 
         container.appendChild(item);
@@ -94,26 +158,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeBtn = document.getElementById("close-drawer-btn");
     const searchInput = document.getElementById("problem-search");
 
-    openBtn.onclick = () => {
-        drawer.classList.add("open");
-    };
+    if (openBtn) {
+        openBtn.onclick = () => {
+            drawer.classList.add("open");
+        };
+    }
 
-    closeBtn.onclick = () => {
-        drawer.classList.remove("open");
-    };
+    if (closeBtn) {
+        closeBtn.onclick = () => {
+            drawer.classList.remove("open");
+        };
+    }
 
-    searchInput.oninput = (e) => {
-        renderProblems(e.target.value);
-    };
+    if (searchInput) {
+        searchInput.oninput = (e) => {
+            renderProblems(e.target.value);
+        };
+    }
 
     // Close drawer when clicking outside
     document.addEventListener("mousedown", (e) => {
-        if (drawer.classList.contains("open") &&
+        if (drawer && drawer.classList.contains("open") &&
             !drawer.contains(e.target) &&
-            !openBtn.contains(e.target)) {
+            (openBtn && !openBtn.contains(e.target))) {
             drawer.classList.remove("open");
         }
     });
 
     renderProblems();
+
+    // Load first problem by default
+    loadProblem(1);
 });
