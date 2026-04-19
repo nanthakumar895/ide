@@ -1,148 +1,91 @@
 const problems = [
-    {
-        id: 1,
-        title: "Two Sum",
-        difficulty: "Easy",
-        solved: true,
-        description: `
-            <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
-            <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the <em>same</em> element twice.</p>
-            <p>You can return the answer in any order.</p>
+    { id: 1, title: "Two Sum", topics: "Array / Hashmap", difficulty: "Easy" },
+    { id: 2, title: "Add Two Numbers", topics: "Linked List", difficulty: "Medium" },
+    { id: 3, title: "Longest Substring Without Repeating Characters", topics: "String / Sliding Window", difficulty: "Medium" },
+    { id: 4, title: "Median of Two Sorted Arrays", topics: "Array / Binary Search", difficulty: "Hard" },
+    { id: 5, title: "Longest Palindromic Substring", topics: "String / DP", difficulty: "Medium" },
+    { id: 6, title: "Zigzag Conversion", topics: "String", difficulty: "Medium" },
+    { id: 7, title: "Reverse Integer", topics: "Math", difficulty: "Medium" },
+    { id: 8, title: "String to Integer (atoi)", topics: "String / Math", difficulty: "Medium" },
+    { id: 9, title: "Palindrome Number", topics: "Math", difficulty: "Easy" },
+    { id: 10, title: "Regular Expression Matching", topics: "String / DP", difficulty: "Hard" },
+    { id: 11, title: "Container With Most Water", topics: "Array / Two Pointers", difficulty: "Medium" },
+    { id: 12, title: "Integer to Roman", topics: "Math / String", difficulty: "Medium" },
+    { id: 13, title: "Roman to Integer", topics: "Math / String", difficulty: "Easy" },
+    { id: 14, title: "Longest Common Prefix", topics: "String", difficulty: "Easy" },
+    { id: 15, title: "3Sum", topics: "Array / Two Pointers", difficulty: "Medium" },
+    { id: 16, title: "3Sum Closest", topics: "Array / Two Pointers", difficulty: "Medium" },
+    { id: 17, title: "Letter Combinations of a Phone Number", topics: "Backtracking", difficulty: "Medium" },
+    { id: 18, title: "4Sum", topics: "Array / Two Pointers", difficulty: "Medium" },
+    { id: 19, title: "Remove Nth Node From End of List", topics: "Linked List", difficulty: "Medium" },
+    { id: 20, title: "Valid Parentheses", topics: "Stack", difficulty: "Easy" },
+    { id: 21, title: "Merge Two Sorted Lists", topics: "Linked List", difficulty: "Easy" },
+    { id: 22, title: "Generate Parentheses", topics: "Backtracking", difficulty: "Medium" },
+    { id: 23, title: "Merge k Sorted Lists", topics: "Linked List / Heap", difficulty: "Hard" },
+    { id: 24, title: "Swap Nodes in Pairs", topics: "Linked List", difficulty: "Medium" },
+    { id: 25, title: "Reverse Nodes in k-Group", topics: "Linked List", difficulty: "Hard" },
+    { id: 26, title: "Remove Duplicates from Sorted Array", topics: "Array / Two Pointers", difficulty: "Easy" },
+    { id: 27, title: "Remove Element", topics: "Array / Two Pointers", difficulty: "Easy" },
+    { id: 28, title: "Find the Index of the First Occurrence in a String", topics: "String", difficulty: "Easy" },
+    { id: 29, title: "Divide Two Integers", topics: "Math", difficulty: "Medium" },
+    { id: 30, title: "Substring with Concatenation of All Words", topics: "String / Hashmap", difficulty: "Hard" },
+    { id: 31, title: "Next Permutation", topics: "Array", difficulty: "Medium" },
+    { id: 32, title: "Longest Valid Parentheses", topics: "Stack / DP", difficulty: "Hard" },
+    { id: 33, title: "Search in Rotated Sorted Array", topics: "Array / Binary Search", difficulty: "Medium" },
+    { id: 34, title: "Find First and Last Position of Element in Sorted Array", topics: "Array / Binary Search", difficulty: "Medium" },
+    { id: 35, title: "Search Insert Position", topics: "Array / Binary Search", difficulty: "Easy" },
+    { id: 36, title: "Valid Sudoku", topics: "Array / Hashmap", difficulty: "Medium" },
+    { id: 37, title: "Sudoku Solver", topics: "Backtracking", difficulty: "Hard" },
+    { id: 38, title: "Count and Say", topics: "String", difficulty: "Medium" },
+    { id: 39, title: "Combination Sum", topics: "Backtracking", difficulty: "Medium" },
+    { id: 40, title: "Combination Sum II", topics: "Backtracking", difficulty: "Medium" },
+    { id: 41, title: "First Missing Positive", topics: "Array / Hashing", difficulty: "Hard" },
+    { id: 42, title: "Trapping Rain Water", topics: "Array / Two Pointers", difficulty: "Hard" },
+    { id: 43, title: "Multiply Strings", topics: "String / Math", difficulty: "Medium" },
+    { id: 44, title: "Wildcard Matching", topics: "String / DP", difficulty: "Hard" },
+    { id: 45, title: "Jump Game II", topics: "Array / Greedy", difficulty: "Medium" },
+    { id: 46, title: "Permutations", topics: "Backtracking", difficulty: "Medium" },
+    { id: 47, title: "Permutations II", topics: "Backtracking", difficulty: "Medium" },
+    { id: 48, title: "Rotate Image", topics: "Matrix", difficulty: "Medium" },
+    { id: 49, title: "Group Anagrams", topics: "String / Hashmap", difficulty: "Medium" },
+    { id: 50, title: "Pow(x, n)", topics: "Math / Recursion", difficulty: "Medium" }
+].map(p => ({
+    ...p,
+    solved: p.id % 7 === 0,
+    description: `
+        <p>This is a detailed description for <strong>${p.title}</strong> which focuses on <strong>${p.topics}</strong>.</p>
+        <p>You are expected to solve this problem within the specified time and memory limits.</p>
 
-            <h3>Example 1:</h3>
-            <div class="ui segment example-block">
-                <p><strong>Input:</strong> nums = [2,7,11,15], target = 9</p>
-                <p><strong>Output:</strong> [0,1]</p>
-                <p><strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].</p>
-            </div>
+        <h3>Example 1:</h3>
+        <div class="ui segment example-block">
+            <p><strong>Input:</strong> mock_input_${p.id}</p>
+            <p><strong>Output:</strong> mock_output_${p.id}</p>
+        </div>
 
-            <h3>Example 2:</h3>
-            <div class="ui segment example-block">
-                <p><strong>Input:</strong> nums = [3,2,4], target = 6</p>
-                <p><strong>Output:</strong> [1,2]</p>
-            </div>
+        <h3>Constraints:</h3>
+        <ul>
+            <li>1 &le; input.length &le; 10<sup>5</sup></li>
+            <li>All inputs are valid according to problem specifications.</li>
+        </ul>
+    `,
+    testcases: [
+        { input: `input_data_${p.id}`, expected: `output_data_${p.id}` }
+    ]
+}));
 
-            <h3>Example 3:</h3>
-            <div class="ui segment example-block">
-                <p><strong>Input:</strong> nums = [3,3], target = 6</p>
-                <p><strong>Output:</strong> [0,1]</p>
-            </div>
-        `,
-        testcases: [
-            { input: "2 7 11 15\n9", expected: "[0,1]" },
-            { input: "3 2 4\n6", expected: "[1,2]" },
-            { input: "3 3\n6", expected: "[0,1]" }
-        ]
-    },
-    {
-        id: 2,
-        title: "Add Two Numbers",
-        difficulty: "Medium",
-        solved: false,
-        description: `
-            <p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in <strong>reverse order</strong>, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.</p>
-            <p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+// Enhance some specific ones
+problems[0].description = `
+    <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
+    <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the <em>same</em> element twice.</p>
 
-            <h3>Example 1:</h3>
-            <div class="ui segment example-block">
-                <p><strong>Input:</strong> l1 = [2,4,3], l2 = [5,6,4]</p>
-                <p><strong>Output:</strong> [7,0,8]</p>
-                <p><strong>Explanation:</strong> 342 + 465 = 807.</p>
-            </div>
-
-            <h3>Example 2:</h3>
-            <div class="ui segment example-block">
-                <p><strong>Input:</strong> l1 = [0], l2 = [0]</p>
-                <p><strong>Output:</strong> [0]</p>
-            </div>
-        `,
-        testcases: [
-            { input: "2 4 3\n5 6 4", expected: "[7,0,8]" },
-            { input: "0\n0", expected: "[0]" }
-        ]
-    },
-    {
-        id: 3,
-        title: "Longest Substring Without Repeating Characters",
-        difficulty: "Medium",
-        solved: false,
-        description: `
-            <p>Given a string <code>s</code>, find the length of the <strong>longest substring</strong> without repeating characters.</p>
-
-            <h3>Example 1:</h3>
-            <div class="ui segment example-block">
-                <p><strong>Input:</strong> s = "abcabcbb"</p>
-                <p><strong>Output:</strong> 3</p>
-                <p><strong>Explanation:</strong> The answer is "abc", with the length of 3.</p>
-            </div>
-
-            <h3>Example 2:</h3>
-            <div class="ui segment example-block">
-                <p><strong>Input:</strong> s = "bbbbb"</p>
-                <p><strong>Output:</strong> 1</p>
-                <p><strong>Explanation:</strong> The answer is "b", with the length of 1.</p>
-            </div>
-        `,
-        testcases: [
-            { input: "abcabcbb", expected: "3" },
-            { input: "bbbbb", expected: "1" },
-            { input: "pwwkew", expected: "3" }
-        ]
-    },
-    {
-        id: 29,
-        title: "Divide Two Integers",
-        difficulty: "Medium",
-        solved: false,
-        description: `
-            <p>Given two integers <code>dividend</code> and <code>divisor</code>, divide two integers <strong>without</strong> using multiplication, division, and mod operator.</p>
-            <p>The integer division should truncate toward zero, which means losing its fractional part. For example, <code>8.345</code> would be truncated to <code>8</code>, and <code>-2.7335</code> would be truncated to <code>-2</code>.</p>
-            <p>Return <em>the quotient after dividing</em> <code>dividend</code> by <code>divisor</code>.</p>
-            <p><strong>Note:</strong> Assume we are dealing with an environment that could only store integers within the <strong>32-bit</strong> signed integer range: [−2<sup>31</sup>, 2<sup>31</sup> − 1]. For this problem, if the quotient is <strong>strictly greater than</strong> 2<sup>31</sup> − 1, then return 2<sup>31</sup> − 1, and if the quotient is <strong>strictly less than</strong> −2<sup>31</sup>, then return −2<sup>31</sup>.</p>
-
-            <h3>Example 1:</h3>
-            <div class="ui segment example-block">
-                <p><strong>Input:</strong> dividend = 10, divisor = 3</p>
-                <p><strong>Output:</strong> 3</p>
-                <p><strong>Explanation:</strong> 10/3 = 3.33333.. which is truncated to 3.</p>
-            </div>
-
-            <h3>Example 2:</h3>
-            <div class="ui segment example-block">
-                <p><strong>Input:</strong> dividend = 7, divisor = -3</p>
-                <p><strong>Output:</strong> -2</p>
-                <p><strong>Explanation:</strong> 7/-3 = -2.33333.. which is truncated to -2.</p>
-            </div>
-        `,
-        testcases: [
-            { input: "10 3", expected: "3" },
-            { input: "7 -3", expected: "-2" }
-        ]
-    }
-];
-
-// Fill with more mock data if needed
-for (let i = 4; i <= 50; i++) {
-    if (i === 29) continue;
-    problems.push({
-        id: i,
-        title: `Problem ${i}`,
-        difficulty: i % 3 === 0 ? "Hard" : (i % 2 === 0 ? "Medium" : "Easy"),
-        solved: i % 5 === 0,
-        description: `
-            <p>This is a description for problem ${i}.</p>
-            <h3>Example 1:</h3>
-            <div class="ui segment example-block">
-                <p><strong>Input:</strong> input = ${i}</p>
-                <p><strong>Output:</strong> ${i * 2}</p>
-            </div>
-        `,
-        testcases: [
-            { input: `${i}`, expected: `${i * 2}` }
-        ]
-    });
-}
-problems.sort((a, b) => a.id - b.id);
+    <h3>Example 1:</h3>
+    <div class="ui segment example-block">
+        <p><strong>Input:</strong> nums = [2,7,11,15], target = 9</p>
+        <p><strong>Output:</strong> [0,1]</p>
+        <p><strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].</p>
+    </div>
+`;
+problems[0].testcases = [ { input: "2 7 11 15\n9", expected: "[0,1]" } ];
 
 let currentProblemId = 1;
 
@@ -162,7 +105,7 @@ function loadProblem(id) {
             <h1 class="ui header">${problem.id}. ${problem.title}</h1>
             <div class="ui labels">
                 <div class="ui ${difficultyColor} label">${problem.difficulty}</div>
-                <div class="ui basic label"><i class="tag icon"></i> Topics</div>
+                <div class="ui basic label"><i class="tag icon"></i> ${problem.topics}</div>
                 <div class="ui basic label"><i class="lock icon"></i> Companies</div>
             </div>
             <div class="problem-content" style="margin-top: 20px;">
@@ -171,7 +114,6 @@ function loadProblem(id) {
         </div>
     `;
 
-    // Update active state in drawer
     document.querySelectorAll(".problem-item").forEach(el => {
         el.classList.remove("active");
         if (el.dataset.id == id) {
@@ -179,12 +121,12 @@ function loadProblem(id) {
         }
     });
 
-    // Update stdin with first testcase if available
     window.dispatchEvent(new CustomEvent("problemLoaded", { detail: problem }));
 }
 
 function renderProblems(filter = "") {
     const container = document.getElementById("problem-items-container");
+    if (!container) return;
     container.innerHTML = "";
 
     const filteredProblems = problems.filter(p =>
@@ -212,6 +154,9 @@ function renderProblems(filter = "") {
 
         item.onclick = () => {
             loadProblem(p.id);
+            if (window.innerWidth <= 768) {
+                document.getElementById("procode-problem-list-drawer").classList.remove("open");
+            }
         };
 
         container.appendChild(item);
@@ -242,7 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-    // Close drawer when clicking outside
     document.addEventListener("mousedown", (e) => {
         if (drawer && drawer.classList.contains("open") &&
             !drawer.contains(e.target) &&
@@ -252,8 +196,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     renderProblems();
-
-    // Load first problem by default
     loadProblem(1);
 });
 

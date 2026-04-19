@@ -562,17 +562,24 @@ document.addEventListener("DOMContentLoaded", async function () {
         $("#submit-btn").click();
     });
 
+    $("#mobile-description-btn").click(function() {
+        let x = layout.root.getItemsById("description")[0];
+        if (x) {
+            x.parent.header.parent.setActiveContentItem(x);
+        }
+    });
+
+    $("#mobile-editor-btn").click(function() {
+        let x = layout.root.getItemsById("source")[0];
+        if (x) {
+            x.parent.header.parent.setActiveContentItem(x);
+        }
+    });
+
     $("#mobile-testcase-btn").click(function() {
         let x = layout.root.getItemsById("stdout")[0];
         if (x) {
             x.parent.header.parent.setActiveContentItem(x);
-        }
-        // Toggle icon
-        const icon = $(this).find("i");
-        if (icon.hasClass("up")) {
-            icon.removeClass("up").addClass("down");
-        } else {
-            icon.removeClass("down").addClass("up");
         }
     });
 
