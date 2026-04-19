@@ -130,6 +130,19 @@
             <select id="select-language" class="ui search selection dropdown"></select>
         </div>
 
+        <div class="item judge0-showCompilerOptions">
+            <div class="ui left icon transparent input">
+                <i class="flag icon"></i>
+                <input id="compiler-options" type="text" placeholder="Compiler options"></input>
+            </div>
+        </div>
+        <div class="item judge0-showCommandLineArguments">
+            <div class="ui left icon transparent input">
+                <i class="terminal icon"></i>
+                <input id="command-line-arguments" type="text" placeholder="Command line arguments"></input>
+            </div>
+        </div>
+
         <div class="item" style="flex-grow: 1; justify-content: center; display: flex;">
             <div class="ui buttons">
                 <button id="run-btn" class="ui button" data-content="+↵">
@@ -145,6 +158,16 @@
         <div class="right menu">
             <div id="judge0-theme-toggle-btn" class="icon link item judge0-showThemeButton" data-content="">
                 <i id="judge0-theme-toggle-btn-icon" class="sun icon"></i>
+            </div>
+            <div class="item judge0-showPuterSignInOutButton">
+                <button id="judge0-sign-in-btn" class="ui basic button">
+                    <i class="sign-in icon"></i>
+                    Sign in with Puter
+                </button>
+                <button id="judge0-sign-out-btn" class="ui basic button" data-content="Sign out">
+                    <i class="sign-out icon"></i>
+                    <span id="judge0-puter-username">Sign out</span>
+                </button>
             </div>
             <div class="item">
                 <i class="th icon"></i>
@@ -214,7 +237,7 @@
         </div>
     </div>
 
-    <div id="judge0-chat-container" class="ui segment">
+    <div id="judge0-chat-container" class="ui segment" style="display: none;">
         <div class="ui top attached borderless menu">
             <div class="item">
                 <div class="ui toggle checked checkbox">
@@ -257,7 +280,9 @@
 
     <div id="judge0-status-line" class="ui bottom right attached mini label judge0-showStatusLine"></div>
 
-    <a href="https://judge0.com" target="_blank" class="ui bottom center attached mini label judge0-showCopyright">© 2016-2026 Judge0 d.o.o. – All Rights Reserved. • A Croatian 🇭🇷 company</a>
+    <div class="ui bottom center attached mini label judge0-showCopyright">
+        <a href="https://judge0.com" target="_blank">© 2016-2026 Judge0 d.o.o. – All Rights Reserved. • A Croatian 🇭🇷 company</a>
+    </div>
 
     <script>
         if ("serviceWorker" in navigator) {

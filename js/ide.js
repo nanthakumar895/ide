@@ -460,16 +460,14 @@ function clear() {
 }
 
 function refreshSiteContentHeight() {
-    const navigationHeight = document.getElementById("judge0-site-navigation").offsetHeight;
-
-    const siteContent = document.getElementById("judge0-site-content");
-    siteContent.style.height = `${window.innerHeight}px`;
-    siteContent.style.paddingTop = `${navigationHeight}px`;
+    // Height and padding are now handled by CSS in modern.css
 }
 
 function refreshLayoutSize() {
     refreshSiteContentHeight();
-    layout.updateSize();
+    if (layout) {
+        layout.updateSize();
+    }
 }
 
 window.addEventListener("resize", refreshLayoutSize);
@@ -674,13 +672,16 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
 
         layout.registerComponent("description", function (container, state) {
-            container.getElement()[0].appendChild(document.getElementById("judge0-problem-description"));
-            document.getElementById("judge0-problem-description").style.display = "block";
+            const el = document.getElementById("judge0-problem-description");
+            if (el) {
+                container.getElement()[0].appendChild(el);
+                el.style.display = "block";
+            }
         });
 
         layout.on("initialised", function () {
             setDefaults();
-            refreshLayoutSize();
+            setTimeout(refreshLayoutSize, 50);
             window.top.postMessage({ event: "initialised" }, "*");
         });
 
