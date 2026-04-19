@@ -816,6 +816,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     document.getElementById("judge0-open-file-btn").addEventListener("click", openAction);
     document.getElementById("judge0-save-btn").addEventListener("click", saveAction);
 
+    $("#judge0-clear-btn").on("click", function() {
+        if (confirm("Are you sure you want to clear your code?")) {
+            clear();
+        }
+    });
+
     $("#judge0-mobile-menu-btn").on("click", function() {
         $("#judge0-mobile-menu-modal").modal({
             centered: false,
