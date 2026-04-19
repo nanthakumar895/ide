@@ -389,3 +389,125 @@ body {
 .problem-item.active .problem-difficulty {
     color: #00af9b !important;
 }
+
+/* Test Result UI Styles */
+#judge0-test-result-container {
+    padding: 1rem;
+    height: 100%;
+    background-color: var(--panel-bg);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.test-result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.result-status-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.result-status {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.result-status.accepted { color: #2cbb5d; }
+.result-status.wrong-answer { color: #ef4444; }
+.result-status.error { color: #eab308; }
+
+.result-runtime {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+}
+
+.result-actions .diff-link {
+    color: #3b82f6;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.test-case-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.test-case-tab {
+    background: rgba(255, 255, 255, 0.05);
+    color: #eff1f6;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.test-case-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.test-case-tab.active {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.test-case-tab i.icon {
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.test-case-tab.pass i.icon { color: #2cbb5d; }
+.test-case-tab.fail i.icon { color: #ef4444; }
+
+.test-case-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-label {
+    font-size: 0.85rem;
+    color: var(--secondary-text);
+    font-weight: 500;
+}
+
+.detail-value {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    min-height: 40px;
+}
+
+#test-case-output {
+    color: #eff1f6;
+}
+
+#test-case-expected {
+    color: #2cbb5d;
+}
+
+.wrong-answer #test-case-output {
+    color: #ef4444;
+}

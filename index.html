@@ -229,6 +229,35 @@
 
     <div id="judge0-site-content"></div>
 
+    <div id="judge0-test-result-container" style="display: none;">
+        <div class="test-result-header">
+            <div class="result-status-container">
+                <span id="test-result-status" class="result-status">Accepted</span>
+                <span id="test-result-runtime" class="result-runtime">Runtime: 0 ms</span>
+            </div>
+            <div class="result-actions">
+                <span class="diff-link">Diff</span>
+            </div>
+        </div>
+        <div id="test-case-tabs" class="test-case-tabs">
+            <!-- Tabs will be injected here -->
+        </div>
+        <div class="test-case-details">
+            <div class="detail-item">
+                <div class="detail-label">Input</div>
+                <div id="test-case-input" class="detail-value"></div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Output</div>
+                <div id="test-case-output" class="detail-value"></div>
+            </div>
+            <div id="expected-output-container" class="detail-item">
+                <div class="detail-label">Expected</div>
+                <div id="test-case-expected" class="detail-value"></div>
+            </div>
+        </div>
+    </div>
+
     <div id="judge0-problem-description" style="display: none;">
         <div class="ui basic segment description-container">
             <h1 class="ui header">29. Divide Two Integers</h1>

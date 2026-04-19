@@ -21,7 +21,12 @@ const problems = [
                 <p><strong>Input:</strong> nums = [3,2,4], target = 6</p>
                 <p><strong>Output:</strong> [1,2]</p>
             </div>
-        `
+        `,
+        testcases: [
+            { input: "nums = [2,7,11,15]\ntarget = 9", expected: "[0,1]" },
+            { input: "nums = [3,2,4]\ntarget = 6", expected: "[1,2]" },
+            { input: "nums = [3,3]\ntarget = 6", expected: "[0,1]" }
+        ]
     },
     {
         id: 2,
@@ -38,7 +43,12 @@ const problems = [
                 <p><strong>Output:</strong> [7,0,8]</p>
                 <p><strong>Explanation:</strong> 342 + 465 = 807.</p>
             </div>
-        `
+        `,
+        testcases: [
+            { input: "l1 = [2,4,3]\nl2 = [5,6,4]", expected: "[7,0,8]" },
+            { input: "l1 = [0]\nl2 = [0]", expected: "[0]" },
+            { input: "l1 = [9,9,9,9,9,9,9]\nl2 = [9,9,9,9]", expected: "[8,9,9,9,0,0,0,1]" }
+        ]
     },
     {
         id: 29,
@@ -64,7 +74,11 @@ const problems = [
                 <p><strong>Output:</strong> -2</p>
                 <p><strong>Explanation:</strong> 7/-3 = -2.33333.. which is truncated to -2.</p>
             </div>
-        `
+        `,
+        testcases: [
+            { input: "dividend = 10\ndivisor = 3", expected: "3" },
+            { input: "dividend = 7\ndivisor = -3", expected: "-2" }
+        ]
     }
 ];
 
@@ -76,14 +90,21 @@ for (let i = 3; i <= 50; i++) {
         title: `Mock Problem ${i}`,
         difficulty: i % 3 === 0 ? "Hard" : (i % 2 === 0 ? "Medium" : "Easy"),
         solved: i % 5 === 0,
-        description: `<p>This is a mock description for problem ${i}.</p>`
+        description: `<p>This is a mock description for problem ${i}.</p>`,
+        testcases: [
+            { input: "input = 1", expected: "output = 1" }
+        ]
     });
 }
 problems.sort((a, b) => a.id - b.id);
 
+let currentProblemId = 1;
+
 function loadProblem(id) {
     const problem = problems.find(p => p.id === id);
     if (!problem) return;
+
+    currentProblemId = id;
 
     const container = document.getElementById("judge0-problem-description");
     if (!container) return;
@@ -111,6 +132,13 @@ function loadProblem(id) {
             el.classList.add("active");
         }
     });
+
+    // Update stdin with first testcase
+    if (problem.testcases && problem.testcases.length > 0) {
+        // We need to access the editor, but problems.js is separate.
+        // We'll use a custom event or a global function if available.
+        window.dispatchEvent(new CustomEvent("problemLoaded", { detail: problem }));
+    }
 }
 
 function renderProblems(filter = "") {
@@ -142,10 +170,6 @@ function renderProblems(filter = "") {
 
         item.onclick = () => {
             loadProblem(p.id);
-            // Optionally close drawer on mobile or small screens
-            // if (window.innerWidth < 768) {
-            //     document.getElementById("judge0-problem-list-drawer").classList.remove("open");
-            // }
         };
 
         container.appendChild(item);
@@ -190,3 +214,5 @@ document.addEventListener("DOMContentLoaded", () => {
     // Load first problem by default
     loadProblem(1);
 });
+
+export { problems, loadProblem, currentProblemId };

@@ -160,6 +160,9 @@ function handleResult(data) {
 
     stdoutEditor.setValue(output);
 
+    // Populate Modern Test Result UI
+    renderTestResults(data, output);
+
     $runBtn.removeClass("loading");
 
     window.top.postMessage(JSON.parse(JSON.stringify({
@@ -169,6 +172,51 @@ function handleResult(data) {
         memory: data.memory,
         output: output
     })), "*");
+}
+
+function renderTestResults(data, actualOutput) {
+    const container = document.getElementById("judge0-test-result-container");
+    const statusEl = document.getElementById("test-result-status");
+    const runtimeEl = document.getElementById("test-result-runtime");
+    const tabsContainer = document.getElementById("test-case-tabs");
+
+    // Get current problem testcases
+    // We'll try to find the problem from the global problems array if available
+    // For now we'll use a placeholder if not found
+    const problem = window.currentProblem;
+    const testcases = problem ? problem.testcases : [{ input: stdinEditor.getValue(), expected: "Unknown" }];
+
+    const isAccepted = data.status.id === 3; // 3 is Accepted in Judge0
+
+    statusEl.innerText = isAccepted ? "Accepted" : data.status.description;
+    statusEl.className = "result-status " + (isAccepted ? "accepted" : "wrong-answer");
+    runtimeEl.innerText = `Runtime: ${Math.round(data.time * 1000) || 0} ms`;
+
+    tabsContainer.innerHTML = "";
+    testcases.forEach((tc, index) => {
+        const tab = document.createElement("div");
+        tab.className = `test-case-tab ${index === 0 ? 'active' : ''} ${isAccepted ? 'pass' : 'fail'}`;
+        tab.innerHTML = `<i class="${isAccepted ? 'check' : 'close'} icon"></i> Case ${index + 1}`;
+        tab.onclick = () => {
+            document.querySelectorAll(".test-case-tab").forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+            showTestCaseDetails(tc, index === 0 ? actualOutput : "Output only available for first test case in this demo");
+        };
+        tabsContainer.appendChild(tab);
+    });
+
+    // Show first test case by default
+    showTestCaseDetails(testcases[0], actualOutput);
+
+    // Switch to Test Result tab
+    let x = layout.root.getItemsById("stdout")[0];
+    x.parent.header.parent.setActiveContentItem(x);
+}
+
+function showTestCaseDetails(testcase, actualOutput) {
+    document.getElementById("test-case-input").innerText = testcase.input;
+    document.getElementById("test-case-output").innerText = actualOutput;
+    document.getElementById("test-case-expected").innerText = testcase.expected;
 }
 
 async function getSelectedLanguage() {
@@ -495,6 +543,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     $runBtn = $("#run-btn");
     $runBtn.click(run);
 
+    window.addEventListener("problemLoaded", function(e) {
+        window.currentProblem = e.detail;
+        if (stdinEditor) {
+            stdinEditor.setValue(e.detail.testcases[0].input);
+        }
+    });
+
     $("#submit-btn").click(function() {
         showError("Info", "Submit functionality is currently being implemented. For now, please use the Run button to test your code.");
     });
@@ -656,15 +711,22 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
 
         layout.registerComponent("stdout", function (container, state) {
-            stdoutEditor = monaco.editor.create(container.getElement()[0], {
-                automaticLayout: true,
-                scrollBeyondLastLine: false,
-                readOnly: state.readOnly,
-                language: "plaintext",
-                minimap: {
-                    enabled: false
-                }
-            });
+            const el = document.getElementById("judge0-test-result-container");
+            if (el) {
+                container.getElement()[0].appendChild(el);
+                el.style.display = "flex";
+            }
+
+            // Create a hidden editor for backward compatibility if needed,
+            // or just use a dummy element.
+            const dummy = document.createElement("div");
+            dummy.style.display = "none";
+            container.getElement()[0].appendChild(dummy);
+            stdoutEditor = {
+                setValue: (val) => { console.log("Standard output:", val); },
+                getValue: () => { return ""; },
+                updateOptions: () => {}
+            };
         });
 
         layout.registerComponent("ai", function (container, state) {
