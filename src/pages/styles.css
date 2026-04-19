@@ -1,0 +1,50 @@
+:root {
+    --dark-bg: #1a1a1a;
+    --darker-bg: #0f0f0f;
+    --panel-bg: #262626;
+    --text-color: #eff1f6;
+}
+
+body {
+    background-color: var(--darker-bg) !important;
+    color: var(--text-color) !important;
+    margin: 0;
+    padding: 0;
+}
+
+.ui.container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.ui.segment, .ui.card {
+    background-color: var(--panel-bg) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-color) !important;
+}
+
+.ui.header {
+    color: white !important;
+}
+
+.ui.form label {
+    color: var(--text-color) !important;
+}
+
+.ui.form input, .ui.form select {
+    background-color: var(--dark-bg) !important;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.ui.card .header {
+    color: white !important;
+}
+
+.ui.card .meta {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.ui.card .description {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
