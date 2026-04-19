@@ -230,3 +230,162 @@ body {
     border: none !important;
     font-size: 10px !important;
 }
+
+/* Problem List Drawer */
+.problem-list-drawer {
+    position: fixed;
+    top: 0;
+    left: -420px;
+    width: 420px;
+    height: 100%;
+    background-color: var(--dark-bg);
+    z-index: 1001;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.problem-list-drawer.open {
+    left: 0;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.drawer-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.solved-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+
+.progress-circle {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #3e3e3e;
+    border-top-color: #2cbb5d;
+    border-radius: 50%;
+}
+
+.drawer-close {
+    background: transparent !important;
+    color: var(--secondary-text) !important;
+    padding: 5px !important;
+}
+
+.drawer-close:hover {
+    color: white !important;
+}
+
+.drawer-search-bar {
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 10px;
+}
+
+.search-input-container {
+    flex-grow: 1;
+}
+
+.search-input-container input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 10px !important;
+    height: 38px !important;
+}
+
+.search-actions button {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: var(--secondary-text) !important;
+    border-radius: 10px !important;
+    margin: 0 !important;
+    height: 38px !important;
+    width: 38px !important;
+    padding: 0 !important;
+}
+
+.filter-active {
+    background: rgba(255, 161, 22, 0.15) !important;
+    color: #ffa116 !important;
+}
+
+.problem-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0.5rem 0;
+}
+
+.problem-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.problem-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.problem-item.active {
+    background: white;
+    color: #1a1a1a !important;
+    border-radius: 10px;
+    margin: 0 10px;
+}
+
+.problem-item.active .problem-title {
+    color: #1a1a1a !important;
+}
+
+.problem-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.problem-status {
+    width: 16px;
+    color: #2cbb5d;
+}
+
+.problem-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #eff1f6;
+}
+
+.problem-difficulty {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.diff-easy { color: #00af9b; }
+.diff-medium { color: #ffb800; }
+.diff-hard { color: #ff2d55; }
+
+.problem-item.active .problem-difficulty {
+    color: #00af9b !important;
+}

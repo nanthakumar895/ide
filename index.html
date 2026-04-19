@@ -47,6 +47,7 @@
     <script type="module" src="js/query.js"></script>
     <script type="module" src="js/style.js"></script>
     <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/problems.js"></script>
 
     <link type="text/css" rel="stylesheet" href="css/ide.css">
     <link type="text/css" rel="stylesheet" href="css/semantic.css">
@@ -92,11 +93,43 @@
 </head>
 
 <body>
+    <div id="judge0-problem-list-drawer" class="problem-list-drawer">
+        <div class="drawer-header">
+            <div class="header-left">
+                <span class="drawer-title">Problem List <i class="chevron right icon" style="font-size: 0.8em; margin-left: 5px;"></i></span>
+            </div>
+            <div class="header-right">
+                <div class="solved-progress">
+                    <div class="progress-circle"></div>
+                    <span>22/3906 Solved</span>
+                </div>
+                <button id="close-drawer-btn" class="ui icon button drawer-close">
+                    <i class="close icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="drawer-search-bar">
+            <div class="ui left icon input search-input-container">
+                <i class="search icon"></i>
+                <input type="text" id="problem-search" placeholder="Search questions">
+            </div>
+            <div class="search-actions">
+                <button class="ui icon button"><i class="exchange icon" style="transform: rotate(90deg);"></i></button>
+                <button class="ui icon button filter-active"><i class="filter icon"></i></button>
+            </div>
+        </div>
+
+        <div id="problem-items-container" class="problem-items">
+            <!-- Problem items will be injected here by JS -->
+        </div>
+    </div>
+
     <div id="judge0-site-navigation" class="ui top fixed borderless menu judge0-showNavigation">
         <a id="judge0-header" href="https://judge0.com" target="_blank" class="header item judge0-showLogo">
             <img id="judge0-logo" src="./images/icon_var2_rounded_512.png">
         </a>
-        <div class="item">
+        <div id="problem-list-btn" class="item link">
             <i class="list icon"></i>
             <span class="text">Problem List</span>
         </div>
