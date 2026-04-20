@@ -19,7 +19,7 @@ export const SUPPORTED_LANGUAGES: Language[] = [
     defaultCode: "#include <stdio.h>\n\nint main() {\n    printf(\"Hello World\");\n    return 0;\n}"
   },
   {
-    id: 25,
+    id: 92,
     name: "Python (3.11.2)",
     monacoMode: "python",
     defaultCode: "print(\"Hello World\")"
@@ -70,7 +70,7 @@ export const SUPPORTED_LANGUAGES: Language[] = [
     id: 51,
     name: "C# (Mono 6.6.0.161)",
     monacoMode: "csharp",
-    defaultCode: "using System;\n\npublic class HelloWorld\n{\n    public static void main(string[] args)\n    {\n        Console.WriteLine(\"Hello World\");\n    }\n}"
+    defaultCode: "using System;\n\npublic class HelloWorld\n{\n    public static void Main(string[] args)\n    {\n        Console.WriteLine(\"Hello World\");\n    }\n}"
   },
   {
     id: 83,
@@ -83,5 +83,17 @@ export const SUPPORTED_LANGUAGES: Language[] = [
     name: "Kotlin (1.3.70)",
     monacoMode: "kotlin",
     defaultCode: "fun main(args: Array<String>) {\n    println(\"Hello World\")\n}"
+  },
+  {
+    id: 112,
+    name: "Scala (3.4.2)",
+    monacoMode: "scala",
+    defaultCode: "@main def hello() = println(\"Hello World\")"
+  },
+  {
+    id: 82,
+    name: "SQL (SQLite 3.27.2)",
+    monacoMode: "sql",
+    defaultCode: "CREATE TABLE hello (name TEXT);\nINSERT INTO hello VALUES ('Hello World');\nSELECT * FROM hello;"
   }
 ];
