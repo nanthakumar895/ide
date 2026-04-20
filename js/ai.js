@@ -38,28 +38,28 @@ If their message is unrelated to the code, focus solely on their conversational 
 ];
 
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("judge0-chat-form").addEventListener("submit", async function (event) {
+    document.getElementById("procode-chat-form").addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        const userInput = document.getElementById("judge0-chat-user-input");
+        const userInput = document.getElementById("procode-chat-user-input");
         const userInputValue = userInput.value.trim();
         if (userInputValue === "") {
             return;
         }
 
-        const sendButton = document.getElementById("judge0-chat-send-button");
+        const sendButton = document.getElementById("procode-chat-send-button");
 
         sendButton.classList.add("loading");
         userInput.disabled = true;
 
         const userMessage = document.createElement("div");
         userMessage.innerText = userInputValue;
-        userMessage.classList.add("ui", "message", "judge0-message", "judge0-user-message");
+        userMessage.classList.add("ui", "message", "procode-message", "procode-user-message");
         if (!theme.isLight()) {
             userMessage.classList.add("inverted");
         }
 
-        const messages = document.getElementById("judge0-chat-messages");
+        const messages = document.getElementById("procode-chat-messages");
         messages.appendChild(userMessage);
 
         userInput.value = "";
@@ -78,7 +78,7 @@ ${userInputValue}
 
 
         const aiMessage = document.createElement("div");
-        aiMessage.classList.add("ui", "basic", "segment", "judge0-message", "loading");
+        aiMessage.classList.add("ui", "basic", "segment", "procode-message", "loading");
         if (!theme.isLight()) {
             aiMessage.classList.add("inverted");
         }
@@ -86,7 +86,7 @@ ${userInputValue}
         messages.scrollTop = messages.scrollHeight;
 
         const aiResponse = await puter.ai.chat(THREAD, {
-            model: document.getElementById("judge0-chat-model-select").value,
+            model: document.getElementById("procode-chat-model-select").value,
         });
         let aiResponseValue = aiResponse.toString();
         if (typeof aiResponseValue !== "string") {
@@ -115,8 +115,8 @@ ${userInputValue}
         userInput.focus();
     });
 
-    document.getElementById("judge0-chat-model-select").addEventListener("change", function () {
-        const userInput = document.getElementById("judge0-chat-user-input");
+    document.getElementById("procode-chat-model-select").addEventListener("change", function () {
+        const userInput = document.getElementById("procode-chat-user-input");
         userInput.placeholder = `Message ${this.value}`;
     });
 });
@@ -129,7 +129,7 @@ document.addEventListener("keydown", function (e) {
                     break;
                 }
                 e.preventDefault();
-                document.getElementById("judge0-chat-user-input").focus();
+                document.getElementById("procode-chat-user-input").focus();
                 break;
         }
     }
