@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ onRun, onSubmit }) => {
           <button
             onClick={onRun}
             disabled={isRunning}
-            className={`ui basic inverted icon button \${isRunning ? 'loading' : ''}`}
+            className={`ui basic inverted icon button ${isRunning ? 'loading' : ''}`}
             style={{ padding: '6px 12px', color: '#eff1f6' }}
           >
             <Play size={16} fill="currentColor" />

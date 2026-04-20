@@ -12,7 +12,6 @@ interface TestResultsPanelProps {
 const TestResultsPanel: React.FC<TestResultsPanelProps> = ({ stdin, setStdin, result, isLoading }) => {
   const [activeTab, setActiveTab] = useState<'testcase' | 'result'>('testcase');
 
-  // If result comes in, switch to Result tab
   React.useEffect(() => {
     if (result) setActiveTab('result');
   }, [result]);
