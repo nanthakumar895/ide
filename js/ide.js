@@ -1,5 +1,6 @@
 import { usePuter } from "./puter.js";
 import configuration from "./configuration.js";
+import { problems } from "./problems.js";
 
 const API_KEY = "";
 
@@ -297,15 +298,15 @@ function fetchSubmission(flavor, region, submission_token, iteration) {
 }
 
 function setSourceCodeName(name) {
-    const titles = $(".lm_title");
-    if (titles.length > 0) {
-        titles[0].innerText = name;
+    const items = layout.root.getItemsById("source");
+    if (items.length > 0) {
+        items[0].setTitle(name);
     }
 }
 
 function getSourceCodeName() {
-    const titles = $(".lm_title");
-    return titles.length > 0 ? titles[0].innerText : "main.cpp";
+    const items = layout.root.getItemsById("source");
+    return items.length > 0 ? items[0].config.title : "main.cpp";
 }
 
 function openFile(content, filename) {
@@ -506,6 +507,56 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     $submitBtn = $("#submit-btn");
     $submitBtn.click(run);
+
+    const $problemListDrawer = $("#judge0-problem-list-drawer");
+    const $problemListItems = $("#problem-list-items");
+    const $closeDrawerBtn = $("#close-drawer-btn");
+    const $problemListBtn = $(".problem-list-btn");
+    const $drawerSearch = $(".drawer-search input");
+
+    function renderProblemList(filter = "") {
+        $problemListItems.empty();
+        problems.filter(p => p.title.toLowerCase().includes(filter.toLowerCase()))
+            .forEach(problem => {
+                const $item = $(`
+                    <div class="problem-item" data-id="${problem.id}">
+                        <div class="title">${problem.id}. ${problem.title}</div>
+                        <div class="meta">
+                            <span class="difficulty-${problem.difficulty.toLowerCase()}">${problem.difficulty}</span>
+                            <span class="tags">${problem.tags.join(", ")}</span>
+                        </div>
+                    </div>
+                `);
+                $item.click(() => {
+                    loadProblem(problem);
+                    $problemListDrawer.removeClass("show");
+                });
+                $problemListItems.append($item);
+            });
+    }
+
+    function loadProblem(problem) {
+        const $container = $("#judge0-problem-container");
+        $container.find("h1").text(`${problem.id}. ${problem.title}`);
+
+        const $tags = $container.find(".problem-tags");
+        $tags.empty();
+        $tags.append(`<span class="ui tiny ${problem.difficulty === 'Easy' ? 'green' : problem.difficulty === 'Medium' ? 'orange' : 'red'} label">${problem.difficulty}</span>`);
+        problem.tags.forEach(tag => {
+            $tags.append(`<span class="ui tiny label">${tag}</span>`);
+        });
+
+        $container.find(".problem-content").html(problem.description);
+
+        $(".problem-item").removeClass("active");
+        $(`.problem-item[data-id="${problem.id}"]`).addClass("active");
+    }
+
+    $problemListBtn.click(() => $problemListDrawer.toggleClass("show"));
+    $closeDrawerBtn.click(() => $problemListDrawer.removeClass("show"));
+    $drawerSearch.on("input", (e) => renderProblemList($(e.target).val()));
+
+    renderProblemList();
 
     $("#open-file-input").change(function (e) {
         const selectedFile = e.target.files[0];
