@@ -1,6 +1,7 @@
 import React from 'react'
 import Editor from '@monaco-editor/react'
 import { SUPPORTED_LANGUAGES } from '../constants'
+import LanguageSelector from './LanguageSelector'
 
 interface EditorPanelProps {
   code: string
@@ -15,31 +16,18 @@ const EditorPanel: React.FC<EditorPanelProps> = ({ code, onChange, selectedLangu
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <div style={{
-        height: '40px',
+        height: '44px',
         backgroundColor: '#252525',
         display: 'flex',
         alignItems: 'center',
-        padding: '0 10px',
+        padding: '0 12px',
         borderBottom: '1px solid #111',
-        justifyContent: 'space-between'
+        justifyContent: 'flex-start'
       }}>
-        <select
-          value={selectedLanguageId}
-          onChange={(e) => onLanguageChange(Number(e.target.value))}
-          style={{
-            backgroundColor: '#333',
-            color: '#fff',
-            border: '1px solid #444',
-            borderRadius: '4px',
-            padding: '2px 8px',
-            fontSize: '0.85rem',
-            cursor: 'pointer'
-          }}
-        >
-          {SUPPORTED_LANGUAGES.map(lang => (
-            <option key={lang.id} value={lang.id}>{lang.name}</option>
-          ))}
-        </select>
+        <LanguageSelector
+          selectedLanguageId={selectedLanguageId}
+          onLanguageChange={onLanguageChange}
+        />
       </div>
       <div style={{ flex: 1 }}>
         <Editor
