@@ -40,6 +40,7 @@ var $selectLanguage;
 var $compilerOptions;
 var $commandLineArguments;
 var $runBtn;
+var $submitBtn;
 var $statusLine;
 
 var timeStart;
@@ -53,54 +54,50 @@ var layoutConfig = {
         reorderEnabled: true
     },
     content: [{
-        type: configuration.get("appOptions.mainLayout"),
+        type: "row",
         content: [{
             type: "component",
-            width: 66,
-            componentName: "source",
-            id: "source",
-            title: "Source Code",
-            isClosable: false,
-            componentState: {
-                readOnly: false
-            }
+            width: 30,
+            componentName: "problem",
+            id: "problem",
+            title: "Problem",
+            isClosable: false
         }, {
-            type: configuration.get("appOptions.assistantLayout"),
-            title: "AI Assistant and I/O",
-            content: [configuration.get("appOptions.showAIAssistant") ? {
+            type: "column",
+            width: 70,
+            content: [{
                 type: "component",
-                height: 66,
-                componentName: "ai",
-                id: "ai",
-                title: "AI Assistant",
+                height: 60,
+                componentName: "source",
+                id: "source",
+                title: "Source Code",
                 isClosable: false,
                 componentState: {
                     readOnly: false
                 }
-            } : null, {
-                type: configuration.get("appOptions.ioLayout"),
-                title: "I/O",
-                content: [
-                    configuration.get("appOptions.showInput") ? {
-                        type: "component",
-                        componentName: "stdin",
-                        id: "stdin",
-                        title: "Input",
-                        isClosable: false,
-                        componentState: {
-                            readOnly: false
-                        }
-                    } : null, configuration.get("appOptions.showOutput") ? {
-                        type: "component",
-                        componentName: "stdout",
-                        id: "stdout",
-                        title: "Output",
-                        isClosable: false,
-                        componentState: {
-                            readOnly: true
-                        }
-                    } : null].filter(Boolean)
-            }].filter(Boolean)
+            }, {
+                type: "stack",
+                height: 40,
+                content: [{
+                    type: "component",
+                    componentName: "stdout",
+                    id: "stdout",
+                    title: "Result",
+                    isClosable: false,
+                    componentState: {
+                        readOnly: true
+                    }
+                }, {
+                    type: "component",
+                    componentName: "stdin",
+                    id: "stdin",
+                    title: "Testcase",
+                    isClosable: false,
+                    componentState: {
+                        readOnly: false
+                    }
+                }]
+            }]
         }]
     }]
 };
@@ -300,11 +297,15 @@ function fetchSubmission(flavor, region, submission_token, iteration) {
 }
 
 function setSourceCodeName(name) {
-    $(".lm_title")[0].innerText = name;
+    const titles = $(".lm_title");
+    if (titles.length > 0) {
+        titles[0].innerText = name;
+    }
 }
 
 function getSourceCodeName() {
-    return $(".lm_title")[0].innerText;
+    const titles = $(".lm_title");
+    return titles.length > 0 ? titles[0].innerText : "main.cpp";
 }
 
 function openFile(content, filename) {
@@ -503,6 +504,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     $runBtn = $("#run-btn");
     $runBtn.click(run);
 
+    $submitBtn = $("#submit-btn");
+    $submitBtn.click(run);
+
     $("#open-file-input").change(function (e) {
         const selectedFile = e.target.files[0];
         if (selectedFile) {
@@ -562,6 +566,14 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     require(["vs/editor/editor.main"], function (ignorable) {
         layout = new GoldenLayout(layoutConfig, $("#judge0-site-content"));
+
+        layout.registerComponent("problem", function (container, state) {
+            const problemContainer = document.getElementById("judge0-problem-container");
+            if (problemContainer) {
+                container.getElement()[0].appendChild(problemContainer);
+                problemContainer.classList.remove("judge0-hidden");
+            }
+        });
 
         layout.registerComponent("source", function (container, state) {
             sourceEditor = monaco.editor.create(container.getElement()[0], {
@@ -694,7 +706,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     document.querySelectorAll(".description").forEach(e => {
-        e.innerText = `${superKey}${e.innerText}`;
+        if (e) {
+            e.innerText = `${superKey}${e.innerText}`;
+        }
     });
 
     if (usePuter()) {

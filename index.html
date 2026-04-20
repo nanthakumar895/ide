@@ -96,6 +96,11 @@
         <a id="judge0-header" href="https://judge0.com" target="_blank" class="header item judge0-showLogo">
             <img id="judge0-logo" src="./images/icon_var2_rounded_512.png">
         </a>
+        <div class="item">
+            <button class="ui button problem-list-btn">
+                Problem List
+            </button>
+        </div>
         <div class="ui simple dropdown item judge0-showFileMenu">
             <span class="text">File</span>
             <i class="dropdown icon"></i>
@@ -111,56 +116,73 @@
                 </div>
             </div>
         </div>
-        <div class="ui simple dropdown item judge0-showHelpMenu">
-            <span class="text">Help</span>
-            <i class="dropdown icon"></i>
-            <div class="menu judge0-file-menu">
-                <a href="https://github.com/judge0/ide" class="link text item" target="_blank"><i class="external square alternate icon"></i>GitHub Repository</a>
-                <a href="/embed" class="link text item" target="_blank"><i class="external square alternate icon"></i>Embed Guide</a>
-                <a href="https://platform.sulu.sh/apis/judge0" class="link text item" target="_blank"><i class="external square alternate icon"></i>HTTP API Documentation</a>
-                <a href="PRIVACY.md" class="link text item" target="_blank"><i class="external square alternate icon"></i>Privacy Policy</a>
-                <a href="TERMS.md" class="link text item" target="_blank"><i class="external square alternate icon"></i>Terms of Service</a>
-            </div>
-        </div>
         <div class="item judge0-showSelectLanguage">
             <select id="select-language" class="ui search selection dropdown"></select>
         </div>
-        <div class="item judge0-showCompilerOptions">
-            <div class="ui left icon transparent input">
-                <i class="flag icon"></i>
-                <input id="compiler-options" type="text" placeholder="Compiler options"></input>
-            </div>
-        </div>
-        <div class="item judge0-showCommandLineArguments">
-            <div class="ui left icon transparent input">
-                <i class="terminal icon"></i>
-                <input id="command-line-arguments" type="text" placeholder="Command line arguments"></input>
-            </div>
-        </div>
-        <div class="item judge0-showRunButton">
-            <button id="run-btn" class="ui primary labeled icon button" data-content="+↵">
+        <div class="item center-buttons">
+            <button id="run-btn" class="ui icon button" data-content="+↵">
                 <i class="play icon"></i>
-                Run Code
+            </button>
+            <button id="submit-btn" class="ui positive labeled icon button">
+                <i class="cloud upload icon"></i>
+                Submit
             </button>
         </div>
         <div class="right menu">
             <div id="judge0-theme-toggle-btn" class="icon link item judge0-showThemeButton" data-content="">
                 <i id="judge0-theme-toggle-btn-icon" class="sun icon"></i>
             </div>
+            <div class="icon link item">
+                <i class="grid layout icon"></i>
+            </div>
+        <div class="ui simple dropdown icon link item">
+                <i class="setting icon"></i>
+            <div class="menu">
+                <div class="header">Compiler Options</div>
+                <div class="ui item transparent input">
+                    <input id="compiler-options" type="text" placeholder="Compiler options">
+                </div>
+                <div class="header">Command Line Arguments</div>
+                <div class="ui item transparent input">
+                    <input id="command-line-arguments" type="text" placeholder="Command line arguments">
+                </div>
+            </div>
+            </div>
+            <div class="item">
+                <i class="fire icon"></i>
+                <span>0</span>
+            </div>
+            <div class="item">
+                <button class="ui orange button premium-btn">Premium</button>
+            </div>
             <div class="item judge0-showPuterSignInOutButton">
-                <button id="judge0-sign-in-btn" class="ui basic button">
+            <button id="judge0-sign-in-btn" class="ui icon button" title="Sign in with Puter">
                     <i class="sign-in icon"></i>
-                    Sign in with Puter
                 </button>
-                <button id="judge0-sign-out-btn" class="ui basic button" data-content="Sign out">
+            <button id="judge0-sign-out-btn" class="ui icon button judge0-hidden" data-content="Sign out">
                     <i class="sign-out icon"></i>
-                    <span id="judge0-puter-username">Sign out</span>
                 </button>
             </div>
         </div>
     </div>
 
     <div id="judge0-site-content"></div>
+
+    <div id="judge0-problem-container" class="judge0-hidden">
+        <div class="problem-description">
+            <h1 class="ui header">1. Two Sum</h1>
+            <div class="problem-tags">
+                <span class="ui tiny green label">Easy</span>
+                <span class="ui tiny label">Array</span>
+                <span class="ui tiny label">Hash Table</span>
+            </div>
+            <div class="problem-content">
+                <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return <i>indices of the two numbers such that they add up to target</i>.</p>
+                <p>You may assume that each input would have <b>exactly one solution</b>, and you may not use the same element twice.</p>
+                <p>You can return the answer in any order.</p>
+            </div>
+        </div>
+    </div>
 
     <div id="judge0-site-modal" class="ui modal">
         <div class="header">
