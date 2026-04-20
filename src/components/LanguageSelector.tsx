@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useIDE } from '../context/IDEContext';
-import { ChevronDown, Search } from 'lucide-react';
+import { ChevronDown, Search, Globe } from 'lucide-react';
 
 const LanguageSelector: React.FC = () => {
   const { languages, selectedLanguage, setSelectedLanguage } = useIDE();
@@ -21,28 +21,32 @@ const LanguageSelector: React.FC = () => {
   const filtered = languages.filter(l => l.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <div ref={dropdownRef} style={{ position: 'relative', width: '200px' }}>
+    <div ref={dropdownRef} style={{ position: 'relative' }}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         style={{
-          width: '100%',
           height: '32px',
           padding: '0 12px',
           backgroundColor: '#252525',
-          border: 'none',
+          border: '1px solid #333',
           borderRadius: '8px',
           color: '#eff1f6',
           fontSize: '0.85rem',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          cursor: 'pointer'
+          gap: '8px',
+          cursor: 'pointer',
+          transition: 'border-color 0.2s',
+          minWidth: '160px'
         }}
+        onMouseOver={(e) => e.currentTarget.style.borderColor = '#444'}
+        onMouseOut={(e) => e.currentTarget.style.borderColor = '#333'}
       >
-        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <Globe size={14} style={{ color: '#aaa' }} />
+        <span style={{ flex: 1, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {selectedLanguage ? selectedLanguage.name : 'Select Language'}
         </span>
-        <ChevronDown size={14} style={{ flexShrink: 0, marginLeft: '8px' }} />
+        <ChevronDown size={14} style={{ flexShrink: 0, color: '#666' }} />
       </button>
 
       {isOpen && (
@@ -50,38 +54,41 @@ const LanguageSelector: React.FC = () => {
           position: 'absolute',
           top: '38px',
           left: 0,
-          width: '250px',
+          width: '280px',
           maxHeight: '400px',
           backgroundColor: '#1a1a1a',
           border: '1px solid #333',
-          borderRadius: '8px',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
+          borderRadius: '10px',
+          boxShadow: '0 15px 40px rgba(0,0,0,0.6)',
           zIndex: 1001,
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          overflow: 'hidden',
+          animation: 'fadeIn 0.15s ease-out'
         }}>
-          <div style={{ padding: '8px', borderBottom: '1px solid #333' }}>
+          <div style={{ padding: '10px', borderBottom: '1px solid #333', backgroundColor: '#202020' }}>
             <div style={{ position: 'relative' }}>
-              <Search size={14} style={{ position: 'absolute', left: '8px', top: '8px', color: '#666' }} />
+              <Search size={14} style={{ position: 'absolute', left: '10px', top: '9px', color: '#666' }} />
               <input
                 autoFocus
                 type="text"
-                placeholder="Search..."
+                placeholder="Filter languages..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '6px 8px 6px 30px',
-                  backgroundColor: '#252525',
+                  padding: '7px 10px 7px 32px',
+                  backgroundColor: '#2d2d2d',
                   border: '1px solid #444',
-                  borderRadius: '4px',
+                  borderRadius: '6px',
                   color: '#fff',
-                  fontSize: '0.8rem'
+                  fontSize: '0.85rem',
+                  outline: 'none'
                 }}
               />
             </div>
           </div>
-          <div style={{ overflowY: 'auto', flex: 1, padding: '4px' }}>
+          <div style={{ overflowY: 'auto', flex: 1, padding: '6px' }}>
             {filtered.map(l => (
               <div
                 key={`${l.flavor}-${l.id}`}
@@ -91,21 +98,40 @@ const LanguageSelector: React.FC = () => {
                   setSearch('');
                 }}
                 style={{
-                  padding: '8px 12px',
-                  borderRadius: '4px',
+                  padding: '10px 14px',
+                  borderRadius: '6px',
                   cursor: 'pointer',
-                  fontSize: '0.85rem',
+                  fontSize: '0.9rem',
                   color: selectedLanguage?.id === l.id && selectedLanguage?.flavor === l.flavor ? '#ffa116' : '#ccc',
-                  backgroundColor: selectedLanguage?.id === l.id && selectedLanguage?.flavor === l.flavor ? '#2d2d2d' : 'transparent'
+                  backgroundColor: selectedLanguage?.id === l.id && selectedLanguage?.flavor === l.flavor ? '#2d2d2d' : 'transparent',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '2px'
                 }}
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#2d2d2d'}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = selectedLanguage?.id === l.id && selectedLanguage?.flavor === l.flavor ? '#2d2d2d' : 'transparent'}
+                onMouseOver={(e) => {
+                    if (!(selectedLanguage?.id === l.id && selectedLanguage?.flavor === l.flavor)) {
+                        e.currentTarget.style.backgroundColor = '#252525';
+                        e.currentTarget.style.color = '#fff';
+                    }
+                }}
+                onMouseOut={(e) => {
+                    if (!(selectedLanguage?.id === l.id && selectedLanguage?.flavor === l.flavor)) {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = '#ccc';
+                    }
+                }}
               >
-                {l.name}
+                <span>{l.name}</span>
+                {selectedLanguage?.id === l.id && selectedLanguage?.flavor === l.flavor && (
+                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ffa116' }}></div>
+                )}
               </div>
             ))}
             {filtered.length === 0 && (
-              <div style={{ padding: '20px', textAlign: 'center', color: '#666', fontSize: '0.85rem' }}>No results</div>
+              <div style={{ padding: '30px 10px', textAlign: 'center', color: '#666', fontSize: '0.85rem' }}>
+                No matching languages found
+              </div>
             )}
           </div>
         </div>

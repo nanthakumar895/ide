@@ -26,6 +26,17 @@ interface IDEContextType {
 
 const IDEContext = createContext<IDEContextType | undefined>(undefined);
 
+// Helper for base64
+const encode = (str: string) => btoa(unescape(encodeURIComponent(str)));
+const decode = (str: string) => {
+    if (!str) return "";
+    try {
+        return decodeURIComponent(escape(atob(str)));
+    } catch(e) {
+        return atob(str);
+    }
+};
+
 export const IDEProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<'dark' | 'light'>('dark');
   const [languages, setLanguages] = useState<Language[]>([]);
@@ -78,18 +89,29 @@ export const IDEProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     try {
       const baseUrl = selectedLanguage.flavor === 'CE' ? 'https://ce.judge0.com' : 'https://extra-ce.judge0.com';
-      const response = await fetch(`${baseUrl}/submissions?base64_encoded=false&wait=true`, {
+      const response = await fetch(`${baseUrl}/submissions?base64_encoded=true&wait=true`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          source_code: source,
+          source_code: encode(source),
           language_id: selectedLanguage.id,
-          stdin: stdin,
+          stdin: encode(stdin),
         })
       });
 
       const result = await response.json();
-      setExecutionResult(result);
+
+      // Decode results
+      const decodedResult: ExecutionResult = {
+          status: result.status,
+          time: result.time,
+          memory: result.memory,
+          stdout: decode(result.stdout),
+          stderr: decode(result.stderr),
+          compile_output: decode(result.compile_output)
+      };
+
+      setExecutionResult(decodedResult);
     } catch (err) {
       console.error("Execution failed", err);
       setExecutionResult({
