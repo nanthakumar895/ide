@@ -1,8 +1,8 @@
 import React from 'react'
 import {
-  Settings, User, Plus, LayoutGrid, Moon, Sun,
+  Settings, LayoutGrid, Moon, Sun,
   Flame, Play, CloudUpload, ChevronLeft, ChevronRight,
-  RefreshCw, Stopwatch, UserPlus, CircleUser, HelpCircle
+  RefreshCw, Timer as Stopwatch, UserPlus, CircleUser, HelpCircle
 } from 'lucide-react'
 import { useIDE } from '../context/IDEContext'
 import LanguageSelector from './LanguageSelector'

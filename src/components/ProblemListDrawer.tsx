@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useIDE } from '../context/IDEContext';
-import { X, Search, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { X, Search, CheckCircle2 } from 'lucide-react';
 
 const ProblemListDrawer: React.FC = () => {
   const { allProblems, selectProblem, isProblemListOpen, setIsProblemListOpen, currentProblem } = useIDE();

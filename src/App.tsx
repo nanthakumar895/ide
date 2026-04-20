@@ -27,7 +27,7 @@ const App: React.FC = () => {
 
       <main style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
         <div className="desktop-layout" style={{ height: '100%' }}>
-          <PanelGroup direction="horizontal">
+          <PanelGroup orientation="horizontal">
             <Panel defaultSize={30} minSize={20}>
               <ProblemPanel problem={currentProblem} />
             </Panel>
@@ -35,7 +35,7 @@ const App: React.FC = () => {
             <PanelResizeHandle className="resize-handle-h" />
 
             <Panel defaultSize={70}>
-              <PanelGroup direction="vertical">
+              <PanelGroup orientation="vertical">
                 <Panel defaultSize={70} minSize={30}>
                   <EditorPanel code={sourceCode} onChange={(val) => setSourceCode(val || '')} />
                 </Panel>

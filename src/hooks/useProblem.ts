@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Problem } from '../types'
 
 const MOCK_PROBLEMS: Problem[] = [
@@ -20,7 +20,7 @@ const MOCK_PROBLEMS: Problem[] = [
   }
 ]
 
-export const useProblem = (initialId: number = 1) => {
+export const useProblem = (_initialId: number = 1) => {
   const [currentProblem, setCurrentProblem] = useState<Problem>(MOCK_PROBLEMS[0])
 
   const selectProblem = (id: number) => {
