@@ -640,6 +640,28 @@ document.addEventListener("DOMContentLoaded", async function () {
     $drawerSearch.on("input", (e) => renderProblemList($(e.target).val()));
 
     renderProblemList();
+    if (problems.length > 0) {
+        loadProblem(problems[0]);
+    }
+
+    $(document).on("click", ".add-testcase", function() {
+        const index = $(".testcase-tabs .item:not(.add-testcase)").length + 1;
+        const tabName = `case-${index}`;
+        const $tab = $(`<a class="item" data-tab="${tabName}">Case ${index}</a>`);
+        $(".testcase-tabs .add-testcase").before($tab);
+
+        const $pane = $(`
+            <div class="ui tab" data-tab="${tabName}">
+                <div class="testcase-input-group">
+                    <div class="input-label">input =</div>
+                    <textarea class="testcase-input" spellcheck="false"></textarea>
+                </div>
+            </div>
+        `);
+        $(".testcase-panes").append($pane);
+        $(".testcase-tabs .item").tab();
+        $tab.click();
+    });
 
     $("#open-file-input").change(function (e) {
         const selectedFile = e.target.files[0];
