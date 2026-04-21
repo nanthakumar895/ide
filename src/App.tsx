@@ -302,7 +302,7 @@ const App: React.FC = () => {
       )}
 
       {!isMobile && (
-        <div className="procode-showCopyright" style={{ height: '25px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#666', borderTop: '1px solid var(--border-color)', backgroundColor: 'var(--dark-bg)' }}>
+        <div className="procode-showCopyright" style={{ height: '25px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: 'var(--secondary-text)', borderTop: '1px solid var(--border-color)', backgroundColor: 'var(--dark-bg)' }}>
           © 2016-2026 ProCode IDE – All Rights Reserved.
         </div>
       )}

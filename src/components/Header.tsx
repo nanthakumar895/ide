@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
         <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div className="procode-logo" style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#ffa116' }}>θ</div>
-          <Home size={18} color="#aaa" className="desktop-only-inline" />
+          <Home size={18} color="var(--secondary-text)" className="desktop-only-inline" />
         </a>
         <button
           onClick={onProblemListClick}
@@ -69,12 +69,12 @@ const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-         <button onClick={onToggleTheme} className="ui basic inverted icon button" title="Toggle Theme">
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} color="#1a1a1a" />}
+         <button onClick={onToggleTheme} className="ui basic inverted icon button" title="Toggle Theme" style={{ color: 'var(--text-color)' }}>
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
          </button>
-         <button onClick={onAppsClick} className="ui basic inverted icon button desktop-only-inline" title="Apps"><LayoutGrid size={18} /></button>
-         <button onClick={onSettingsClick} className="ui basic inverted icon button" title="Settings"><Settings size={18} /></button>
-         <div className="desktop-only-flex" style={{ alignItems: 'center', gap: '5px', color: '#aaa', fontSize: '0.9rem' }}>
+         <button onClick={onAppsClick} className="ui basic inverted icon button desktop-only-inline" title="Apps" style={{ color: 'var(--text-color)' }}><LayoutGrid size={18} /></button>
+         <button onClick={onSettingsClick} className="ui basic inverted icon button" title="Settings" style={{ color: 'var(--text-color)' }}><Settings size={18} /></button>
+         <div className="desktop-only-flex" style={{ alignItems: 'center', gap: '5px', color: 'var(--secondary-text)', fontSize: '0.9rem' }}>
            <Flame size={18} /> <span>0</span>
          </div>
          <a href="/premium.html" className="ui orange button" style={{ borderRadius: '20px', padding: '8px 15px', textDecoration: 'none' }}>Premium</a>
