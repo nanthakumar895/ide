@@ -43,6 +43,7 @@ const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('editor')
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const [customInput, setCustomInput] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const pollingRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const abortRef = useRef(false);
@@ -63,68 +64,68 @@ const App: React.FC = () => {
     if (currentProblem.testcases[0]) {
       setCustomInput(currentProblem.testcases[0].input);
     }
-    // Reset abort flag on problem change if needed, but usually unmount is what matters.
-    // However, if we stay on the same component but change state, we just need to cancel pending polls.
-  }, [currentProblem])
+    const lang = SUPPORTED_LANGUAGES.find(l => l.id === selectedLanguageId);
+    if (lang) {
+        setSourceCode(lang.defaultCode);
+    }
+  }, [currentProblem, selectedLanguageId])
 
   const handleLanguageChange = (id: number) => {
     setSelectedLanguageId(id)
-    const lang = SUPPORTED_LANGUAGES.find(l => l.id === id)
-    if (lang) {
-      setSourceCode(lang.defaultCode)
-    }
   }
 
-  const fetchSubmission = useCallback(async (token: string, iteration = 1): Promise<void> => {
-    if (abortRef.current) return;
+  const fetchSubmission = useCallback(async (token: string, iteration = 1): Promise<ExecutionResult | null> => {
+    if (abortRef.current) return null;
 
     if (iteration >= 100) {
-      setExecutionResult({
+      return {
         status: { id: 5, description: 'Time Limit Exceeded' },
         stderr: 'Maximum number of probe requests reached.'
-      });
-      setIsRunning(false);
-      return;
+      };
     }
 
     try {
       const response = await fetch(`${CE_BASE_URL}/submissions/${token}?base64_encoded=true`);
-      if (abortRef.current) return;
+      if (abortRef.current) return null;
 
       const data = await response.json();
 
       if (data.status.id <= 2) { // In Queue or Processing
-        pollingRef.current = setTimeout(() => fetchSubmission(token, iteration + 1), 1000);
+        return new Promise((resolve) => {
+           pollingRef.current = setTimeout(() => resolve(fetchSubmission(token, iteration + 1)), 1000);
+        });
       } else {
-        setExecutionResult({
+        return {
           status: data.status,
           time: data.time,
           memory: data.memory,
           stdout: data.stdout ? fromBase64(data.stdout) : undefined,
           stderr: data.stderr ? fromBase64(data.stderr) : undefined,
           compile_output: data.compile_output ? fromBase64(data.compile_output) : undefined,
-        });
-        setIsRunning(false);
+          token: data.token
+        };
       }
     } catch (error) {
-      if (abortRef.current) return;
+      if (abortRef.current) return null;
       console.error('Error fetching submission:', error);
-      setExecutionResult({
+      return {
         status: { id: 13, description: 'Internal Error' },
         stderr: 'Failed to fetch submission results.'
-      });
-      setIsRunning(false);
+      };
     }
   }, []);
 
-  const runCode = useCallback(async (code: string, languageId: number, stdin: string = "") => {
+  const runCode = useCallback(async (code: string, languageId: number, stdin: string = "", isSubmit: boolean = false) => {
     if (pollingRef.current) clearTimeout(pollingRef.current);
 
     setIsRunning(true);
+    setIsSubmitting(isSubmit);
     setExecutionResult(null);
     if (isMobile) setActiveTab('testcase');
 
     try {
+      // If it's a submit, we could potentially run all testcases.
+      // For now, let's just mark it as submit in the result.
       const response = await fetch(`${CE_BASE_URL}/submissions?base64_encoded=true&wait=false`, {
         method: 'POST',
         headers: {
@@ -142,7 +143,10 @@ const App: React.FC = () => {
 
       const data = await response.json();
       if (data.token) {
-        fetchSubmission(data.token);
+        const result = await fetchSubmission(data.token);
+        if (result) {
+            setExecutionResult(result);
+        }
       } else {
         throw new Error('No token received');
       }
@@ -153,16 +157,20 @@ const App: React.FC = () => {
         status: { id: 13, description: 'Internal Error' },
         stderr: 'Failed to initiate code execution.'
       });
+    } finally {
       setIsRunning(false);
+      setIsSubmitting(false);
     }
   }, [fetchSubmission, isMobile]);
 
   const handleRun = () => {
-    runCode(sourceCode, selectedLanguageId, customInput);
+    runCode(sourceCode, selectedLanguageId, customInput, false);
   }
 
   const handleSubmit = () => {
-    runCode(sourceCode, selectedLanguageId, customInput);
+    // For submit, use the first testcase input as default if customInput is empty
+    const input = customInput || currentProblem.testcases[0]?.input || "";
+    runCode(sourceCode, selectedLanguageId, input, true);
   }
 
   const handleToggleTheme = () => {
@@ -204,7 +212,7 @@ const App: React.FC = () => {
 
       <main style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
         {isMobile ? (
-          <div className="mobile-layout" style={{ height: '100%', overflowY: 'auto' }}>
+          <div className="mobile-layout" style={{ height: '100%', overflowY: 'auto', paddingBottom: '70px' }}>
             {activeTab === 'description' && <ProblemPanel problem={currentProblem} />}
             {activeTab === 'editor' && (
               <EditorPanel
@@ -227,15 +235,15 @@ const App: React.FC = () => {
         ) : (
           <div className="desktop-layout" style={{ height: '100%' }}>
             <Group orientation="horizontal">
-              <Panel defaultSize={30} minSize={20}>
+              <Panel defaultSize={35} minSize={20}>
                 <ProblemPanel problem={currentProblem} />
               </Panel>
 
               <Separator className="resize-handle-h" />
 
-              <Panel defaultSize={70}>
+              <Panel defaultSize={65}>
                 <Group orientation="vertical">
-                  <Panel defaultSize={70} minSize={30}>
+                  <Panel defaultSize={65} minSize={30}>
                     <EditorPanel
                       code={sourceCode}
                       onChange={(value) => setSourceCode(value || '')}
@@ -246,13 +254,14 @@ const App: React.FC = () => {
 
                   <Separator className="resize-handle-v" />
 
-                  <Panel defaultSize={30} minSize={20}>
+                  <Panel defaultSize={35} minSize={20}>
                     <TestResultsPanel
                       result={executionResult}
                       isRunning={isRunning}
                       problem={currentProblem}
                       customInput={customInput}
                       setCustomInput={setCustomInput}
+                      isSubmitting={isSubmitting}
                     />
                   </Panel>
                 </Group>
@@ -273,8 +282,8 @@ const App: React.FC = () => {
       )}
 
       {!isMobile && (
-        <div className="procode-showCopyright" style={{ height: '25px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#666', borderTop: '1px solid #222' }}>
-          © 2016-2026 ProCode – All Rights Reserved.
+        <div className="procode-showCopyright" style={{ height: '25px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#666', borderTop: '1px solid #222', backgroundColor: '#1a1a1a' }}>
+          © 2016-2026 ProCode IDE – All Rights Reserved. Empowering developers worldwide.
         </div>
       )}
     </div>
