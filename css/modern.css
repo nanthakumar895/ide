@@ -252,10 +252,24 @@ body, .ui.button, .ui.input input, .ui.dropdown, .ui.label {
 
 /* Problem Description Styles */
 #judge0-problem-container {
-    padding: 20px;
+    padding: 0;
     color: #eff1f6 !important;
-    overflow-y: auto;
+    overflow: hidden;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.problem-tabs {
+    background: #282828 !important;
+    margin: 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.problem-pane-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
 }
 
 .problem-description h1 {
@@ -278,6 +292,104 @@ body, .ui.button, .ui.input input, .ui.dropdown, .ui.label {
     background: rgba(255, 255, 255, 0.1);
     padding: 2px 4px;
     border-radius: 4px;
+}
+
+.example-box {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    margin: 10px 0 20px 0;
+    border-radius: 0 4px 4px 0;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+}
+
+/* Testcase Styles */
+#judge0-testcase-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.testcase-tabs {
+    background: #282828 !important;
+    margin: 0 !important;
+}
+
+.testcase-input-group {
+    padding: 15px;
+}
+
+.testcase-input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #eff1f6b3;
+}
+
+.testcase-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px;
+    padding: 10px;
+    font-family: "JetBrains Mono", monospace;
+    resize: none;
+    min-height: 100px;
+}
+
+/* Result Styles */
+#judge0-result-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.result-tabs {
+    background: #282828 !important;
+    margin: 0 !important;
+}
+
+#test-result-content {
+    padding: 15px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.result-detail {
+    padding: 10px 0;
+}
+
+.status {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.status.passed { color: #2db55d; }
+.status.failed { color: #ef4743; }
+
+.output-box {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 8px;
+    font-family: "JetBrains Mono", monospace;
+    min-height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-case-tabs {
+    margin-bottom: 15px !important;
+}
+
+.compile-output {
+    background: rgba(239, 71, 67, 0.1);
+    color: #ef4743;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-family: "JetBrains Mono", monospace;
 }
 
 .lm_splitter {

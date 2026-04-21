@@ -186,18 +186,73 @@
         </div>
     </div>
 
-    <div id="judge0-problem-container" class="judge0-hidden">
-        <div class="problem-description">
-            <h1 class="ui header">1. Two Sum</h1>
-            <div class="problem-tags">
-                <span class="ui tiny green label">Easy</span>
-                <span class="ui tiny label">Array</span>
-                <span class="ui tiny label">Hash Table</span>
+    <div id="judge0-testcase-container" class="judge0-hidden">
+        <div class="testcase-tabs ui mini secondary pointing menu">
+            <!-- Tabs will be injected here -->
+            <a class="item add-testcase"><i class="plus icon"></i></a>
+        </div>
+        <div class="testcase-panes">
+            <!-- Panes will be injected here -->
+        </div>
+    </div>
+
+    <div id="judge0-result-container" class="judge0-hidden">
+        <div class="result-tabs ui mini secondary pointing menu">
+            <a class="item active" data-tab="test-result">Test Result</a>
+        </div>
+        <div class="result-panes">
+            <div class="ui tab active" data-tab="test-result">
+                <div id="test-result-content">
+                    <div class="ui placeholder segment">
+                        <div class="ui icon header">
+                            <i class="play icon"></i>
+                            Run your code to see the test results.
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="problem-content">
-                <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return <i>indices of the two numbers such that they add up to target</i>.</p>
-                <p>You may assume that each input would have <b>exactly one solution</b>, and you may not use the same element twice.</p>
-                <p>You can return the answer in any order.</p>
+        </div>
+    </div>
+
+    <div id="judge0-problem-container" class="judge0-hidden">
+        <div class="problem-tabs ui mini secondary pointing menu">
+            <a class="item active" data-tab="description"><i class="file alternate outline icon"></i> Description</a>
+            <a class="item" data-tab="editorial"><i class="book icon"></i> Editorial</a>
+            <a class="item" data-tab="solutions"><i class="flask icon"></i> Solutions</a>
+            <a class="item" data-tab="submissions"><i class="history icon"></i> Submissions</a>
+        </div>
+        <div class="problem-pane-content">
+            <div class="ui tab active" data-tab="description">
+                <div class="problem-description">
+                    <h1 class="ui header"></h1>
+                    <div class="problem-tags"></div>
+                    <div class="problem-content"></div>
+                    <div class="problem-examples"></div>
+                </div>
+            </div>
+            <div class="ui tab" data-tab="editorial">
+                <div class="ui placeholder segment">
+                    <div class="ui icon header">
+                        <i class="lock icon"></i>
+                        Editorial is available for Premium users.
+                    </div>
+                </div>
+            </div>
+            <div class="ui tab" data-tab="solutions">
+                <div class="ui placeholder segment">
+                    <div class="ui icon header">
+                        <i class="flask icon"></i>
+                        Community solutions will appear here.
+                    </div>
+                </div>
+            </div>
+            <div class="ui tab" data-tab="submissions">
+                <div class="ui placeholder segment">
+                    <div class="ui icon header">
+                        <i class="history icon"></i>
+                        Your submission history will appear here.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
