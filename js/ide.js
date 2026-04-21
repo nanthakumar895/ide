@@ -1,5 +1,6 @@
 import { usePuter } from "./puter.js";
 import configuration from "./configuration.js";
+import { problems } from "./problems.js";
 
 const API_KEY = "";
 
@@ -33,13 +34,12 @@ var fontSize = 13;
 var layout;
 
 export var sourceEditor;
-var stdinEditor;
-var stdoutEditor;
 
 var $selectLanguage;
 var $compilerOptions;
 var $commandLineArguments;
 var $runBtn;
+var $submitBtn;
 var $statusLine;
 
 var timeStart;
@@ -53,54 +53,44 @@ var layoutConfig = {
         reorderEnabled: true
     },
     content: [{
-        type: configuration.get("appOptions.mainLayout"),
+        type: "row",
         content: [{
             type: "component",
-            width: 66,
-            componentName: "source",
-            id: "source",
-            title: "Source Code",
-            isClosable: false,
-            componentState: {
-                readOnly: false
-            }
+            width: 30,
+            componentName: "problem",
+            id: "problem",
+            title: "Problem",
+            isClosable: false
         }, {
-            type: configuration.get("appOptions.assistantLayout"),
-            title: "AI Assistant and I/O",
-            content: [configuration.get("appOptions.showAIAssistant") ? {
+            type: "column",
+            width: 70,
+            content: [{
                 type: "component",
-                height: 66,
-                componentName: "ai",
-                id: "ai",
-                title: "AI Assistant",
+                height: 60,
+                componentName: "source",
+                id: "source",
+                title: "Source Code",
                 isClosable: false,
                 componentState: {
                     readOnly: false
                 }
-            } : null, {
-                type: configuration.get("appOptions.ioLayout"),
-                title: "I/O",
-                content: [
-                    configuration.get("appOptions.showInput") ? {
-                        type: "component",
-                        componentName: "stdin",
-                        id: "stdin",
-                        title: "Input",
-                        isClosable: false,
-                        componentState: {
-                            readOnly: false
-                        }
-                    } : null, configuration.get("appOptions.showOutput") ? {
-                        type: "component",
-                        componentName: "stdout",
-                        id: "stdout",
-                        title: "Output",
-                        isClosable: false,
-                        componentState: {
-                            readOnly: true
-                        }
-                    } : null].filter(Boolean)
-            }].filter(Boolean)
+            }, {
+                type: "stack",
+                height: 40,
+                content: [{
+                    type: "component",
+                    componentName: "testcase",
+                    id: "testcase",
+                    title: "Testcase",
+                    isClosable: false
+                }, {
+                    type: "component",
+                    componentName: "result",
+                    id: "result",
+                    title: "Test Result",
+                    isClosable: false
+                }]
+            }]
         }]
     }]
 };
@@ -150,31 +140,86 @@ function handleRunError(jqXHR) {
     })), "*");
 }
 
-function handleResult(data) {
+function handleResult(data, index, total, expectedOutput) {
     const tat = Math.round(performance.now() - timeStart);
-    console.log(`It took ${tat}ms to get submission result.`);
+    console.log(`It took ${tat}ms to get submission result for test case ${index + 1}.`);
 
     const status = data.status;
-    const stdout = decode(data.stdout);
+    const stdout = decode(data.stdout).trim();
     const compileOutput = decode(data.compile_output);
     const time = (data.time === null ? "-" : data.time + "s");
     const memory = (data.memory === null ? "-" : data.memory + "KB");
 
-    $statusLine.html(`${status.description}, ${time}, ${memory} (TAT: ${tat}ms)`);
+    const passed = status.id === 3 && stdout === expectedOutput.trim();
 
-    const output = [compileOutput, stdout].filter(x => x).join("\n").trimEnd();
+    if (!window.testResults) window.testResults = [];
+    window.testResults[index] = {
+        status: status,
+        stdout: stdout,
+        compileOutput: compileOutput,
+        time: time,
+        memory: memory,
+        passed: passed,
+        expectedOutput: expectedOutput
+    };
 
-    stdoutEditor.setValue(output);
+    if (window.testResults.filter(r => r).length === total) {
+        renderTestResults();
+        $runBtn.removeClass("loading");
+    }
+}
 
-    $runBtn.removeClass("loading");
+function renderTestResults() {
+    const $content = $("#test-result-content");
+    $content.empty();
 
-    window.top.postMessage(JSON.parse(JSON.stringify({
-        event: "postExecution",
-        status: data.status,
-        time: data.time,
-        memory: data.memory,
-        output: output
-    })), "*");
+    const totalPassed = window.testResults.filter(r => r.passed).length;
+    const total = window.testResults.length;
+
+    const $summary = $(`
+        <div class="ui message ${totalPassed === total ? 'positive' : 'negative'}">
+            <div class="header">${totalPassed === total ? 'All Test Cases Passed!' : 'Some Test Cases Failed'}</div>
+            <p>${totalPassed} / ${total} test cases passed.</p>
+        </div>
+    `);
+    $content.append($summary);
+
+    const $tabs = $(`<div class="ui mini secondary pointing menu result-case-tabs"></div>`);
+    const $panes = $(`<div class="result-case-panes"></div>`);
+
+    window.testResults.forEach((result, index) => {
+        const tabName = `result-case-${index + 1}`;
+        const $tab = $(`<a class="item ${index === 0 ? 'active' : ''}" data-tab="${tabName}">Case ${index + 1} <i class="${result.passed ? 'check green' : 'close red'} icon"></i></a>`);
+        $tabs.append($tab);
+
+        const $pane = $(`
+            <div class="ui tab ${index === 0 ? 'active' : ''}" data-tab="${tabName}">
+                <div class="result-detail">
+                    <div class="status ${result.passed ? 'passed' : 'failed'}">${result.status.description}</div>
+                    ${result.compileOutput ? `<div class="compile-output"><pre>${result.compileOutput}</pre></div>` : ""}
+                    <div class="ui grid">
+                        <div class="eight wide column">
+                            <label>Actual Output</label>
+                            <pre class="output-box">${result.stdout || "(empty)"}</pre>
+                        </div>
+                        <div class="eight wide column">
+                            <label>Expected Output</label>
+                            <pre class="output-box">${result.expectedOutput}</pre>
+                        </div>
+                    </div>
+                    <div class="meta">Time: ${result.time}, Memory: ${result.memory}</div>
+                </div>
+            </div>
+        `);
+        $panes.append($pane);
+    });
+
+    $content.append($tabs);
+    $content.append($panes);
+    $(".result-case-tabs .item").tab();
+
+    let x = layout.root.getItemsById("result")[0];
+    x.parent.header.parent.setActiveContentItem(x);
 }
 
 async function getSelectedLanguage() {
@@ -197,18 +242,45 @@ function run() {
         $runBtn.addClass("loading");
     }
 
-    stdoutEditor.setValue("");
-    $statusLine.html("");
+    $("#test-result-content").html(`
+        <div class="ui active centered inline loader"></div>
+        <div style="text-align: center; margin-top: 10px;">Running test cases...</div>
+    `);
 
-    let x = layout.root.getItemsById("stdout")[0];
+    let x = layout.root.getItemsById("result")[0];
     x.parent.header.parent.setActiveContentItem(x);
 
+    const testCases = [];
+    $(".testcase-panes .tab").each(function(index) {
+        testCases.push({
+            input: $(this).find(".testcase-input").val(),
+            expectedOutput: "" // We will try to get this from the current problem
+        });
+    });
+
+    const activeProblemId = $(".problem-item.active").data("id");
+    const activeProblem = problems.find(p => p.id === activeProblemId);
+    if (activeProblem && activeProblem.test_cases) {
+        testCases.forEach((tc, i) => {
+            if (activeProblem.test_cases[i]) {
+                tc.expectedOutput = activeProblem.test_cases[i].expected_output;
+            }
+        });
+    }
+
+    window.testResults = new Array(testCases.length).fill(null);
+
+    testCases.forEach((tc, index) => {
+        runTestCase(tc, index, testCases.length);
+    });
+}
+
+function runTestCase(tc, index, total) {
     let sourceValue = encode(sourceEditor.getValue());
-    let stdinValue = encode(stdinEditor.getValue());
+    let stdinValue = encode(tc.input);
     let languageId = getSelectedLanguageId();
     let compilerOptions = $compilerOptions.val();
     let commandLineArguments = $commandLineArguments.val();
-
     let flavor = getSelectedLanguageFlavor();
 
     if (languageId === 44) {
@@ -224,56 +296,22 @@ function run() {
         redirect_stderr_to_stdout: true
     };
 
-    let sendRequest = function (data) {
-        window.top.postMessage(JSON.parse(JSON.stringify({
-            event: "preExecution",
-            source_code: sourceEditor.getValue(),
-            language_id: languageId,
-            flavor: flavor,
-            stdin: stdinEditor.getValue(),
-            compiler_options: compilerOptions,
-            command_line_arguments: commandLineArguments
-        })), "*");
-
-        timeStart = performance.now();
-        $.ajax({
-            url: `${AUTHENTICATED_BASE_URL[flavor]}/submissions?base64_encoded=true&wait=false`,
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            headers: AUTH_HEADERS,
-            success: function (data, textStatus, request) {
-                console.log(`Your submission token is: ${data.token}`);
-                let region = request.getResponseHeader('X-Judge0-Region');
-                setTimeout(fetchSubmission.bind(null, flavor, region, data.token, 1), INITIAL_WAIT_TIME_MS);
-            },
-            error: handleRunError
-        });
-    }
-
-    if (languageId === 82) {
-        if (!sqliteAdditionalFiles) {
-            $.ajax({
-                url: `./data/additional_files_zip_base64.txt`,
-                contentType: "text/plain",
-                success: function (responseData) {
-                    sqliteAdditionalFiles = responseData;
-                    data["additional_files"] = sqliteAdditionalFiles;
-                    sendRequest(data);
-                },
-                error: handleRunError
-            });
-        }
-        else {
-            data["additional_files"] = sqliteAdditionalFiles;
-            sendRequest(data);
-        }
-    } else {
-        sendRequest(data);
-    }
+    timeStart = performance.now();
+    $.ajax({
+        url: `${AUTHENTICATED_BASE_URL[flavor]}/submissions?base64_encoded=true&wait=false`,
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        headers: AUTH_HEADERS,
+        success: function (data, textStatus, request) {
+            let region = request.getResponseHeader('X-Judge0-Region');
+            setTimeout(fetchSubmission.bind(null, flavor, region, data.token, 1, index, total, tc.expectedOutput), INITIAL_WAIT_TIME_MS);
+        },
+        error: handleRunError
+    });
 }
 
-function fetchSubmission(flavor, region, submission_token, iteration) {
+function fetchSubmission(flavor, region, submission_token, iteration, index, total, expectedOutput) {
     if (iteration >= MAX_PROBE_REQUESTS) {
         handleRunError({
             statusText: "Maximum number of probe requests reached.",
@@ -290,9 +328,9 @@ function fetchSubmission(flavor, region, submission_token, iteration) {
         success: function (data) {
             if (data.status.id <= 2) { // In Queue or Processing
                 $statusLine.html(data.status.description);
-                setTimeout(fetchSubmission.bind(null, flavor, region, submission_token, iteration + 1), WAIT_TIME_FUNCTION(iteration));
+                setTimeout(fetchSubmission.bind(null, flavor, region, submission_token, iteration + 1, index, total, expectedOutput), WAIT_TIME_FUNCTION(iteration));
             } else {
-                handleResult(data);
+                handleResult(data, index, total, expectedOutput);
             }
         },
         error: handleRunError
@@ -300,11 +338,15 @@ function fetchSubmission(flavor, region, submission_token, iteration) {
 }
 
 function setSourceCodeName(name) {
-    $(".lm_title")[0].innerText = name;
+    const items = layout.root.getItemsById("source");
+    if (items.length > 0) {
+        items[0].setTitle(name);
+    }
 }
 
 function getSourceCodeName() {
-    return $(".lm_title")[0].innerText;
+    const items = layout.root.getItemsById("source");
+    return items.length > 0 ? items[0].config.title : "main.cpp";
 }
 
 function openFile(content, filename) {
@@ -349,8 +391,6 @@ async function saveAction() {
 
 function setFontSizeForAllEditors(fontSize) {
     sourceEditor.updateOptions({ fontSize: fontSize });
-    stdinEditor.updateOptions({ fontSize: fontSize });
-    stdoutEditor.updateOptions({ fontSize: fontSize });
 }
 
 async function loadLangauges() {
@@ -447,7 +487,6 @@ async function getLanguage(flavor, languageId) {
 function setDefaults() {
     setFontSizeForAllEditors(fontSize);
     sourceEditor.setValue(DEFAULT_SOURCE);
-    stdinEditor.setValue(DEFAULT_STDIN);
     $compilerOptions.val(DEFAULT_COMPILER_OPTIONS);
     $commandLineArguments.val(DEFAULT_CMD_ARGUMENTS);
 
@@ -458,7 +497,6 @@ function setDefaults() {
 
 function clear() {
     sourceEditor.setValue("");
-    stdinEditor.setValue("");
     $compilerOptions.val("");
     $commandLineArguments.val("");
 
@@ -502,6 +540,106 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     $runBtn = $("#run-btn");
     $runBtn.click(run);
+
+    $submitBtn = $("#submit-btn");
+    $submitBtn.click(run);
+
+    const $problemListDrawer = $("#judge0-problem-list-drawer");
+    const $problemListItems = $("#problem-list-items");
+    const $closeDrawerBtn = $("#close-drawer-btn");
+    const $problemListBtn = $(".problem-list-btn");
+    const $drawerSearch = $(".drawer-search input");
+
+    function renderProblemList(filter = "") {
+        $problemListItems.empty();
+        problems.filter(p => p.title.toLowerCase().includes(filter.toLowerCase()))
+            .forEach(problem => {
+                const $item = $(`
+                    <div class="problem-item" data-id="${problem.id}">
+                        <div class="title">${problem.id}. ${problem.title}</div>
+                        <div class="meta">
+                            <span class="difficulty-${problem.difficulty.toLowerCase()}">${problem.difficulty}</span>
+                            <span class="tags">${problem.tags.join(", ")}</span>
+                        </div>
+                    </div>
+                `);
+                $item.click(() => {
+                    loadProblem(problem);
+                    $problemListDrawer.removeClass("show");
+                });
+                $problemListItems.append($item);
+            });
+    }
+
+    function loadProblem(problem) {
+        const $container = $("#judge0-problem-container");
+        $container.find("h1").text(`${problem.id}. ${problem.title}`);
+
+        const $tags = $container.find(".problem-tags");
+        $tags.empty();
+        $tags.append(`<span class="ui tiny ${problem.difficulty === 'Easy' ? 'green' : problem.difficulty === 'Medium' ? 'orange' : 'red'} label">${problem.difficulty}</span>`);
+        problem.tags.forEach(tag => {
+            $tags.append(`<span class="ui tiny label">${tag}</span>`);
+        });
+
+        $container.find(".problem-content").html(problem.description);
+
+        const $examples = $container.find(".problem-examples");
+        $examples.empty();
+        if (problem.examples) {
+            problem.examples.forEach((example, index) => {
+                const $example = $(`
+                    <div class="problem-example">
+                        <h4>Example ${index + 1}:</h4>
+                        <div class="example-box">
+                            <div><strong>Input:</strong> <code>${example.input}</code></div>
+                            <div><strong>Output:</strong> <code>${example.output}</code></div>
+                            ${example.explanation ? `<div><strong>Explanation:</strong> ${example.explanation}</div>` : ""}
+                        </div>
+                    </div>
+                `);
+                $examples.append($example);
+            });
+        }
+
+        $(".problem-item").removeClass("active");
+        $(`.problem-item[data-id="${problem.id}"]`).addClass("active");
+
+        // Reset tabs
+        $(".problem-tabs .item").tab();
+        $(".problem-tabs .item").first().click();
+
+        // Load test cases
+        const $testcaseTabs = $(".testcase-tabs");
+        const $testcasePanes = $(".testcase-panes");
+        $testcaseTabs.find(".item:not(.add-testcase)").remove();
+        $testcasePanes.empty();
+
+        if (problem.test_cases) {
+            problem.test_cases.forEach((tc, index) => {
+                const tabName = `case-${index + 1}`;
+                const $tab = $(`<a class="item ${index === 0 ? 'active' : ''}" data-tab="${tabName}">Case ${index + 1}</a>`);
+                $testcaseTabs.find(".add-testcase").before($tab);
+
+                const $pane = $(`
+                    <div class="ui tab ${index === 0 ? 'active' : ''}" data-tab="${tabName}">
+                        <div class="testcase-input-group">
+                            <label>Input</label>
+                            <textarea class="testcase-input">${tc.input}</textarea>
+                        </div>
+                    </div>
+                `);
+                $testcasePanes.append($pane);
+            });
+            $(".testcase-tabs .item").tab();
+        }
+    }
+
+    $problemListBtn.click(() => $problemListDrawer.toggleClass("show"));
+    $closeDrawerBtn.click(() => $problemListDrawer.removeClass("show"));
+    $drawerSearch.on("input", (e) => renderProblemList($(e.target).val()));
+
+    renderProblemList();
 
     $("#open-file-input").change(function (e) {
         const selectedFile = e.target.files[0];
@@ -562,6 +700,14 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     require(["vs/editor/editor.main"], function (ignorable) {
         layout = new GoldenLayout(layoutConfig, $("#judge0-site-content"));
+
+        layout.registerComponent("problem", function (container, state) {
+            const problemContainer = document.getElementById("judge0-problem-container");
+            if (problemContainer) {
+                container.getElement()[0].appendChild(problemContainer);
+                problemContainer.classList.remove("judge0-hidden");
+            }
+        });
 
         layout.registerComponent("source", function (container, state) {
             sourceEditor = monaco.editor.create(container.getElement()[0], {
@@ -647,28 +793,20 @@ document.addEventListener("DOMContentLoaded", async function () {
             });
         });
 
-        layout.registerComponent("stdin", function (container, state) {
-            stdinEditor = monaco.editor.create(container.getElement()[0], {
-                automaticLayout: true,
-                scrollBeyondLastLine: false,
-                readOnly: state.readOnly,
-                language: "plaintext",
-                minimap: {
-                    enabled: false
-                }
-            });
+        layout.registerComponent("testcase", function (container, state) {
+            const testcaseContainer = document.getElementById("judge0-testcase-container");
+            if (testcaseContainer) {
+                container.getElement()[0].appendChild(testcaseContainer);
+                testcaseContainer.classList.remove("judge0-hidden");
+            }
         });
 
-        layout.registerComponent("stdout", function (container, state) {
-            stdoutEditor = monaco.editor.create(container.getElement()[0], {
-                automaticLayout: true,
-                scrollBeyondLastLine: false,
-                readOnly: state.readOnly,
-                language: "plaintext",
-                minimap: {
-                    enabled: false
-                }
-            });
+        layout.registerComponent("result", function (container, state) {
+            const resultContainer = document.getElementById("judge0-result-container");
+            if (resultContainer) {
+                container.getElement()[0].appendChild(resultContainer);
+                resultContainer.classList.remove("judge0-hidden");
+            }
         });
 
         layout.registerComponent("ai", function (container, state) {
@@ -694,7 +832,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     document.querySelectorAll(".description").forEach(e => {
-        e.innerText = `${superKey}${e.innerText}`;
+        if (e) {
+            e.innerText = `${superKey}${e.innerText}`;
+        }
     });
 
     if (usePuter()) {
