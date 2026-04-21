@@ -20,8 +20,10 @@ export default defineConfig({
         companies: resolve(__dirname, 'companies.html'),
       },
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'lucide-react', 'react-resizable-panels'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
         },
       },
     },
