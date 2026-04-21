@@ -111,6 +111,27 @@ body {
     border-color: var(--accent-color) !important;
 }
 
+.ui.selection.dropdown .menu {
+    background-color: #282828 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.ui.selection.dropdown .menu > .item {
+    color: #eff1f6b3 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.ui.selection.dropdown .menu > .item:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #fff !important;
+}
+
+.ui.selection.dropdown .menu > .selected.item {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+}
+
 /* Typography */
 body, .ui.button, .ui.input input, .ui.dropdown, .ui.label {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;

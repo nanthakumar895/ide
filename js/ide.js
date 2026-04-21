@@ -880,8 +880,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 source_code: sourceEditor.getValue(),
                 language_id: getSelectedLanguageId(),
                 flavor: getSelectedLanguageFlavor(),
-                stdin: stdinEditor.getValue(),
-                stdout: stdoutEditor.getValue(),
+                stdin: $(".testcase-input").first().val(),
+                stdout: "",
                 compiler_options: $compilerOptions.val(),
                 command_line_arguments: $commandLineArguments.val()
             })), "*");
@@ -893,10 +893,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 selectLanguageByFlavorAndId(e.data.language_id, e.data.flavor);
             }
             if (e.data.stdin) {
-                stdinEditor.setValue(e.data.stdin);
-            }
-            if (e.data.stdout) {
-                stdoutEditor.setValue(e.data.stdout);
+                $(".testcase-input").first().val(e.data.stdin);
             }
             if (e.data.compiler_options) {
                 $compilerOptions.val(e.data.compiler_options);
