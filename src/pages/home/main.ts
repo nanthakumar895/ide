@@ -1,7 +1,22 @@
 import '../styles.css';
+import { MOCK_PROBLEMS } from '../../data/mockProblems';
 
 const appElement = document.getElementById('app');
 if (appElement) {
+    const problemsHtml = MOCK_PROBLEMS.slice(0, 15).map(p => {
+        const diffColor = p.difficulty === 'Easy' ? '#2cbb5d' : p.difficulty === 'Medium' ? '#ffa116' : '#ef4743';
+        const diffBg = p.difficulty === 'Easy' ? 'rgba(44, 187, 93, 0.1)' : p.difficulty === 'Medium' ? 'rgba(255, 161, 22, 0.1)' : 'rgba(239, 71, 67, 0.1)';
+
+        return `
+            <div style="padding: 1rem 1.5rem; display: flex; align-items: center; border-bottom: 1px solid var(--border-color); color: white; cursor: pointer;" onclick="window.location.href='/editor.html?id=${p.id}'">
+                <i class="circle outline icon" style="color: var(--secondary-text); font-size: 0.8rem;"></i>
+                <span style="margin-left: 1rem; font-size: 0.95rem;">${p.id}. ${p.title}</span>
+                <span style="margin-left: auto; font-size: 0.75rem; color: ${diffColor}; background: ${diffBg}; padding: 2px 8px; border-radius: 10px; font-weight: 600;">${p.difficulty}</span>
+                <span style="margin-left: 2rem; color: var(--secondary-text); width: 60px; text-align: right; font-size: 0.85rem;">${(Math.random() * 40 + 30).toFixed(1)}%</span>
+            </div>
+        `;
+    }).join('');
+
     appElement.innerHTML = `
         <div class="page-wrapper">
             <nav class="page-nav">
@@ -56,23 +71,9 @@ if (appElement) {
 
                         <!-- Problem Table -->
                         <div class="modern-card" style="padding: 0;">
-                            <div style="padding: 1rem 1.5rem; display: flex; align-items: center; border-bottom: 1px solid var(--border-color); color: #2cbb5d; cursor: pointer;" onclick="window.location.href='/editor.html'">
-                                <i class="check circle icon"></i>
-                                <span style="margin-left: 1rem;">1. Two Sum</span>
-                                <span style="margin-left: auto; font-size: 0.85rem; color: #2cbb5d; background: rgba(44, 187, 93, 0.1); padding: 2px 8px; border-radius: 10px;">Easy</span>
-                                <span style="margin-left: 2rem; color: var(--secondary-text); width: 60px; text-align: right;">57.4%</span>
-                            </div>
-                            <div style="padding: 1rem 1.5rem; display: flex; align-items: center; border-bottom: 1px solid var(--border-color); color: white; cursor: pointer;" onclick="window.location.href='/editor.html'">
-                                <i class="circle outline icon" style="color: var(--secondary-text);"></i>
-                                <span style="margin-left: 1rem;">2. Add Two Numbers</span>
-                                <span style="margin-left: auto; font-size: 0.85rem; color: #ffa116; background: rgba(255, 161, 22, 0.1); padding: 2px 8px; border-radius: 10px;">Medium</span>
-                                <span style="margin-left: 2rem; color: var(--secondary-text); width: 60px; text-align: right;">48.3%</span>
-                            </div>
-                            <div style="padding: 1rem 1.5rem; display: flex; align-items: center; color: white; cursor: pointer;" onclick="window.location.href='/editor.html'">
-                                <i class="circle outline icon" style="color: var(--secondary-text);"></i>
-                                <span style="margin-left: 1rem;">3. Longest Substring Without Repeating Characters</span>
-                                <span style="margin-left: auto; font-size: 0.85rem; color: #ffa116; background: rgba(255, 161, 22, 0.1); padding: 2px 8px; border-radius: 10px;">Medium</span>
-                                <span style="margin-left: 2rem; color: var(--secondary-text); width: 60px; text-align: right;">34.7%</span>
+                            ${problemsHtml}
+                            <div style="padding: 1rem; text-align: center; border-top: 1px solid var(--border-color); color: var(--secondary-text); font-size: 0.85rem;">
+                                Showing first 15 of ${MOCK_PROBLEMS.length} problems
                             </div>
                         </div>
                     </div>
