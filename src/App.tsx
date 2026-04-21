@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { Panel, Group, Separator } from 'react-resizable-panels'
 import Header from './components/Header'
 import ProblemPanel from './components/ProblemPanel'
@@ -12,16 +12,24 @@ import { ExecutionResult } from './types'
 
 const CE_BASE_URL = "https://ce.judge0.com";
 
-const encode = (str: string) => {
-  return btoa(unescape(encodeURIComponent(str || "")));
+const toBase64 = (str: string) => {
+  try {
+    return btoa(unescape(encodeURIComponent(str || "")));
+  } catch (e) {
+    return btoa(str || "");
+  }
 };
 
-const decode = (bytes: string) => {
-  const escaped = escape(atob(bytes || ""));
+const fromBase64 = (bytes: string) => {
   try {
+    const escaped = escape(atob(bytes || ""));
     return decodeURIComponent(escaped);
   } catch {
-    return unescape(escaped);
+    try {
+       return atob(bytes || "");
+    } catch {
+       return bytes || "";
+    }
   }
 };
 
@@ -36,18 +44,27 @@ const App: React.FC = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const [customInput, setCustomInput] = useState("")
 
+  const pollingRef = useRef<NodeJS.Timeout | null>(null);
+  const abortRef = useRef(false);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768)
     }
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      abortRef.current = true;
+      if (pollingRef.current) clearTimeout(pollingRef.current);
+    }
   }, [])
 
   useEffect(() => {
     if (currentProblem.testcases[0]) {
       setCustomInput(currentProblem.testcases[0].input);
     }
+    // Reset abort flag on problem change if needed, but usually unmount is what matters.
+    // However, if we stay on the same component but change state, we just need to cancel pending polls.
   }, [currentProblem])
 
   const handleLanguageChange = (id: number) => {
@@ -59,6 +76,8 @@ const App: React.FC = () => {
   }
 
   const fetchSubmission = useCallback(async (token: string, iteration = 1): Promise<void> => {
+    if (abortRef.current) return;
+
     if (iteration >= 100) {
       setExecutionResult({
         status: { id: 5, description: 'Time Limit Exceeded' },
@@ -70,22 +89,25 @@ const App: React.FC = () => {
 
     try {
       const response = await fetch(`${CE_BASE_URL}/submissions/${token}?base64_encoded=true`);
+      if (abortRef.current) return;
+
       const data = await response.json();
 
       if (data.status.id <= 2) { // In Queue or Processing
-        setTimeout(() => fetchSubmission(token, iteration + 1), 1000);
+        pollingRef.current = setTimeout(() => fetchSubmission(token, iteration + 1), 1000);
       } else {
         setExecutionResult({
           status: data.status,
           time: data.time,
           memory: data.memory,
-          stdout: data.stdout ? decode(data.stdout) : undefined,
-          stderr: data.stderr ? decode(data.stderr) : undefined,
-          compile_output: data.compile_output ? decode(data.compile_output) : undefined,
+          stdout: data.stdout ? fromBase64(data.stdout) : undefined,
+          stderr: data.stderr ? fromBase64(data.stderr) : undefined,
+          compile_output: data.compile_output ? fromBase64(data.compile_output) : undefined,
         });
         setIsRunning(false);
       }
     } catch (error) {
+      if (abortRef.current) return;
       console.error('Error fetching submission:', error);
       setExecutionResult({
         status: { id: 13, description: 'Internal Error' },
@@ -95,7 +117,9 @@ const App: React.FC = () => {
     }
   }, []);
 
-  const runCode = async (code: string, languageId: number, stdin: string = "") => {
+  const runCode = useCallback(async (code: string, languageId: number, stdin: string = "") => {
+    if (pollingRef.current) clearTimeout(pollingRef.current);
+
     setIsRunning(true);
     setExecutionResult(null);
     if (isMobile) setActiveTab('testcase');
@@ -107,12 +131,14 @@ const App: React.FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          source_code: encode(code),
+          source_code: toBase64(code),
           language_id: languageId,
-          stdin: encode(stdin),
+          stdin: toBase64(stdin),
           redirect_stderr_to_stdout: false
         }),
       });
+
+      if (abortRef.current) return;
 
       const data = await response.json();
       if (data.token) {
@@ -121,6 +147,7 @@ const App: React.FC = () => {
         throw new Error('No token received');
       }
     } catch (error) {
+      if (abortRef.current) return;
       console.error('Error running code:', error);
       setExecutionResult({
         status: { id: 13, description: 'Internal Error' },
@@ -128,7 +155,7 @@ const App: React.FC = () => {
       });
       setIsRunning(false);
     }
-  };
+  }, [fetchSubmission, isMobile]);
 
   const handleRun = () => {
     runCode(sourceCode, selectedLanguageId, customInput);

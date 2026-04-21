@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  base: '/',
   build: {
     rollupOptions: {
       input: {
@@ -17,6 +18,11 @@ export default defineConfig({
         interview: resolve(__dirname, 'interview.html'),
         store: resolve(__dirname, 'store.html'),
         companies: resolve(__dirname, 'companies.html'),
+      },
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'lucide-react', 'react-resizable-panels'],
+        },
       },
     },
   },
