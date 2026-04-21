@@ -18,6 +18,7 @@ export default defineConfig({
         interview: resolve(__dirname, 'interview.html'),
         store: resolve(__dirname, 'store.html'),
         companies: resolve(__dirname, 'companies.html'),
+        contest: resolve(__dirname, 'contest.html'),
       },
       output: {
         manualChunks(id) {

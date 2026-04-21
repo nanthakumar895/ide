@@ -3,6 +3,43 @@ import { MOCK_PROBLEMS } from '../../data/mockProblems';
 
 const appElement = document.getElementById('app');
 
+function renderHeader() {
+    return `
+        <header class="procode-main-header home-header">
+            <div class="header-left">
+                <button id="open-sidebar" class="header-icon-btn mobile-only-inline"><i class="bars icon"></i></button>
+                <div class="logo-box"><span>L</span></div>
+                <div class="divider desktop-only-flex"></div>
+                <a href="/" class="icon-link desktop-only-flex" title="Home"><i class="home icon" style="font-size: 1.1rem;"></i></a>
+
+                <div class="nav-links-modern desktop-only-flex" style="margin-left: 10px;">
+                    <a href="/" class="active">Explore</a>
+                    <a href="/interview.html">Problems</a>
+                    <a href="/contest.html">Contest</a>
+                    <a href="/store.html">Discuss</a>
+                </div>
+            </div>
+
+            <div class="header-right">
+                 <button class="header-icon-btn" id="home-theme-toggle">
+                    <i class="sun icon"></i>
+                 </button>
+                 <button class="header-icon-btn desktop-only-flex" title="Notifications">
+                    <i class="bell icon"></i>
+                 </button>
+                 <div class="streak-info desktop-only-flex">
+                   <i class="fire icon" style="color: #ffa116; margin: 0;"></i>
+                   <span>12</span>
+                 </div>
+                 <a href="/premium.html" class="header-premium-btn">Premium</a>
+                 <div class="header-profile-avatar" onclick="window.location.href='/profile.html'">
+                    <i class="user icon"></i>
+                 </div>
+            </div>
+        </header>
+    `;
+}
+
 function renderHome() {
     if (!appElement) return;
 
@@ -36,50 +73,18 @@ function renderHome() {
                     <div class="drawer-links">
                         <a href="/" class="active">Explore</a>
                         <a href="/interview.html">Problems</a>
-                        <a href="/companies.html">Contest</a>
+                        <a href="/contest.html">Contest</a>
                         <a href="/store.html">Discuss</a>
-                        <a href="/store.html">Store</a>
                         <div class="drawer-divider"></div>
                         <a href="/premium.html">Premium</a>
                         <a href="/profile.html">Profile</a>
+                        <a href="/settings.html">Settings</a>
                     </div>
                 </div>
             </div>
             <div id="sidebar-overlay" class="drawer-overlay"></div>
 
-            <!-- Redesigned Global Header (Desktop & Mobile) -->
-            <header class="procode-main-header home-header">
-                <div class="header-left">
-                    <button id="open-sidebar" class="header-icon-btn mobile-only-inline"><i class="bars icon"></i></button>
-                    <div class="logo-box"><span>L</span></div>
-                    <div class="divider desktop-only-flex"></div>
-                    <a href="/" class="icon-link desktop-only-flex" title="Home"><i class="home icon" style="font-size: 1.1rem;"></i></a>
-
-                    <div class="nav-links-modern desktop-only-flex" style="margin-left: 10px;">
-                        <a href="/" class="active">Explore</a>
-                        <a href="/interview.html">Problems</a>
-                        <a href="/companies.html">Contest</a>
-                        <a href="/store.html">Discuss</a>
-                    </div>
-                </div>
-
-                <div class="header-right">
-                     <button class="header-icon-btn" id="home-theme-toggle">
-                        <i class="sun icon"></i>
-                     </button>
-                     <button class="header-icon-btn desktop-only-flex" title="Notifications">
-                        <i class="bell icon"></i>
-                     </button>
-                     <div class="streak-info desktop-only-flex">
-                       <i class="fire icon" style="color: #ffa116; margin: 0;"></i>
-                       <span>12</span>
-                     </div>
-                     <a href="/premium.html" class="header-premium-btn">Premium</a>
-                     <div class="header-profile-avatar" onclick="window.location.href='/profile.html'">
-                        <i class="user icon"></i>
-                     </div>
-                </div>
-            </header>
+            ${renderHeader()}
 
             <div class="page-container">
                 <div class="home-layout">
@@ -125,7 +130,6 @@ function renderHome() {
                                 <span class="card-title">July 2026</span>
                                 <span class="card-subtitle">Day 21</span>
                             </div>
-                            <!-- Mock Calendar -->
                             <div class="mock-calendar">
                                 <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
                                 <div class="empty">-</div><div class="empty">-</div><div class="empty">-</div><div class="empty">-</div><div class="empty">-</div><div>1</div><div>2</div>
@@ -183,7 +187,6 @@ function renderHome() {
     document.getElementById('close-sidebar')?.addEventListener('click', closeSidebar);
     document.getElementById('sidebar-overlay')?.addEventListener('click', closeSidebar);
 
-    // Theme Toggle Logic
     const toggleTheme = () => {
         const isLight = document.documentElement.classList.toggle('light-mode');
         localStorage.setItem('procode-theme', isLight ? 'light' : 'dark');
@@ -192,10 +195,8 @@ function renderHome() {
             icon.className = isLight ? 'moon icon' : 'sun icon';
         }
     };
-
     document.getElementById('home-theme-toggle')?.addEventListener('click', toggleTheme);
 
-    // Initialize theme
     if (localStorage.getItem('procode-theme') === 'light') {
         document.documentElement.classList.add('light-mode');
         const icon = document.querySelector('#home-theme-toggle i');
@@ -204,3 +205,5 @@ function renderHome() {
 }
 
 renderHome();
+
+export { renderHeader };
