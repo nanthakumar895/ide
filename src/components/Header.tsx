@@ -1,5 +1,5 @@
 import React from 'react'
-import { Settings, LayoutGrid, Sun, Flame, Play, CloudUpload, Loader2 } from 'lucide-react'
+import { Settings, LayoutGrid, Sun, Flame, Play, CloudUpload, Loader2, Home } from 'lucide-react'
 
 interface HeaderProps {
   onRun: () => void
@@ -32,7 +32,10 @@ const Header: React.FC<HeaderProps> = ({
       zIndex: 10
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-        <div className="procode-logo" style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#ffa116' }}>θ</div>
+        <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div className="procode-logo" style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#ffa116' }}>θ</div>
+          <Home size={18} color="#aaa" />
+        </a>
         <button
           onClick={onProblemListClick}
           className="ui basic inverted button"
@@ -48,6 +51,7 @@ const Header: React.FC<HeaderProps> = ({
            disabled={isRunning}
            className="ui basic inverted icon button"
            style={{ color: '#2cbb5d' }}
+           title="Run Code"
          >
            {isRunning ? <Loader2 size={18} className="animate-spin" /> : <Play size={18} fill="#2cbb5d" />}
          </button>
@@ -63,13 +67,13 @@ const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-         <button onClick={onToggleTheme} className="ui basic inverted icon button"><Sun size={18} /></button>
-         <button onClick={onAppsClick} className="ui basic inverted icon button"><LayoutGrid size={18} /></button>
-         <button onClick={onSettingsClick} className="ui basic inverted icon button"><Settings size={18} /></button>
+         <button onClick={onToggleTheme} className="ui basic inverted icon button" title="Theme"><Sun size={18} /></button>
+         <button onClick={onAppsClick} className="ui basic inverted icon button" title="Apps"><LayoutGrid size={18} /></button>
+         <button onClick={onSettingsClick} className="ui basic inverted icon button" title="Settings"><Settings size={18} /></button>
          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#aaa', fontSize: '0.9rem' }}>
            <Flame size={18} /> <span>0</span>
          </div>
-         <div className="ui orange button" style={{ borderRadius: '20px', padding: '8px 15px' }}>Premium</div>
+         <a href="/premium.html" className="ui orange button" style={{ borderRadius: '20px', padding: '8px 15px', textDecoration: 'none' }}>Premium</a>
       </div>
     </header>
   )

@@ -34,6 +34,7 @@ const App: React.FC = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [activeTab, setActiveTab] = useState('editor')
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+  const [customInput, setCustomInput] = useState("")
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,6 +43,12 @@ const App: React.FC = () => {
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  useEffect(() => {
+    if (currentProblem.testcases[0]) {
+      setCustomInput(currentProblem.testcases[0].input);
+    }
+  }, [currentProblem])
 
   const handleLanguageChange = (id: number) => {
     setSelectedLanguageId(id)
@@ -124,13 +131,11 @@ const App: React.FC = () => {
   };
 
   const handleRun = () => {
-    const stdin = currentProblem.testcases[0]?.input || "";
-    runCode(sourceCode, selectedLanguageId, stdin);
+    runCode(sourceCode, selectedLanguageId, customInput);
   }
 
   const handleSubmit = () => {
-    const stdin = currentProblem.testcases[0]?.input || "";
-    runCode(sourceCode, selectedLanguageId, stdin);
+    runCode(sourceCode, selectedLanguageId, customInput);
   }
 
   const handleToggleTheme = () => {
@@ -182,7 +187,15 @@ const App: React.FC = () => {
                 onLanguageChange={handleLanguageChange}
               />
             )}
-            {activeTab === 'testcase' && <TestResultsPanel result={executionResult} isRunning={isRunning} problem={currentProblem} />}
+            {activeTab === 'testcase' && (
+              <TestResultsPanel
+                result={executionResult}
+                isRunning={isRunning}
+                problem={currentProblem}
+                customInput={customInput}
+                setCustomInput={setCustomInput}
+              />
+            )}
           </div>
         ) : (
           <div className="desktop-layout" style={{ height: '100%' }}>
@@ -207,7 +220,13 @@ const App: React.FC = () => {
                   <Separator className="resize-handle-v" />
 
                   <Panel defaultSize={30} minSize={20}>
-                    <TestResultsPanel result={executionResult} isRunning={isRunning} problem={currentProblem} />
+                    <TestResultsPanel
+                      result={executionResult}
+                      isRunning={isRunning}
+                      problem={currentProblem}
+                      customInput={customInput}
+                      setCustomInput={setCustomInput}
+                    />
                   </Panel>
                 </Group>
               </Panel>

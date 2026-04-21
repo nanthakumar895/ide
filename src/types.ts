@@ -5,6 +5,9 @@ export interface Problem {
   topics: string;
   description: string;
   testcases: { input: string; expected: string }[];
+  constraints?: string[];
+  sampleInput?: string;
+  sampleOutput?: string;
 }
 
 export interface ExecutionResult {
@@ -14,4 +17,5 @@ export interface ExecutionResult {
   stdout?: string;
   stderr?: string;
   compile_output?: string;
+  token?: string;
 }
