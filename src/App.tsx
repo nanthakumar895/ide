@@ -1,11 +1,11 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Panel, Group, Separator } from 'react-resizable-panels'
 import Header from './components/Header'
 import ProblemPanel from './components/ProblemPanel'
 import EditorPanel from './components/EditorPanel'
 import TestResultsPanel from './components/TestResultsPanel'
-import ProblemListDrawer from './components/ProblemListDrawer'
 import MobileFooter from './components/MobileFooter'
+import ProblemListDrawer from './components/ProblemListDrawer'
 import { useProblem } from './hooks/useProblem'
 import { SUPPORTED_LANGUAGES } from './constants'
 import { ExecutionResult } from './types'
@@ -14,22 +14,27 @@ const CE_BASE_URL = "https://ce.judge0.com";
 
 const toBase64 = (str: string) => {
   try {
-    return btoa(unescape(encodeURIComponent(str || "")));
+    const bytes = new TextEncoder().encode(str || "");
+    let binary = "";
+    for (let i = 0; i < bytes.byteLength; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return btoa(binary);
   } catch (e) {
     return btoa(str || "");
   }
 };
 
-const fromBase64 = (bytes: string) => {
+const fromBase64 = (base64: string) => {
   try {
-    const escaped = escape(atob(bytes || ""));
-    return decodeURIComponent(escaped);
-  } catch {
-    try {
-       return atob(bytes || "");
-    } catch {
-       return bytes || "";
+    const binary = atob(base64 || "");
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
     }
+    return new TextDecoder().decode(bytes);
+  } catch {
+    return base64 || "";
   }
 };
 
