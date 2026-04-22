@@ -12,3 +12,273 @@ Port 5174 is in use, trying another one...
 9:35:35 AM [vite] (client) hmr update /src/pages/styles.css, /src/pages/styles.css?direct
 9:37:36 AM [vite] (client) page reload src/pages/home/main.ts
 9:47:49 AM [vite] (client) hmr update /src/pages/styles.css, /src/pages/styles.css?direct
+11:20:38 AM [vite] (client) page reload index.html
+11:25:49 AM [vite] Internal server error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+      at TransformPluginContext._formatLog (file:///app/node_modules/vite/dist/node/chunks/node.js:30354:39)
+      at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/node.js:30351:14)
+      at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/node.js:27633:18)
+      at async file:///app/node_modules/vite/dist/node/chunks/node.js:27696:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:27664:4)
+      at async EnvironmentPluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:30143:14)
+      at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/node.js:24468:26)
+11:25:49 AM [vite] (client) Pre-transform error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+11:25:49 AM [vite] Internal server error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+      at TransformPluginContext._formatLog (file:///app/node_modules/vite/dist/node/chunks/node.js:30354:39)
+      at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/node.js:30351:14)
+      at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/node.js:27633:18)
+      at async file:///app/node_modules/vite/dist/node/chunks/node.js:27696:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:27664:4)
+      at async EnvironmentPluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:30143:14)
+      at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/node.js:24468:26)
+11:25:49 AM [vite] (client) Pre-transform error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+11:25:54 AM [vite] Internal server error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+      at TransformPluginContext._formatLog (file:///app/node_modules/vite/dist/node/chunks/node.js:30354:39)
+      at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/node.js:30351:14)
+      at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/node.js:27633:18)
+      at async file:///app/node_modules/vite/dist/node/chunks/node.js:27696:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:27664:4)
+      at async EnvironmentPluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:30143:14)
+      at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/node.js:24468:26)
+11:25:54 AM [vite] (client) Pre-transform error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+11:29:35 AM [vite] (client) page reload verify_ui_v3.py
+11:29:36 AM [vite] (client) Pre-transform error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+11:29:36 AM [vite] Internal server error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+      at TransformPluginContext._formatLog (file:///app/node_modules/vite/dist/node/chunks/node.js:30354:39)
+      at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/node.js:30351:14)
+      at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/node.js:27633:18)
+      at async file:///app/node_modules/vite/dist/node/chunks/node.js:27696:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:27664:4)
+      at async EnvironmentPluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:30143:14)
+      at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/node.js:24468:26)
+      at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/node.js:24262:20)
+11:29:41 AM [vite] (client) page reload mobile_v3_home.png
+11:29:41 AM [vite] (client) Pre-transform error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+11:29:42 AM [vite] Internal server error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+      at TransformPluginContext._formatLog (file:///app/node_modules/vite/dist/node/chunks/node.js:30354:39)
+      at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/node.js:30351:14)
+      at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/node.js:27633:18)
+      at async file:///app/node_modules/vite/dist/node/chunks/node.js:27696:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:27664:4)
+      at async EnvironmentPluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:30143:14)
+      at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/node.js:24468:26)
+      at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/node.js:24262:20)
+11:29:42 AM [vite] Internal server error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+      at TransformPluginContext._formatLog (file:///app/node_modules/vite/dist/node/chunks/node.js:30354:39)
+      at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/node.js:30351:14)
+      at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/node.js:27633:18)
+      at async file:///app/node_modules/vite/dist/node/chunks/node.js:27696:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:27664:4)
+      at async EnvironmentPluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:30143:14)
+      at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/node.js:24468:26)
+11:29:42 AM [vite] (client) Pre-transform error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+11:29:47 AM [vite] (client) page reload desktop_v3_home.png
+11:34:49 AM [vite] (client) Pre-transform error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+11:34:49 AM [vite] Internal server error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+      at TransformPluginContext._formatLog (file:///app/node_modules/vite/dist/node/chunks/node.js:30354:39)
+      at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/node.js:30351:14)
+      at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/node.js:27633:18)
+      at async file:///app/node_modules/vite/dist/node/chunks/node.js:27696:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:27664:4)
+      at async EnvironmentPluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:30143:14)
+      at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/node.js:24468:26)
+      at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/node.js:24262:20)
+11:34:54 AM [vite] (client) Pre-transform error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+11:34:54 AM [vite] Internal server error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+      at TransformPluginContext._formatLog (file:///app/node_modules/vite/dist/node/chunks/node.js:30354:39)
+      at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/node.js:30351:14)
+      at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/node.js:27633:18)
+      at async file:///app/node_modules/vite/dist/node/chunks/node.js:27696:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:27664:4)
+      at async EnvironmentPluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:30143:14)
+      at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/node.js:24468:26)
+      at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/node.js:24262:20)
+11:37:32 AM [vite] (client) Pre-transform error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+11:37:32 AM [vite] Internal server error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+      at TransformPluginContext._formatLog (file:///app/node_modules/vite/dist/node/chunks/node.js:30354:39)
+      at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/node.js:30351:14)
+      at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/node.js:27633:18)
+      at async file:///app/node_modules/vite/dist/node/chunks/node.js:27696:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:27664:4)
+      at async EnvironmentPluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:30143:14)
+      at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/node.js:24468:26)
+      at async viteTransformMiddleware (file:///app/node_modules/vite/dist/node/chunks/node.js:24262:20)
+11:37:37 AM [vite] Internal server error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+      at TransformPluginContext._formatLog (file:///app/node_modules/vite/dist/node/chunks/node.js:30354:39)
+      at TransformPluginContext.error (file:///app/node_modules/vite/dist/node/chunks/node.js:30351:14)
+      at normalizeUrl (file:///app/node_modules/vite/dist/node/chunks/node.js:27633:18)
+      at async file:///app/node_modules/vite/dist/node/chunks/node.js:27696:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:27664:4)
+      at async EnvironmentPluginContainer.transform (file:///app/node_modules/vite/dist/node/chunks/node.js:30143:14)
+      at async loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/node.js:24468:26)
+11:37:37 AM [vite] (client) Pre-transform error: Failed to resolve import "../../index.css" from "src/pages/home/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /app/src/pages/home/main.tsx:4:7
+  2  |  import ReactDOM from "react-dom/client";
+  3  |  import App from "./App";
+  4  |  import "../../index.css";
+     |          ^
+  5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+11:41:33 AM [vite] (client) hmr update /src/pages/home/App.tsx
