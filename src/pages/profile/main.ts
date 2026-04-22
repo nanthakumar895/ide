@@ -1,54 +1,54 @@
 import '../styles.css';
-import { renderHeader, initTheme, initSidebar } from '../home/main';
+import { renderHeader } from '../home/main';
 
 const appElement = document.getElementById('app');
 if (appElement) {
     appElement.innerHTML = `
-        <div class="page-wrapper animate-fade-in">
-            <!-- Mobile Sidebar -->
-            <div id="mobile-sidebar" class="mobile-drawer">
-                <div class="drawer-content">
-                    <div class="drawer-header-internal">
-                        <div class="logo-box"><span>L</span></div>
-                        <button id="close-sidebar" class="header-icon-btn"><i class="x icon"></i></button>
-                    </div>
-                    <div class="drawer-links">
-                        <a href="/">Explore</a>
-                        <a href="/interview.html">Problems</a>
-                        <a href="/contest.html">Contest</a>
-                        <a href="/store.html">Discuss</a>
-                        <div class="drawer-divider"></div>
-                        <a href="/premium.html">Premium</a>
-                        <a href="/profile.html" class="active">Profile</a>
-                        <a href="/settings.html">Settings</a>
-                    </div>
-                </div>
-            </div>
-            <div id="sidebar-overlay" class="drawer-overlay"></div>
+        <div class="page-wrapper">
             ${renderHeader()}
             <div class="page-container">
-                <div class="modern-card" style="display: flex; align-items: center; gap: 3rem; padding: 4rem; border: none; background: linear-gradient(135deg, var(--panel-bg) 0%, rgba(255, 161, 22, 0.05) 100%);">
-                    <div style="width: 140px; height: 140px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; font-weight: 800; color: white; box-shadow: 0 10px 20px rgba(255, 161, 22, 0.2);">JD</div>
-                    <div style="flex: 1;">
-                        <h1 class="modern-title" style="margin-bottom: 0.5rem; font-size: 2.5rem;">John Doe</h1>
-                        <p style="color: var(--secondary-text); font-size: 1.1rem; margin-bottom: 1.5rem;">Full-Stack Engineer • Competitive Programmer</p>
-                        <div style="display: flex; gap: 2rem; border-top: 1px solid var(--border-color); paddingTop: 1.5rem;">
-                            <div style="text-align: center;"><div style="font-size: 1.5rem; font-weight: 800;">124</div><div style="font-size: 0.8rem; color: var(--secondary-text); text-transform: uppercase;">Solved</div></div>
-                            <div style="text-align: center;"><div style="font-size: 1.5rem; font-weight: 800;">1,420</div><div style="font-size: 0.8rem; color: var(--secondary-text); text-transform: uppercase;">Rank</div></div>
-                            <div style="text-align: center;"><div style="font-size: 1.5rem; font-weight: 800;">2,450</div><div style="font-size: 0.8rem; color: var(--secondary-text); text-transform: uppercase;">Points</div></div>
+                <div class="modern-card" style="display: flex; align-items: center; gap: 2rem; padding: 3rem;">
+                    <div style="width: 120px; height: 120px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; font-weight: bold; color: white;">JD</div>
+                    <div>
+                        <h1 class="modern-title" style="margin-bottom: 0.5rem;">John Doe</h1>
+                        <p style="color: var(--secondary-text);">Member since July 2026</p>
+                        <div style="display: flex; gap: 1.5rem; margin-top: 1rem;">
+                            <span><strong>124</strong> Solved</span>
+                            <span><strong>15</strong> Contests</span>
+                            <span><strong>2450</strong> Points</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="home-layout" style="margin-top: 2rem;">
+                    <div class="main-content">
+                        <div class="modern-card">
+                            <h3 class="modern-subtitle">Recent Submissions</h3>
+                            <div class="problem-row">
+                                <span>Two Sum</span>
+                                <span style="color: #2cbb5d;">Accepted</span>
+                            </div>
+                            <div class="problem-row">
+                                <span>Add Two Numbers</span>
+                                <span style="color: #2cbb5d;">Accepted</span>
+                            </div>
+                            <div class="problem-row">
+                                <span>Longest Substring...</span>
+                                <span style="color: #ef4743;">Wrong Answer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="side-content">
+                        <div class="modern-card">
+                            <h3 class="modern-subtitle">Badges</h3>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 2rem; text-align: center;">
+                                <div>🥇</div><div>🥈</div><div>🥉</div>
+                                <div>🚀</div><div>🔥</div><div>🧩</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Mobile Footer -->
-            <footer class="mobile-footer mobile-only-flex">
-                <a href="/"><i class="compass icon"></i><span>Explore</span></a>
-                <a href="/interview.html"><i class="code branch icon"></i><span>Code</span></a>
-                <a href="/store.html"><i class="shopping bag icon"></i><span>Store</span></a>
-                <a href="/profile.html" class="active"><i class="user circle icon"></i><span>Profile</span></a>
-            </footer>
         </div>
     `;
-    initTheme();
-    initSidebar();
 }

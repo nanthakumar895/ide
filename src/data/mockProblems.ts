@@ -2229,5 +2229,2105 @@ export const MOCK_PROBLEMS: Problem[] = [
     constraints: [
       "1 <= n <= 10^4"
     ]
+  },
+{
+    id: 151,
+    title: "Dynamic Window Median Stabilization",
+    difficulty: "Hard",
+    topics: "Array, Graph",
+    description: "<p>Solve the problem <strong>Dynamic Window Median Stabilization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 152,
+    title: "Minimum Circular Shift Cost",
+    difficulty: "Easy",
+    topics: "String, Tree",
+    description: "<p>Solve the problem <strong>Minimum Circular Shift Cost</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 153,
+    title: "K-Limited Peak Reduction",
+    difficulty: "Medium",
+    topics: "DP, Backtracking",
+    description: "<p>Solve the problem <strong>K-Limited Peak Reduction</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 154,
+    title: "Balanced Segment Partition Count",
+    difficulty: "Easy",
+    topics: "Graph, Greedy",
+    description: "<p>Solve the problem <strong>Balanced Segment Partition Count</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 155,
+    title: "Maximum XOR Path in Grid",
+    difficulty: "Medium",
+    topics: "Tree, Math",
+    description: "<p>Solve the problem <strong>Maximum XOR Path in Grid</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 156,
+    title: "Frequency-Constrained Subarray Length",
+    difficulty: "Hard",
+    topics: "Backtracking, Hash Table",
+    description: "<p>Solve the problem <strong>Frequency-Constrained Subarray Length</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 157,
+    title: "Adaptive Prefix Compression Score",
+    difficulty: "Medium",
+    topics: "Greedy, Binary Search",
+    description: "<p>Solve the problem <strong>Adaptive Prefix Compression Score</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 158,
+    title: "Minimum Swap Parity Alignment",
+    difficulty: "Easy",
+    topics: "Math, Sliding Window",
+    description: "<p>Solve the problem <strong>Minimum Swap Parity Alignment</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 159,
+    title: "Range Update Consistency Check",
+    difficulty: "Medium",
+    topics: "Hash Table, Stack",
+    description: "<p>Solve the problem <strong>Range Update Consistency Check</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 160,
+    title: "Weighted Interval Chain Optimization",
+    difficulty: "Easy",
+    topics: "Binary Search, Queue",
+    description: "<p>Solve the problem <strong>Weighted Interval Chain Optimization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 161,
+    title: "Multi-Source BFS Time Spread",
+    difficulty: "Hard",
+    topics: "Sliding Window, Heap",
+    description: "<p>Solve the problem <strong>Multi-Source BFS Time Spread</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 162,
+    title: "Longest Alternating Difference Subsequence",
+    difficulty: "Easy",
+    topics: "Stack, Matrix",
+    description: "<p>Solve the problem <strong>Longest Alternating Difference Subsequence</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 163,
+    title: "Minimum Cost Bit Flip Sequence",
+    difficulty: "Medium",
+    topics: "Queue, Array",
+    description: "<p>Solve the problem <strong>Minimum Cost Bit Flip Sequence</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 164,
+    title: "K-Step Reachability in Directed Graph",
+    difficulty: "Easy",
+    topics: "Heap, String",
+    description: "<p>Solve the problem <strong>K-Step Reachability in Directed Graph</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 165,
+    title: "Maximum Product Subtree Split",
+    difficulty: "Medium",
+    topics: "Matrix, DP",
+    description: "<p>Solve the problem <strong>Maximum Product Subtree Split</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 166,
+    title: "Sliding Window Distinct Power Sum",
+    difficulty: "Hard",
+    topics: "Array, Graph",
+    description: "<p>Solve the problem <strong>Sliding Window Distinct Power Sum</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 167,
+    title: "Minimum Merge Operations to Palindrome",
+    difficulty: "Medium",
+    topics: "String, Tree",
+    description: "<p>Solve the problem <strong>Minimum Merge Operations to Palindrome</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 168,
+    title: "Graph Edge Reversal Minimization",
+    difficulty: "Easy",
+    topics: "DP, Backtracking",
+    description: "<p>Solve the problem <strong>Graph Edge Reversal Minimization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 169,
+    title: "K-Partition Equal XOR Groups",
+    difficulty: "Medium",
+    topics: "Graph, Greedy",
+    description: "<p>Solve the problem <strong>K-Partition Equal XOR Groups</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 170,
+    title: "Maximum Stable Increasing Segments",
+    difficulty: "Easy",
+    topics: "Tree, Math",
+    description: "<p>Solve the problem <strong>Maximum Stable Increasing Segments</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 171,
+    title: "Circular Array Jump Game Variant",
+    difficulty: "Hard",
+    topics: "Backtracking, Hash Table",
+    description: "<p>Solve the problem <strong>Circular Array Jump Game Variant</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 172,
+    title: "Minimum Cost Path with Teleports",
+    difficulty: "Easy",
+    topics: "Greedy, Binary Search",
+    description: "<p>Solve the problem <strong>Minimum Cost Path with Teleports</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 173,
+    title: "String Reordering with Distance Constraint",
+    difficulty: "Medium",
+    topics: "Math, Sliding Window",
+    description: "<p>Solve the problem <strong>String Reordering with Distance Constraint</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 174,
+    title: "Range GCD Query Optimization",
+    difficulty: "Easy",
+    topics: "Hash Table, Stack",
+    description: "<p>Solve the problem <strong>Range GCD Query Optimization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 175,
+    title: "Maximum Non-Overlapping XOR Subarrays",
+    difficulty: "Medium",
+    topics: "Binary Search, Queue",
+    description: "<p>Solve the problem <strong>Maximum Non-Overlapping XOR Subarrays</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 176,
+    title: "K-Limited Decreasing Transformations",
+    difficulty: "Hard",
+    topics: "Sliding Window, Heap",
+    description: "<p>Solve the problem <strong>K-Limited Decreasing Transformations</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 177,
+    title: "Binary Tree Level Sum Rebalancing",
+    difficulty: "Medium",
+    topics: "Stack, Matrix",
+    description: "<p>Solve the problem <strong>Binary Tree Level Sum Rebalancing</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 178,
+    title: "Minimum Deletions for K-Frequency Uniformity",
+    difficulty: "Easy",
+    topics: "Queue, Array",
+    description: "<p>Solve the problem <strong>Minimum Deletions for K-Frequency Uniformity</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 179,
+    title: "Subarray Beauty Score Maximization",
+    difficulty: "Medium",
+    topics: "Heap, String",
+    description: "<p>Solve the problem <strong>Subarray Beauty Score Maximization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 180,
+    title: "Grid Path with Maximum Minimum Value",
+    difficulty: "Easy",
+    topics: "Matrix, DP",
+    description: "<p>Solve the problem <strong>Grid Path with Maximum Minimum Value</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 181,
+    title: "Dynamic Connectivity Query System",
+    difficulty: "Hard",
+    topics: "Array, Graph",
+    description: "<p>Solve the problem <strong>Dynamic Connectivity Query System</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 182,
+    title: "K-Flip Binary String Optimization",
+    difficulty: "Easy",
+    topics: "String, Tree",
+    description: "<p>Solve the problem <strong>K-Flip Binary String Optimization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 183,
+    title: "Minimum Time to Equalize Array",
+    difficulty: "Medium",
+    topics: "DP, Backtracking",
+    description: "<p>Solve the problem <strong>Minimum Time to Equalize Array</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 184,
+    title: "Weighted Graph Cycle Profit Detection",
+    difficulty: "Easy",
+    topics: "Graph, Greedy",
+    description: "<p>Solve the problem <strong>Weighted Graph Cycle Profit Detection</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 185,
+    title: "Prefix-Suffix Match Count",
+    difficulty: "Medium",
+    topics: "Tree, Math",
+    description: "<p>Solve the problem <strong>Prefix-Suffix Match Count</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 186,
+    title: "Maximum Sum of Disjoint Paths",
+    difficulty: "Hard",
+    topics: "Backtracking, Hash Table",
+    description: "<p>Solve the problem <strong>Maximum Sum of Disjoint Paths</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 187,
+    title: "K-Window Maximum Difference Minimization",
+    difficulty: "Medium",
+    topics: "Greedy, Binary Search",
+    description: "<p>Solve the problem <strong>K-Window Maximum Difference Minimization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 188,
+    title: "String Pattern Compression Length",
+    difficulty: "Easy",
+    topics: "Math, Sliding Window",
+    description: "<p>Solve the problem <strong>String Pattern Compression Length</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 189,
+    title: "Minimum Edge Cut for Balanced Graph",
+    difficulty: "Medium",
+    topics: "Hash Table, Stack",
+    description: "<p>Solve the problem <strong>Minimum Edge Cut for Balanced Graph</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 190,
+    title: "Multi-Array Intersection Strength",
+    difficulty: "Easy",
+    topics: "Binary Search, Queue",
+    description: "<p>Solve the problem <strong>Multi-Array Intersection Strength</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 191,
+    title: "Maximum Alternating Subarray Sum II",
+    difficulty: "Hard",
+    topics: "Sliding Window, Heap",
+    description: "<p>Solve the problem <strong>Maximum Alternating Subarray Sum II</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 192,
+    title: "K-Group Rotation Minimization",
+    difficulty: "Easy",
+    topics: "Stack, Matrix",
+    description: "<p>Solve the problem <strong>K-Group Rotation Minimization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 193,
+    title: "Shortest Path with Color Constraints",
+    difficulty: "Medium",
+    topics: "Queue, Array",
+    description: "<p>Solve the problem <strong>Shortest Path with Color Constraints</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 194,
+    title: "Array Equalization with Modulo Operations",
+    difficulty: "Easy",
+    topics: "Heap, String",
+    description: "<p>Solve the problem <strong>Array Equalization with Modulo Operations</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 195,
+    title: "Maximum Bitwise AND Subset",
+    difficulty: "Medium",
+    topics: "Matrix, DP",
+    description: "<p>Solve the problem <strong>Maximum Bitwise AND Subset</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 196,
+    title: "K-Removal Increasing Sequence Length",
+    difficulty: "Hard",
+    topics: "Array, Graph",
+    description: "<p>Solve the problem <strong>K-Removal Increasing Sequence Length</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 197,
+    title: "Minimum Cost Tree Pruning",
+    difficulty: "Medium",
+    topics: "String, Tree",
+    description: "<p>Solve the problem <strong>Minimum Cost Tree Pruning</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 198,
+    title: "Grid Island Value Aggregation",
+    difficulty: "Easy",
+    topics: "DP, Backtracking",
+    description: "<p>Solve the problem <strong>Grid Island Value Aggregation</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 199,
+    title: "Longest Substring with K Changes",
+    difficulty: "Medium",
+    topics: "Graph, Greedy",
+    description: "<p>Solve the problem <strong>Longest Substring with K Changes</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 200,
+    title: "Directed Graph Safe Node Detection",
+    difficulty: "Easy",
+    topics: "Tree, Math",
+    description: "<p>Solve the problem <strong>Directed Graph Safe Node Detection</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 201,
+    title: "K-Step Fibonacci Path Count",
+    difficulty: "Hard",
+    topics: "Backtracking, Hash Table",
+    description: "<p>Solve the problem <strong>K-Step Fibonacci Path Count</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 202,
+    title: "Minimum Operations to Zero Matrix",
+    difficulty: "Easy",
+    topics: "Greedy, Binary Search",
+    description: "<p>Solve the problem <strong>Minimum Operations to Zero Matrix</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 203,
+    title: "Maximum Weighted Independent Set Variant",
+    difficulty: "Medium",
+    topics: "Math, Sliding Window",
+    description: "<p>Solve the problem <strong>Maximum Weighted Independent Set Variant</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 204,
+    title: "Range Frequency Mode Query",
+    difficulty: "Easy",
+    topics: "Hash Table, Stack",
+    description: "<p>Solve the problem <strong>Range Frequency Mode Query</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 205,
+    title: "K-Distance Closest Pair Sum",
+    difficulty: "Medium",
+    topics: "Binary Search, Queue",
+    description: "<p>Solve the problem <strong>K-Distance Closest Pair Sum</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 206,
+    title: "Binary Search Tree Merge Cost",
+    difficulty: "Hard",
+    topics: "Sliding Window, Heap",
+    description: "<p>Solve the problem <strong>Binary Search Tree Merge Cost</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 207,
+    title: "Maximum Consecutive Gap with K Inserts",
+    difficulty: "Medium",
+    topics: "Stack, Matrix",
+    description: "<p>Solve the problem <strong>Maximum Consecutive Gap with K Inserts</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 208,
+    title: "Graph Component Value Balancing",
+    difficulty: "Easy",
+    topics: "Queue, Array",
+    description: "<p>Solve the problem <strong>Graph Component Value Balancing</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 209,
+    title: "Minimum Adjacent Swaps for Grouping",
+    difficulty: "Medium",
+    topics: "Heap, String",
+    description: "<p>Solve the problem <strong>Minimum Adjacent Swaps for Grouping</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 210,
+    title: "Subsequence Score Maximization",
+    difficulty: "Easy",
+    topics: "Matrix, DP",
+    description: "<p>Solve the problem <strong>Subsequence Score Maximization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 211,
+    title: "K-Limited Inversion Reduction",
+    difficulty: "Hard",
+    topics: "Array, Graph",
+    description: "<p>Solve the problem <strong>K-Limited Inversion Reduction</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 212,
+    title: "Maximum Rectangle with Constraints",
+    difficulty: "Easy",
+    topics: "String, Tree",
+    description: "<p>Solve the problem <strong>Maximum Rectangle with Constraints</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 213,
+    title: "Multi-Query Range Sum Adjustment",
+    difficulty: "Medium",
+    topics: "DP, Backtracking",
+    description: "<p>Solve the problem <strong>Multi-Query Range Sum Adjustment</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 214,
+    title: "String Split with Unique Counts",
+    difficulty: "Easy",
+    topics: "Graph, Greedy",
+    description: "<p>Solve the problem <strong>String Split with Unique Counts</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 215,
+    title: "Minimum Path Cost with Obstacles II",
+    difficulty: "Medium",
+    topics: "Tree, Math",
+    description: "<p>Solve the problem <strong>Minimum Path Cost with Obstacles II</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 216,
+    title: "K-Partition Minimum Difference",
+    difficulty: "Hard",
+    topics: "Backtracking, Hash Table",
+    description: "<p>Solve the problem <strong>K-Partition Minimum Difference</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 217,
+    title: "Maximum Circular Subarray Product",
+    difficulty: "Medium",
+    topics: "Greedy, Binary Search",
+    description: "<p>Solve the problem <strong>Maximum Circular Subarray Product</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 218,
+    title: "Graph Path XOR Queries",
+    difficulty: "Easy",
+    topics: "Math, Sliding Window",
+    description: "<p>Solve the problem <strong>Graph Path XOR Queries</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 219,
+    title: "Minimum Replacement for Sorted Order",
+    difficulty: "Medium",
+    topics: "Hash Table, Stack",
+    description: "<p>Solve the problem <strong>Minimum Replacement for Sorted Order</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 220,
+    title: "Sliding Window Median Deviation",
+    difficulty: "Easy",
+    topics: "Binary Search, Queue",
+    description: "<p>Solve the problem <strong>Sliding Window Median Deviation</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 221,
+    title: "K-Coloring Graph Minimization",
+    difficulty: "Hard",
+    topics: "Sliding Window, Heap",
+    description: "<p>Solve the problem <strong>K-Coloring Graph Minimization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 222,
+    title: "Maximum Sum After K Negations II",
+    difficulty: "Easy",
+    topics: "Stack, Matrix",
+    description: "<p>Solve the problem <strong>Maximum Sum After K Negations II</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 223,
+    title: "Range Bitwise OR Minimization",
+    difficulty: "Medium",
+    topics: "Queue, Array",
+    description: "<p>Solve the problem <strong>Range Bitwise OR Minimization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 224,
+    title: "Longest Valid Parentheses Variant",
+    difficulty: "Easy",
+    topics: "Heap, String",
+    description: "<p>Solve the problem <strong>Longest Valid Parentheses Variant</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 225,
+    title: "Minimum Cost to Connect Points II",
+    difficulty: "Medium",
+    topics: "Matrix, DP",
+    description: "<p>Solve the problem <strong>Minimum Cost to Connect Points II</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 226,
+    title: "K-Step Array Transformation Stability",
+    difficulty: "Hard",
+    topics: "Array, Graph",
+    description: "<p>Solve the problem <strong>K-Step Array Transformation Stability</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 227,
+    title: "Maximum Frequency After Operations",
+    difficulty: "Medium",
+    topics: "String, Tree",
+    description: "<p>Solve the problem <strong>Maximum Frequency After Operations</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 228,
+    title: "Graph Diameter Reduction",
+    difficulty: "Easy",
+    topics: "DP, Backtracking",
+    description: "<p>Solve the problem <strong>Graph Diameter Reduction</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 229,
+    title: "Minimum Window Subsequence Variant",
+    difficulty: "Medium",
+    topics: "Graph, Greedy",
+    description: "<p>Solve the problem <strong>Minimum Window Subsequence Variant</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 230,
+    title: "K-Constrained Subtree Sum",
+    difficulty: "Easy",
+    topics: "Tree, Math",
+    description: "<p>Solve the problem <strong>K-Constrained Subtree Sum</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 231,
+    title: "Maximum Sum Path with Skips",
+    difficulty: "Hard",
+    topics: "Backtracking, Hash Table",
+    description: "<p>Solve the problem <strong>Maximum Sum Path with Skips</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 232,
+    title: "Binary Matrix Flip Optimization",
+    difficulty: "Easy",
+    topics: "Greedy, Binary Search",
+    description: "<p>Solve the problem <strong>Binary Matrix Flip Optimization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 233,
+    title: "Minimum Time with Parallel Tasks",
+    difficulty: "Medium",
+    topics: "Math, Sliding Window",
+    description: "<p>Solve the problem <strong>Minimum Time with Parallel Tasks</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 234,
+    title: "K-Limited String Palindromization",
+    difficulty: "Easy",
+    topics: "Hash Table, Stack",
+    description: "<p>Solve the problem <strong>K-Limited String Palindromization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 235,
+    title: "Maximum Distinct Subarray Score",
+    difficulty: "Medium",
+    topics: "Binary Search, Queue",
+    description: "<p>Solve the problem <strong>Maximum Distinct Subarray Score</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 236,
+    title: "Range Update Maximum Query",
+    difficulty: "Hard",
+    topics: "Sliding Window, Heap",
+    description: "<p>Solve the problem <strong>Range Update Maximum Query</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 237,
+    title: "Graph Edge Weight Normalization",
+    difficulty: "Medium",
+    topics: "Stack, Matrix",
+    description: "<p>Solve the problem <strong>Graph Edge Weight Normalization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 238,
+    title: "Minimum Cost to Equalize Strings",
+    difficulty: "Easy",
+    topics: "Queue, Array",
+    description: "<p>Solve the problem <strong>Minimum Cost to Equalize Strings</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 239,
+    title: "K-Jump Game Optimization",
+    difficulty: "Medium",
+    topics: "Heap, String",
+    description: "<p>Solve the problem <strong>K-Jump Game Optimization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 240,
+    title: "Maximum Pair Sum with Difference Constraint",
+    difficulty: "Easy",
+    topics: "Matrix, DP",
+    description: "<p>Solve the problem <strong>Maximum Pair Sum with Difference Constraint</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 241,
+    title: "Dynamic Interval Merge Queries",
+    difficulty: "Hard",
+    topics: "Array, Graph",
+    description: "<p>Solve the problem <strong>Dynamic Interval Merge Queries</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 242,
+    title: "Minimum Cost to Break Cycles",
+    difficulty: "Easy",
+    topics: "String, Tree",
+    description: "<p>Solve the problem <strong>Minimum Cost to Break Cycles</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 243,
+    title: "K-Alternating Array Transform",
+    difficulty: "Medium",
+    topics: "DP, Backtracking",
+    description: "<p>Solve the problem <strong>K-Alternating Array Transform</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 244,
+    title: "Maximum Sum of K Non-Overlapping Subarrays",
+    difficulty: "Easy",
+    topics: "Graph, Greedy",
+    description: "<p>Solve the problem <strong>Maximum Sum of K Non-Overlapping Subarrays</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 245,
+    title: "Graph Reachability with Constraints",
+    difficulty: "Medium",
+    topics: "Tree, Math",
+    description: "<p>Solve the problem <strong>Graph Reachability with Constraints</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 246,
+    title: "Minimum Insertions for Balanced String",
+    difficulty: "Hard",
+    topics: "Backtracking, Hash Table",
+    description: "<p>Solve the problem <strong>Minimum Insertions for Balanced String</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 247,
+    title: "K-Limited Maximum Difference Partition",
+    difficulty: "Medium",
+    topics: "Greedy, Binary Search",
+    description: "<p>Solve the problem <strong>K-Limited Maximum Difference Partition</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 248,
+    title: "Maximum Product of Disjoint Subtrees",
+    difficulty: "Easy",
+    topics: "Math, Sliding Window",
+    description: "<p>Solve the problem <strong>Maximum Product of Disjoint Subtrees</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 249,
+    title: "Range Median Query System",
+    difficulty: "Medium",
+    topics: "Hash Table, Stack",
+    description: "<p>Solve the problem <strong>Range Median Query System</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
+  },
+  {
+    id: 250,
+    title: "K-Operation Array Stabilization",
+    difficulty: "Easy",
+    topics: "Binary Search, Queue",
+    description: "<p>Solve the problem <strong>K-Operation Array Stabilization</strong> by finding the optimal solution given the constraints.</p><p>Input consists of specific parameters and output should be the requested result.</p>",
+    testcases: [
+      {
+        input: "1 2 3\n10",
+        expected: "25"
+      },
+      {
+        input: "5 5 5\n5",
+        expected: "10"
+      }
+    ],
+    constraints: [
+      "1 <= n <= 10^5",
+      "0 <= k <= 1000"
+    ]
   }
 ];
