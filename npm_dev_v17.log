@@ -282,3 +282,4 @@ Port 5174 is in use, trying another one...
   5  |  var _jsxFileName = "/app/src/pages/home/main.tsx";
   6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
 11:41:33 AM [vite] (client) hmr update /src/pages/home/App.tsx
+1:39:03 PM [vite] (client) page reload src/pages/home/main.tsx
