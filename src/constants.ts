@@ -73,6 +73,18 @@ export const SUPPORTED_LANGUAGES: Language[] = [
     defaultCode: "@main def hello() = \n  val line = scala.io.StdIn.readLine()\n  if (line != null && line.nonEmpty) println(s\"Hello $line\")\n  else println(\"Hello World\")"
   },
   {
+    id: 113,
+    name: "Kotlin (1.9.24)",
+    monacoMode: "kotlin",
+    defaultCode: "import java.util.Scanner\n\nfun main() {\n    val sc = Scanner(System.`in`)\n    if (sc.hasNext()) {\n        println(\"Hello ${sc.next()}\")\n    } else {\n        println(\"Hello World\")\n    }\n}"
+  },
+  {
+    id: 111,
+    name: "Dart (3.4.4)",
+    monacoMode: "dart",
+    defaultCode: "import 'dart:io';\n\nvoid main() {\n  String? line = stdin.readLineSync();\n  if (line != null && line.isNotEmpty) {\n    print('Hello $line');\n  } else {\n    print('Hello World');\n  }\n}"
+  },
+  {
     id: 82,
     name: "SQL (SQLite 3.27.2)",
     monacoMode: "sql",

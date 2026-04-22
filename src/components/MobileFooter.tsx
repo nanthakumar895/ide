@@ -24,121 +24,122 @@ const MobileFooter: React.FC<MobileFooterProps> = ({
       left: 0,
       width: '100%',
       height: '65px',
-      backgroundColor: '#1a1a1a',
-      borderTop: '1px solid #333',
+      backgroundColor: 'var(--dark-bg)',
+      borderTop: '1px solid var(--border-color)',
       zIndex: 100,
-      padding: '0 5px',
+      padding: '0 8px',
       alignItems: 'center',
-      justifyContent: 'space-around',
-      boxShadow: '0 -4px 10px rgba(0,0,0,0.3)'
+      justifyContent: 'space-between',
+      boxShadow: '0 -4px 12px rgba(0,0,0,0.15)',
+      backdropFilter: 'blur(8px)'
     }}>
-      <button
-        onClick={() => onTabChange('description')}
-        aria-pressed={activeTab === 'description'}
-        aria-label="Problem Description"
-        style={{
-          background: 'none',
-          border: 'none',
-          color: activeTab === 'description' ? '#ffa116' : '#888',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '4px',
-          fontSize: '0.7rem',
-          cursor: 'pointer',
-          flex: 1,
-          transition: 'color 0.2s'
-        }}
-      >
-        <FileText size={20} />
-        <span>Description</span>
-      </button>
+      <div style={{ display: 'flex', flex: 1, justifyContent: 'space-around' }}>
+        <button
+          onClick={() => onTabChange('description')}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: activeTab === 'description' ? 'var(--accent-color)' : 'var(--secondary-text)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            fontSize: '0.65rem',
+            fontWeight: 500,
+            cursor: 'pointer',
+            padding: '8px 4px',
+            transition: 'all 0.2s'
+          }}
+        >
+          <FileText size={22} strokeWidth={activeTab === 'description' ? 2.5 : 2} />
+          <span>Description</span>
+        </button>
 
-      <button
-        onClick={() => onTabChange('editor')}
-        aria-pressed={activeTab === 'editor'}
-        aria-label="Code Editor"
-        style={{
-          background: 'none',
-          border: 'none',
-          color: activeTab === 'editor' ? '#ffa116' : '#888',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '4px',
-          fontSize: '0.7rem',
-          cursor: 'pointer',
-          flex: 1,
-          transition: 'color 0.2s'
-        }}
-      >
-        <Code size={20} />
-        <span>Editor</span>
-      </button>
+        <button
+          onClick={() => onTabChange('editor')}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: activeTab === 'editor' ? 'var(--accent-color)' : 'var(--secondary-text)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            fontSize: '0.65rem',
+            fontWeight: 500,
+            cursor: 'pointer',
+            padding: '8px 4px',
+            transition: 'all 0.2s'
+          }}
+        >
+          <Code size={22} strokeWidth={activeTab === 'editor' ? 2.5 : 2} />
+          <span>Editor</span>
+        </button>
 
-      <button
-        onClick={() => onTabChange('testcase')}
-        aria-pressed={activeTab === 'testcase'}
-        aria-label="Test Cases and Results"
-        style={{
-          background: 'none',
-          border: 'none',
-          color: activeTab === 'testcase' ? '#ffa116' : '#888',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '4px',
-          fontSize: '0.7rem',
-          cursor: 'pointer',
-          flex: 1,
-          transition: 'color 0.2s'
-        }}
-      >
-        <CheckSquare size={20} />
-        <span>Testcase</span>
-      </button>
+        <button
+          onClick={() => onTabChange('testcase')}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: activeTab === 'testcase' ? 'var(--accent-color)' : 'var(--secondary-text)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            fontSize: '0.65rem',
+            fontWeight: 500,
+            cursor: 'pointer',
+            padding: '8px 4px',
+            transition: 'all 0.2s'
+          }}
+        >
+          <CheckSquare size={22} strokeWidth={activeTab === 'testcase' ? 2.5 : 2} />
+          <span>Testcase</span>
+        </button>
+      </div>
 
-      <div style={{ display: 'flex', gap: '8px', padding: '0 10px' }}>
+      <div style={{ display: 'flex', gap: '8px', paddingRight: '4px' }}>
         <button
           onClick={onRun}
           disabled={isRunning}
-          aria-label="Run Code"
           style={{
-            backgroundColor: '#333',
-            border: 'none',
-            borderRadius: '8px',
-            color: '#fff',
-            padding: '8px 12px',
+            backgroundColor: 'rgba(255,255,255,0.05)',
+            border: '1px solid var(--border-color)',
+            borderRadius: '12px',
+            color: 'var(--text-color)',
+            width: '44px',
+            height: '44px',
             cursor: isRunning ? 'default' : 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            opacity: isRunning ? 0.6 : 1,
-            transition: 'opacity 0.2s'
+            transition: 'all 0.2s',
+            outline: 'none'
           }}
         >
-          {isRunning ? <Loader2 size={18} className="animate-spin" /> : <Play size={18} fill="#2cbb5d" color="#2cbb5d" />}
+          {isRunning ? <Loader2 size={20} className="animate-spin" /> : <Play size={20} fill="var(--success-color)" color="var(--success-color)" />}
         </button>
 
         <button
           onClick={onSubmit}
           disabled={isRunning}
-          aria-label="Submit Solution"
           style={{
-            backgroundColor: '#2cbb5d',
+            backgroundColor: 'var(--success-color)',
             border: 'none',
-            borderRadius: '8px',
-            color: '#fff',
-            padding: '8px 12px',
+            borderRadius: '12px',
+            color: '#white',
+            width: '44px',
+            height: '44px',
             cursor: isRunning ? 'default' : 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            opacity: isRunning ? 0.6 : 1,
-            transition: 'opacity 0.2s'
+            boxShadow: '0 2px 8px rgba(44, 187, 93, 0.3)',
+            transition: 'all 0.2s',
+            outline: 'none'
           }}
         >
-          {isRunning ? <Loader2 size={18} className="animate-spin" /> : <CloudUpload size={18} />}
+          {isRunning ? <Loader2 size={20} className="animate-spin" /> : <CloudUpload size={20} color="white" />}
         </button>
       </div>
     </footer>
