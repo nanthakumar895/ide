@@ -63,7 +63,6 @@ function renderHome() {
 
     appElement.innerHTML = `
         <div class="page-wrapper">
-            <!-- Mobile Sidebar -->
             <div id="mobile-sidebar" class="mobile-drawer">
                 <div class="drawer-content">
                     <div class="drawer-header-internal">
@@ -88,9 +87,7 @@ function renderHome() {
 
             <div class="page-container">
                 <div class="home-layout">
-                    <!-- Main Content -->
                     <div class="main-content">
-                        <!-- Promo Cards -->
                         <div class="promo-container custom-scrollbar">
                             <div class="modern-card promo-card promo-gradient-1">
                                 <div class="promo-title">ProCode Mobile</div>
@@ -104,7 +101,6 @@ function renderHome() {
                             </div>
                         </div>
 
-                        <!-- Topics Chips -->
                         <div class="topics-container">
                             <span class="topic-chip">Array <span>2141</span></span>
                             <span class="topic-chip">String <span>867</span></span>
@@ -113,8 +109,7 @@ function renderHome() {
                             <span class="topic-chip accent">Expand <i class="chevron down icon"></i></span>
                         </div>
 
-                        <!-- Problem Table -->
-                        <div class="modern-card problem-table-card">
+                        <div class="modern-card problem-table-card" style="padding: 0;">
                             ${problemsHtml}
                             <div class="table-footer">
                                 Showing all 150 problems
@@ -122,13 +117,10 @@ function renderHome() {
                         </div>
                     </div>
 
-                    <!-- Right Sidebar -->
                     <div class="side-content">
-                        <!-- Calendar Card -->
                         <div class="modern-card calendar-card">
                             <div class="card-header">
-                                <span class="card-title">July 2026</span>
-                                <span class="card-subtitle">Day 21</span>
+                                <span class="card-title">July 2026 Day 21</span>
                             </div>
                             <div class="mock-calendar">
                                 <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
@@ -139,7 +131,6 @@ function renderHome() {
                             </div>
                         </div>
 
-                        <!-- Trending Companies -->
                         <div class="modern-card trending-card">
                             <div class="card-header">
                                 <span class="card-title">Trending Companies</span>
@@ -163,7 +154,6 @@ function renderHome() {
                 </div>
             </div>
 
-            <!-- Mobile Footer Icons -->
             <footer class="mobile-footer mobile-only-flex">
                 <a href="/" class="active"><i class="home icon"></i><span>Home</span></a>
                 <a href="/interview.html"><i class="trophy icon"></i><span>Prep</span></a>
@@ -173,7 +163,6 @@ function renderHome() {
         </div>
     `;
 
-    // Event Listeners
     document.getElementById('open-sidebar')?.addEventListener('click', () => {
         document.getElementById('mobile-sidebar')?.classList.add('open');
         document.getElementById('sidebar-overlay')?.classList.add('visible');

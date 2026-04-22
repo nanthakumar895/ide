@@ -312,3 +312,111 @@ body {
 .mobile-footer a { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--secondary-text); text-decoration: none; font-size: 0.65rem; flex: 1; }
 .mobile-footer a i { font-size: 1.2rem; }
 .mobile-footer a.active { color: var(--accent-color); }
+
+/* Explicit Grid fix for Calendar and Trending */
+.calendar-card {
+    min-height: 250px;
+}
+
+.mock-calendar {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important;
+    gap: 12px !important;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+    margin-top: 1rem;
+}
+
+.mock-calendar > div {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mock-calendar .today {
+    background-color: #2cbb5d !important;
+    color: white !important;
+    border-radius: 50%;
+    font-weight: bold;
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+}
+
+.trending-card {
+    min-height: 180px;
+}
+
+.trending-card .card-header {
+    margin-bottom: 1rem;
+}
+
+.trending-card .header-icons {
+    display: flex;
+    gap: 10px;
+    color: var(--secondary-text);
+}
+
+.search-box {
+    margin-bottom: 1.2rem;
+}
+
+.search-box input {
+    background-color: var(--darker-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-color) !important;
+    border-radius: 6px !important;
+    padding-left: 30px !important;
+}
+
+.company-chips {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+
+.company-chip {
+    background-color: rgba(255,255,255,0.04);
+    border: 1px solid var(--border-color);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: var(--secondary-text);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.company-chip:hover {
+    background-color: rgba(255,255,255,0.08);
+    color: var(--text-color);
+}
+
+/* Sidebar Stability */
+.side-content {
+    width: 300px !important;
+    flex-shrink: 0 !important;
+}
+
+@media (max-width: 1024px) {
+    .home-layout {
+        flex-direction: column;
+    }
+    .side-content {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+    .side-content > .modern-card {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .side-content {
+        flex-direction: column;
+    }
+}
