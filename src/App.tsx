@@ -62,13 +62,27 @@ const App: React.FC = () => {
   const pollingRefs = useRef<Record<number, ReturnType<typeof setTimeout>>>({});
   const abortRef = useRef(false);
 
+  const syncProfile = useCallback(async () => {
+    const supabase = await getClient();
+    if (!supabase || !userId || !user) return;
+
+    const { data } = await supabase.from('profiles').select('id').eq('id', userId).maybeSingle();
+    if (!data) {
+       await supabase.from('profiles').insert({
+          id: userId,
+          username: user.username || user.emailAddresses[0].emailAddress.split('@')[0],
+          full_name: user.fullName,
+          avatar_url: user.imageUrl
+       });
+    }
+  }, [getClient, userId, user]);
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener('resize', handleResize)
     if (theme === 'light') document.documentElement.classList.add('light-mode');
     else document.documentElement.classList.remove('light-mode');
 
-    // Sync profile to Supabase if signed in
     if (isSignedIn && user) {
        syncProfile();
     }
@@ -78,23 +92,7 @@ const App: React.FC = () => {
       abortRef.current = true;
       Object.values(pollingRefs.current).forEach(clearTimeout);
     }
-  }, [theme, isSignedIn, user])
-
-  const syncProfile = async () => {
-     const supabase = await getClient();
-     if (!supabase || !userId) return;
-
-     // Check if profile exists, if not create it
-     const { data } = await supabase.from('profiles').select('id').eq('id', userId).single();
-     if (!data) {
-        await supabase.from('profiles').insert({
-           id: userId,
-           username: user?.username || user?.emailAddresses[0].emailAddress.split('@')[0],
-           full_name: user?.fullName,
-           avatar_url: user?.imageUrl
-        });
-     }
-  }
+  }, [theme, isSignedIn, user, syncProfile])
 
   useEffect(() => {
     if (currentProblem.testcases[0]) {
@@ -144,10 +142,10 @@ const App: React.FC = () => {
     }
   }, []);
 
-  const saveSubmissionToSupabase = async (results: Record<number, ExecutionResult>, code: string) => {
+  const saveSubmissionToSupabase = async (resultsMap: Record<number, ExecutionResult>, code: string) => {
     const supabase = await getClient();
     if (!supabase || !userId) return;
-    const mainResult = results[0];
+    const mainResult = resultsMap[0];
     if (!mainResult) return;
 
     try {
