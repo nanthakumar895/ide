@@ -37,7 +37,6 @@ const App = () => {
     } catch (err) {
       console.error(err);
     } finally {
-      // Small delay to prevent blinking
       setTimeout(() => setLoadingProfile(false), 300);
     }
   }, [getClient]);
@@ -84,7 +83,6 @@ const App = () => {
 
   return (
     <div className="flex h-screen bg-[#0b0e14] text-slate-200 font-sans overflow-hidden relative">
-      {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-20 lg:w-64 bg-[#0b0e14] border-r border-white/5 z-50">
         <div className="p-6 mb-4 flex items-center gap-3 cursor-pointer" onClick={() => window.location.href = '/'}>
           <div className="w-9 h-9 bg-[#ff5a00] rounded-lg flex items-center justify-center font-black text-white shrink-0 shadow-lg shadow-[#ff5a00]/10">P</div>
@@ -132,7 +130,7 @@ const App = () => {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto pb-28 md:pb-8 pt-4">
+        <main className="flex-1 overflow-y-auto pb-32 md:pb-8 pt-4">
           <div className="max-w-5xl mx-auto px-4 lg:px-8">
             {loadingProfile ? (
                <div className="bg-[#1a1d23] border border-white/5 rounded-[2rem] p-8 mb-8 animate-pulse flex flex-col gap-4 h-48 justify-center">
@@ -188,18 +186,17 @@ const App = () => {
           </div>
         </main>
 
-        {/* Mobile Footer Navigation */}
-        <footer className="fixed bottom-0 left-0 right-0 bg-[#0b0e14]/90 backdrop-blur-2xl border-t border-white/5 px-4 pt-3 pb-8 z-[100] md:hidden">
+        <footer className="fixed bottom-0 left-0 right-0 bg-[#0b0e14]/95 backdrop-blur-3xl border-t border-white/5 px-4 pt-3 pb-8 z-[100] md:hidden shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
           <div className="max-w-lg mx-auto flex justify-between items-center relative">
             {navItems.map((item) => {
                const isActive = activeTab === item.id;
                return (
                 <button key={item.id} onClick={() => { setActiveTab(item.id); if (item.link !== '/') window.location.href = item.link; }} className={`flex flex-col items-center justify-center w-14 transition-all duration-300 ${isActive ? 'text-[#ff5a00]' : 'text-slate-500'}`}>
-                  <div className={`p-1.5 rounded-xl transition-all duration-300 ${isActive ? 'bg-[#ff5a00]/10 scale-110 shadow-[0_0_20px_rgba(255,90,0,0.1)]' : ''}`}>
+                  <div className={`p-1.5 rounded-xl transition-all duration-300 ${isActive ? 'bg-[#ff5a00]/15 scale-110 shadow-[0_0_20px_rgba(255,90,0,0.15)]' : ''}`}>
                     <item.icon size={22} strokeWidth={isActive ? 2.5 : 2} />
                   </div>
                   <span className={`text-[9px] font-bold mt-1.5 tracking-tight ${isActive ? 'opacity-100' : 'opacity-60'}`}>{item.label}</span>
-                  {isActive && <div className="absolute -top-3 w-1 h-1 bg-[#ff5a00] rounded-full shadow-[0_0_8px_#ff5a00]"></div>}
+                  {isActive && <div className="absolute -top-3 w-1.5 h-1.5 bg-[#ff5a00] rounded-full shadow-[0_0_12px_#ff5a00]"></div>}
                 </button>
                );
             })}

@@ -44,6 +44,7 @@ const Header: React.FC<HeaderProps> = ({
              onClick={onRun}
              disabled={isRunning}
              className="header-run-btn-new"
+             title="Run Code"
            >
              {(isRunning && !isSubmitting) ? <Loader2 size={16} className="animate-spin" /> : <Play size={14} fill="currentColor" />}
              <span>Run</span>
@@ -52,6 +53,7 @@ const Header: React.FC<HeaderProps> = ({
              onClick={onSubmit}
              disabled={isRunning}
              className="header-submit-btn-new"
+             title="Submit Solution"
            >
              {(isRunning && isSubmitting) ? <Loader2 size={16} className="animate-spin" /> : <CloudUpload size={16} />}
              <span>Submit</span>
@@ -72,6 +74,7 @@ const Header: React.FC<HeaderProps> = ({
          </div>
          <a href="/premium.html" className="header-premium-btn-new">Premium</a>
          <div className="header-profile-avatar-new" onClick={() => window.location.href='/profile.html'}>
+            {/* If user avatar is available we'd use it here, but keeping User icon for simplicity in header */}
             <User size={18} />
          </div>
       </div>

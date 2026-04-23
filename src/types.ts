@@ -13,7 +13,7 @@ export interface Problem {
 export interface ExecutionResult {
   status: { id: number; description: string };
   time?: string;
-  memory?: number;
+  memory?: string | number;
   stdout?: string;
   stderr?: string;
   compile_output?: string;

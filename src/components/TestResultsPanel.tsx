@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { CheckCircle2, XCircle, Terminal, Loader2 } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { CheckCircle2, XCircle, Terminal, Loader2, AlertCircle, Info } from 'lucide-react'
 import { ExecutionResult, Problem } from '../types'
 
 interface TestResultsPanelProps {
@@ -24,21 +24,40 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
 
   const resultsExist = Object.keys(results).length > 0
   const currentResult = results[selectedTestCase]
-  const testcase = problem.testcases[selectedTestCase] || problem.testcases[0]
+
+  // Define what the current testcase metadata is for display
+  const testcase = isSubmitting
+    ? (problem.testcases[selectedTestCase] || problem.testcases[0])
+    : { input: customInput, expected: problem.testcases[selectedTestCase]?.expected || "" }
+
+  // Automatically switch to result tab when running
+  useEffect(() => {
+    if (isRunning) {
+      setActiveMode('result');
+      // Always show first result initially when running/submitting
+      setSelectedTestCase(0);
+    }
+  }, [isRunning]);
+
+  // If results just appeared and we were in testcase mode, maybe switch?
+  // No, the useEffect above handles the start. When finished, it stays in result mode.
 
   const isPassed = (res: ExecutionResult, expected: string) => {
     if (!res || res.status.id !== 3) return false
+    if (!expected) return true; // Can't fail if no expectation
     return (res.stdout || "").trim() === expected.trim()
   }
 
   const getStatusColor = (res: ExecutionResult | undefined, expected: string) => {
     if (!res) return 'var(--secondary-text)'
     if (res.status.id !== 3) return 'var(--error-color)'
+    if (!isSubmitting) return 'var(--success-color)' // Run mode is green if finished successfully
     return isPassed(res, expected) ? 'var(--success-color)' : 'var(--error-color)'
   }
 
   const getStatusLabel = (res: ExecutionResult, expected: string) => {
     if (res.status.id === 3) {
+      if (!isSubmitting) return 'Finished'
       return isPassed(res, expected) ? 'Accepted' : 'Wrong Answer'
     }
     return res.status.description
@@ -46,13 +65,15 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
 
   const getStatusIcon = (res: ExecutionResult, expected: string) => {
     const color = getStatusColor(res, expected)
-    if (res.status.id === 3 && isPassed(res, expected)) {
+    if (res.status.id === 3) {
+      if (!isSubmitting || isPassed(res, expected)) {
         return <CheckCircle2 size={22} color={color} />
+      }
     }
     return <XCircle size={22} color={color} />
   }
 
-  const allPassed = problem.testcases.every((tc, idx) => results[idx] && isPassed(results[idx], tc.expected))
+  const allPassed = isSubmitting && problem.testcases.every((tc, idx) => results[idx] && isPassed(results[idx], tc.expected))
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--panel-bg)', overflow: 'hidden' }}>
@@ -63,7 +84,8 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
         alignItems: 'center',
         padding: '0 10px',
         borderBottom: '1px solid var(--border-color)',
-        gap: '15px'
+        gap: '15px',
+        flexShrink: 0
       }}>
         <button
           onClick={() => setActiveMode('testcase')}
@@ -98,26 +120,23 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
             borderBottom: activeMode === 'result' ? '2px solid var(--accent-color)' : '2px solid transparent',
             transition: 'all 0.2s',
             opacity: isRunning || resultsExist ? 1 : 0.5,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px'
           }}
         >
-          Test Result
-          {resultsExist && !isRunning && (
-              <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: allPassed ? 'var(--success-color)' : 'var(--error-color)' }}></div>
-          )}
+          Result
         </button>
       </div>
 
-      <div style={{ flex: 1, padding: '16px', overflowY: 'auto' }} className="custom-scrollbar">
+      <div style={{ flex: 1, padding: '16px', overflowY: 'auto' }}>
         {activeMode === 'testcase' ? (
           <div className="fade-in">
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
-              {problem.testcases.slice(0, 3).map((_, idx) => (
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', flexWrap: 'wrap' }}>
+              {problem.testcases.map((_, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setSelectedTestCase(idx)}
+                  onClick={() => {
+                    setSelectedTestCase(idx);
+                    setCustomInput(problem.testcases[idx]?.input || "");
+                  }}
                   style={{
                     padding: '6px 12px',
                     borderRadius: '8px',
@@ -143,7 +162,7 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
                 spellCheck={false}
                 style={{
                   width: '100%',
-                  minHeight: '100px',
+                  minHeight: '120px',
                   backgroundColor: 'var(--darker-bg)',
                   padding: '12px',
                   borderRadius: '8px',
@@ -156,6 +175,10 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
                   lineHeight: '1.5'
                 }}
               />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--secondary-text)', fontSize: '0.75rem', opacity: 0.7 }}>
+               <Info size={14} />
+               <span>Click 'Run' to execute this input.</span>
             </div>
           </div>
         ) : (
@@ -174,37 +197,39 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
               </div>
             ) : (
               <div>
-                <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
-                  {problem.testcases.map((tc, idx) => {
-                    const res = results[idx];
-                    const color = getStatusColor(res, tc.expected);
+                {isSubmitting && (
+                  <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
+                    {problem.testcases.map((tc, idx) => {
+                      const res = results[idx];
+                      const color = getStatusColor(res, tc.expected);
 
-                    return (
-                      <button
-                        key={idx}
-                        onClick={() => setSelectedTestCase(idx)}
-                        style={{
-                          padding: '6px 12px',
-                          borderRadius: '8px',
-                          border: '1px solid var(--border-color)',
-                          backgroundColor: selectedTestCase === idx ? 'rgba(255,255,255,0.05)' : 'transparent',
-                          color: selectedTestCase === idx ? 'var(--text-color)' : 'var(--secondary-text)',
-                          cursor: 'pointer',
-                          fontSize: '0.8rem',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '8px',
-                          fontWeight: 600,
-                        }}
-                      >
-                        <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: color }}></div>
-                        Case {idx + 1}
-                      </button>
-                    );
-                  })}
-                </div>
+                      return (
+                        <button
+                          key={idx}
+                          onClick={() => setSelectedTestCase(idx)}
+                          style={{
+                            padding: '6px 12px',
+                            borderRadius: '8px',
+                            border: '1px solid var(--border-color)',
+                            backgroundColor: selectedTestCase === idx ? 'rgba(255,255,255,0.05)' : 'transparent',
+                            color: selectedTestCase === idx ? 'var(--text-color)' : 'var(--secondary-text)',
+                            cursor: 'pointer',
+                            fontSize: '0.8rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            fontWeight: 600,
+                          }}
+                        >
+                          <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: color }}></div>
+                          Case {idx + 1}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
 
-                {currentResult && (
+                {currentResult ? (
                   <div className="fade-in">
                     <div style={{
                       backgroundColor: `${getStatusColor(currentResult, testcase.expected)}10`,
@@ -231,7 +256,7 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
                         )}
                       </div>
 
-                      {allPassed && isSubmitting && selectedTestCase === 0 && (
+                      {allPassed && (
                          <div style={{ color: 'var(--success-color)', fontSize: '0.85rem', fontWeight: 600, marginTop: '8px' }}>
                             All test cases passed!
                          </div>
@@ -241,7 +266,7 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                         <div style={{ color: 'var(--secondary-text)', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase' }}>Input</div>
-                        <pre style={{ backgroundColor: 'var(--darker-bg)', padding: '12px', borderRadius: '8px', margin: 0, color: 'var(--text-color)', fontFamily: "'JetBrains Mono', monospace", border: '1px solid var(--border-color)', fontSize: '0.85rem', lineHeight: '1.5' }}>{testcase.input}</pre>
+                        <pre style={{ backgroundColor: 'var(--darker-bg)', padding: '12px', borderRadius: '8px', margin: 0, color: 'var(--text-color)', fontFamily: "'JetBrains Mono', monospace", border: '1px solid var(--border-color)', fontSize: '0.85rem', lineHeight: '1.5', overflowX: 'auto' }}>{testcase.input || "(no input)"}</pre>
                       </div>
 
                       {currentResult.stdout !== undefined && (
@@ -256,16 +281,18 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
                             fontFamily: "'JetBrains Mono', monospace",
                             fontSize: '0.85rem',
                             border: '1px solid var(--border-color)',
-                            color: isPassed(currentResult, testcase.expected) ? 'var(--text-color)' : 'var(--error-color)',
+                            color: (isSubmitting && !isPassed(currentResult, testcase.expected)) ? 'var(--error-color)' : 'var(--text-color)',
                             lineHeight: '1.5'
                           }}>{currentResult.stdout || "(no output)"}</pre>
                         </div>
                       )}
 
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                        <div style={{ color: 'var(--secondary-text)', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase' }}>Expected</div>
-                        <pre style={{ backgroundColor: 'var(--darker-bg)', padding: '12px', borderRadius: '8px', margin: 0, color: 'var(--text-color)', fontFamily: "'JetBrains Mono', monospace", border: '1px solid var(--border-color)', fontSize: '0.85rem', lineHeight: '1.5' }}>{testcase.expected}</pre>
-                      </div>
+                      {isSubmitting && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          <div style={{ color: 'var(--secondary-text)', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase' }}>Expected</div>
+                          <pre style={{ backgroundColor: 'var(--darker-bg)', padding: '12px', borderRadius: '8px', margin: 0, color: 'var(--text-color)', fontFamily: "'JetBrains Mono', monospace", border: '1px solid var(--border-color)', fontSize: '0.85rem', lineHeight: '1.5', overflowX: 'auto' }}>{testcase.expected}</pre>
+                        </div>
+                      )}
 
                       {currentResult.compile_output && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -282,6 +309,11 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
                       )}
                     </div>
                   </div>
+                ) : (
+                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '200px', gap: '15px' }}>
+                      <AlertCircle size={40} color="var(--error-color)" />
+                      <div style={{ color: 'var(--secondary-text)', fontSize: '0.9rem' }}>No result received from execution engine.</div>
+                   </div>
                 )}
               </div>
             )}
