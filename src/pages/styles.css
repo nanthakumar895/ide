@@ -33,9 +33,16 @@
     --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+/* Global transparent/hidden scrollbar */
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+    display: none !important;
 }
 
 body {
@@ -46,12 +53,6 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
-
-/* Scrollbar Style */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-thumb { background: rgba(120, 120, 120, 0.3); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(120, 120, 120, 0.5); }
-.custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
 
 /* Global Header */
 .procode-main-header {
@@ -123,7 +124,7 @@ body {
     color: var(--secondary-text);
     cursor: pointer;
     padding: 6px;
-    border-radius: 6px;
+    border-radius: 4px;
     transition: all var(--transition-fast);
     display: flex;
     align-items: center;
