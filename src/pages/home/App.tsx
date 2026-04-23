@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   Trophy,
   ShoppingBag,
@@ -7,7 +7,11 @@ import {
   LayoutGrid,
   Menu,
   Zap,
-  Loader2
+  Loader2,
+  CheckCircle,
+  Award,
+  Clock,
+  LogOut
 } from 'lucide-react';
 import { MOCK_PROBLEMS } from '../../data/mockProblems';
 import { useAuth, useUser } from '@clerk/clerk-react';
@@ -18,14 +22,14 @@ const App = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [profile, setProfile] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingProfile, setLoadingProfile] = useState(true);
 
-  const { isLoaded, isSignedIn, userId } = useAuth();
+  const { isLoaded, isSignedIn, userId, signOut } = useAuth();
   const { user } = useUser();
   const { getClient } = useSupabase();
 
   const fetchProfile = useCallback(async (uid: string) => {
-    setLoading(true);
+    setLoadingProfile(true);
     try {
       const supabase = await getClient();
       if (supabase) {
@@ -36,14 +40,19 @@ const App = () => {
     } catch (err) {
       console.error(err);
     } finally {
-      setLoading(false);
+      // Small delay to prevent blinking
+      setTimeout(() => setLoadingProfile(false), 300);
     }
   }, [getClient]);
 
   useEffect(() => {
     if (isLoaded) {
-       if (isSignedIn && userId) fetchProfile(userId);
-       else { setProfile(null); setLoading(false); }
+       if (isSignedIn && userId) {
+          fetchProfile(userId);
+       } else {
+          setProfile(null);
+          setLoadingProfile(false);
+       }
     }
   }, [isLoaded, isSignedIn, userId, fetchProfile]);
 
@@ -64,10 +73,21 @@ const App = () => {
     { id: 'Profile', icon: User, label: 'Account', link: '/profile.html' }
   ];
 
-  if (!isLoaded) return <div className="h-screen w-screen bg-[#0b0e14] flex items-center justify-center"><Loader2 className="animate-spin text-[#ff5a00]" size={48} /></div>;
+  const filteredProblems = useMemo(() => {
+    return MOCK_PROBLEMS.slice(0, 100).filter(p => selectedCategory === 'All' || p.difficulty === selectedCategory);
+  }, [selectedCategory]);
+
+  if (!isLoaded) {
+    return (
+      <div className="h-screen w-screen bg-[#0b0e14] flex items-center justify-center">
+        <Loader2 className="animate-spin text-[#ff5a00]" size={48} />
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-[#0b0e14] text-slate-200 font-sans overflow-hidden relative">
+      {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-20 lg:w-64 bg-[#0b0e14] border-r border-white/5 z-50">
         <div className="p-6 mb-4 flex items-center gap-3 cursor-pointer" onClick={() => window.location.href = '/'}>
           <div className="w-9 h-9 bg-[#ff5a00] rounded-lg flex items-center justify-center font-black text-white shrink-0 shadow-lg shadow-[#ff5a00]/10">P</div>
@@ -84,10 +104,18 @@ const App = () => {
              );
           })}
         </nav>
+        {isSignedIn && (
+          <div className="p-4 mt-auto">
+             <button onClick={() => signOut()} className="w-full flex items-center gap-4 p-3 rounded-2xl text-rose-500 hover:bg-rose-500/10 transition-all font-bold text-sm">
+                <LogOut size={24} /> <span className="hidden lg:block">Sign Out</span>
+             </button>
+          </div>
+        )}
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative">
         <div className={`fixed inset-0 bg-black/70 backdrop-blur-sm z-[60] transition-opacity duration-300 md:hidden ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsMenuOpen(false)} />
+
         <header className="flex-none bg-[#0b0e14] px-4 h-14 flex items-center justify-between z-40 border-b border-white/5">
           <div className="flex items-center gap-4">
             <button onClick={() => setIsMenuOpen(true)} className="p-1 text-slate-400 hover:text-white transition-colors md:hidden"><Menu size={24} /></button>
@@ -109,9 +137,10 @@ const App = () => {
 
         <main className="flex-1 overflow-y-auto pb-28 md:pb-8 pt-4">
           <div className="max-w-5xl mx-auto px-4 lg:px-8">
-            {loading ? (
-               <div className="bg-[#1a1d23] border border-white/5 rounded-[2rem] p-8 mb-8 animate-pulse flex flex-col gap-4">
+            {loadingProfile ? (
+               <div className="bg-[#1a1d23] border border-white/5 rounded-[2rem] p-8 mb-8 animate-pulse flex flex-col gap-4 h-48 justify-center">
                   <div className="h-6 w-32 bg-white/5 rounded-lg"></div>
+                  <div className="h-4 w-full bg-white/5 rounded-xl max-w-md"></div>
                   <div className="h-10 w-full bg-white/5 rounded-xl"></div>
                </div>
             ) : (
@@ -142,17 +171,17 @@ const App = () => {
             </div>
 
             <div className="space-y-3">
-              {MOCK_PROBLEMS.slice(0, 100).filter(p => selectedCategory === 'All' || p.difficulty === selectedCategory).map(p => (
+              {filteredProblems.map(p => (
                 <div key={p.id} className="bg-[#1a1d23] border border-white/5 p-5 rounded-2xl flex items-center justify-between hover:border-white/20 transition-all hover:bg-[#21242a] cursor-pointer group" onClick={() => window.location.href = `/editor.html?id=${p.id}`}>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-[10px] font-bold text-slate-600 tracking-wider">#{p.id}</span>
-                      <h4 className="font-bold text-sm text-slate-100 group-hover:text-white transition-colors" >{p.title}</h4>
+                      <h4 className="font-bold text-sm text-slate-100 group-hover:text-white transition-colors">{p.title}</h4>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className={`text-[9px] px-2.5 py-0.5 rounded-md font-black uppercase tracking-wider ${difficultyColor(p.difficulty)}`} >{p.difficulty}</span>
+                      <span className={`text-[9px] px-2.5 py-0.5 rounded-md font-black uppercase tracking-wider ${difficultyColor(p.difficulty)}`}>{p.difficulty}</span>
                       <div className="w-1 h-1 rounded-full bg-slate-800"></div>
-                      <span className="text-[9px] text-slate-500 font-bold uppercase tracking-tight opacity-70" >{p.topics.split(',')[0]}</span>
+                      <span className="text-[9px] text-slate-500 font-bold uppercase tracking-tight opacity-70">{p.topics.split(',')[0]}</span>
                     </div>
                   </div>
                   <ChevronRight size={18} className="text-slate-700 group-hover:text-slate-400 group-hover:translate-x-1 transition-all" />
@@ -161,6 +190,24 @@ const App = () => {
             </div>
           </div>
         </main>
+
+        {/* Mobile Footer Navigation */}
+        <footer className="fixed bottom-0 left-0 right-0 bg-[#0b0e14]/90 backdrop-blur-2xl border-t border-white/5 px-4 pt-3 pb-8 z-[100] md:hidden">
+          <div className="max-w-lg mx-auto flex justify-between items-center relative">
+            {navItems.map((item) => {
+               const isActive = activeTab === item.id;
+               return (
+                <button key={item.id} onClick={() => { setActiveTab(item.id); if (item.link !== '/') window.location.href = item.link; }} className={`flex flex-col items-center justify-center w-14 transition-all duration-300 ${isActive ? 'text-[#ff5a00]' : 'text-slate-500'}`}>
+                  <div className={`p-1.5 rounded-xl transition-all duration-300 ${isActive ? 'bg-[#ff5a00]/10 scale-110 shadow-[0_0_20px_rgba(255,90,0,0.1)]' : ''}`}>
+                    <item.icon size={22} strokeWidth={isActive ? 2.5 : 2} />
+                  </div>
+                  <span className={`text-[9px] font-bold mt-1.5 tracking-tight ${isActive ? 'opacity-100' : 'opacity-60'}`}>{item.label}</span>
+                  {isActive && <div className="absolute -top-3 w-1 h-1 bg-[#ff5a00] rounded-full shadow-[0_0_8px_#ff5a00]"></div>}
+                </button>
+               );
+            })}
+          </div>
+        </footer>
       </div>
     </div>
   );

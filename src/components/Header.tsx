@@ -7,6 +7,7 @@ interface HeaderProps {
   onToggleTheme: () => void
   onProblemListClick: () => void
   isRunning?: boolean
+  isSubmitting?: boolean
   theme?: 'dark' | 'light'
 }
 
@@ -16,6 +17,7 @@ const Header: React.FC<HeaderProps> = ({
   onToggleTheme,
   onProblemListClick,
   isRunning = false,
+  isSubmitting = false,
   theme = 'dark'
 }) => {
   return (
@@ -43,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({
              disabled={isRunning}
              className="header-run-btn-new"
            >
-             {isRunning ? <Loader2 size={16} className="animate-spin" /> : <Play size={14} fill="currentColor" />}
+             {(isRunning && !isSubmitting) ? <Loader2 size={16} className="animate-spin" /> : <Play size={14} fill="currentColor" />}
              <span>Run</span>
            </button>
            <button
@@ -51,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({
              disabled={isRunning}
              className="header-submit-btn-new"
            >
-             {isRunning ? <Loader2 size={16} className="animate-spin" /> : <CloudUpload size={16} />}
+             {(isRunning && isSubmitting) ? <Loader2 size={16} className="animate-spin" /> : <CloudUpload size={16} />}
              <span>Submit</span>
            </button>
          </div>

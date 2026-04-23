@@ -1,32 +1,26 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { Panel, Group, Separator } from 'react-resizable-panels'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
+import { Group, Panel, Separator } from 'react-resizable-panels'
 import { Loader2 } from 'lucide-react'
+import { useAuth, useUser } from '@clerk/clerk-react'
 import Header from './components/Header'
-import ProblemPanel from './components/ProblemPanel'
 import EditorPanel from './components/EditorPanel'
+import ProblemPanel from './components/ProblemPanel'
 import TestResultsPanel from './components/TestResultsPanel'
 import MobileFooter from './components/MobileFooter'
 import ProblemListDrawer from './components/ProblemListDrawer'
-import Auth from './components/Auth'
 import { useProblem } from './hooks/useProblem'
-import { SUPPORTED_LANGUAGES } from './constants'
-import { ExecutionResult } from './types'
-import { useAuth, useUser } from '@clerk/clerk-react'
+import { SUPPORTED_LANGUAGES, ExecutionResult } from './constants'
 import { useSupabase } from './hooks/useSupabase'
 
 const CE_BASE_URL = "https://ce.judge0.com";
 
 const toBase64 = (str: string) => {
-  try {
-    const bytes = new TextEncoder().encode(str || "");
-    let binary = "";
-    for (let i = 0; i < bytes.byteLength; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    return btoa(binary);
-  } catch (e) {
-    return btoa(str || "");
+  const bytes = new TextEncoder().encode(str || "");
+  let binary = "";
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
   }
+  return btoa(binary);
 };
 
 const fromBase64 = (base64: string) => {
@@ -38,7 +32,7 @@ const fromBase64 = (base64: string) => {
     }
     return new TextDecoder().decode(bytes);
   } catch {
-    return base64 || "";
+    return base64;
   }
 };
 
@@ -59,7 +53,7 @@ const App: React.FC = () => {
   const { user } = useUser()
   const { getClient } = useSupabase()
 
-  const pollingRefs = useRef<Record<number, ReturnType<typeof setTimeout>>>({});
+  const pollingRefs = useRef<Record<number, any>>({});
   const abortRef = useRef(false);
 
   const syncProfile = useCallback(async () => {
@@ -216,12 +210,28 @@ const App: React.FC = () => {
   const handleSubmit = () => runCode(sourceCode, selectedLanguageId, currentProblem.testcases.map(tc => tc.input), true);
   const handleProblemListClick = () => setIsDrawerOpen(!isDrawerOpen);
 
-  if (!isLoaded) return <div className="h-screen w-screen bg-[#0b0e14] flex items-center justify-center"><Loader2 className="animate-spin text-[#ff5a00]" size={48} /></div>;
-  if (!isSignedIn) return <Auth />;
+  if (!isLoaded) return (
+    <div className="h-screen w-screen bg-[#0b0e14] flex items-center justify-center">
+      <div className="flex flex-col items-center gap-4">
+        <Loader2 className="animate-spin text-[#ff5a00]" size={48} />
+        <span className="text-slate-400 font-bold text-sm tracking-widest uppercase">ProCode</span>
+      </div>
+    </div>
+  );
+
+  if (!isSignedIn) {
+    // Only import Auth when needed to avoid blinking
+    const Auth = React.lazy(() => import('./components/Auth'));
+    return (
+      <React.Suspense fallback={<div className="h-screen w-screen bg-[#0b0e14] flex items-center justify-center"><Loader2 className="animate-spin text-[#ff5a00]" size={48} /></div>}>
+        <Auth />
+      </React.Suspense>
+    );
+  }
 
   return (
     <div className="procode-app" style={{ height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--darker-bg)', color: 'var(--text-color)' }}>
-      <Header onRun={handleRun} onSubmit={handleSubmit} onToggleTheme={toggleTheme} onProblemListClick={handleProblemListClick} isRunning={isRunning} theme={theme} />
+      <Header onRun={handleRun} onSubmit={handleSubmit} isSubmitting={isSubmitting} onToggleTheme={toggleTheme} onProblemListClick={handleProblemListClick} isRunning={isRunning} theme={theme} />
       <ProblemListDrawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} problems={allProblems} onSelectProblem={selectProblem} currentProblemId={currentProblem.id} />
       <main style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
         {isMobile ? (
