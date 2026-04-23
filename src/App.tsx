@@ -11,8 +11,8 @@ import Auth from './components/Auth'
 import { useProblem } from './hooks/useProblem'
 import { SUPPORTED_LANGUAGES } from './constants'
 import { ExecutionResult } from './types'
-import { supabase } from './lib/supabase'
-import { Session } from '@supabase/supabase-js'
+import { useAuth, useUser } from '@clerk/clerk-react'
+import { useSupabase } from './hooks/useSupabase'
 
 const CE_BASE_URL = "https://ce.judge0.com";
 
@@ -44,7 +44,7 @@ const fromBase64 = (base64: string) => {
 
 const App: React.FC = () => {
   const { currentProblem, selectProblem, allProblems } = useProblem()
-  const [selectedLanguageId, setSelectedLanguageId] = useState(105) // Default to C++
+  const [selectedLanguageId, setSelectedLanguageId] = useState(105)
   const [sourceCode, setSourceCode] = useState(SUPPORTED_LANGUAGES[0].defaultCode)
   const [executionResults, setExecutionResults] = useState<Record<number, ExecutionResult>>({})
   const [isRunning, setIsRunning] = useState(false)
@@ -54,35 +54,47 @@ const App: React.FC = () => {
   const [customInput, setCustomInput] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [theme, setTheme] = useState<'dark' | 'light'>((localStorage.getItem('procode-theme') as 'dark' | 'light') || 'dark')
-  const [session, setSession] = useState<Session | null>(null)
-  const [initializing, setInitializing] = useState(true)
+
+  const { isLoaded, isSignedIn, userId } = useAuth()
+  const { user } = useUser()
+  const { getClient } = useSupabase()
 
   const pollingRefs = useRef<Record<number, ReturnType<typeof setTimeout>>>({});
   const abortRef = useRef(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      setInitializing(false)
-    })
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener('resize', handleResize)
-
     if (theme === 'light') document.documentElement.classList.add('light-mode');
     else document.documentElement.classList.remove('light-mode');
 
+    // Sync profile to Supabase if signed in
+    if (isSignedIn && user) {
+       syncProfile();
+    }
+
     return () => {
       window.removeEventListener('resize', handleResize);
-      subscription.unsubscribe();
       abortRef.current = true;
       Object.values(pollingRefs.current).forEach(clearTimeout);
     }
-  }, [theme])
+  }, [theme, isSignedIn, user])
+
+  const syncProfile = async () => {
+     const supabase = await getClient();
+     if (!supabase || !userId) return;
+
+     // Check if profile exists, if not create it
+     const { data } = await supabase.from('profiles').select('id').eq('id', userId).single();
+     if (!data) {
+        await supabase.from('profiles').insert({
+           id: userId,
+           username: user?.username || user?.emailAddresses[0].emailAddress.split('@')[0],
+           full_name: user?.fullName,
+           avatar_url: user?.imageUrl
+        });
+     }
+  }
 
   useEffect(() => {
     if (currentProblem.testcases[0]) {
@@ -95,9 +107,7 @@ const App: React.FC = () => {
     setExecutionResults({});
   }, [currentProblem, selectedLanguageId])
 
-  const handleLanguageChange = (id: number) => {
-    setSelectedLanguageId(id)
-  }
+  const handleLanguageChange = (id: number) => setSelectedLanguageId(id)
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -114,7 +124,6 @@ const App: React.FC = () => {
     try {
       const response = await fetch(`${CE_BASE_URL}/submissions/${token}?base64_encoded=true`);
       const data = await response.json();
-
       if (data.status.id <= 2) {
         return new Promise((resolve) => {
            pollingRefs.current[caseIdx] = setTimeout(() => resolve(fetchSubmission(token, caseIdx, iteration + 1)), 1000);
@@ -131,19 +140,19 @@ const App: React.FC = () => {
         };
       }
     } catch (error) {
-      console.error('Error fetching submission:', error);
       return { status: { id: 13, description: 'Internal Error' }, stderr: 'Network Failure' };
     }
   }, []);
 
   const saveSubmissionToSupabase = async (results: Record<number, ExecutionResult>, code: string) => {
-    if (!session?.user) return;
+    const supabase = await getClient();
+    if (!supabase || !userId) return;
     const mainResult = results[0];
     if (!mainResult) return;
 
     try {
       await supabase.from('submissions').insert({
-        user_id: session.user.id,
+        user_id: userId,
         problem_id: currentProblem.id,
         language_id: selectedLanguageId,
         code: code,
@@ -169,42 +178,31 @@ const App: React.FC = () => {
         const response = await fetch(`${CE_BASE_URL}/submissions?base64_encoded=true&wait=false`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            source_code: toBase64(code),
-            language_id: languageId,
-            stdin: toBase64(stdin),
-            redirect_stderr_to_stdout: false
-          }),
+          body: JSON.stringify({ source_code: toBase64(code), language_id: languageId, stdin: toBase64(stdin), redirect_stderr_to_stdout: false }),
         });
         const data = await response.json();
         return data.token;
       }));
-
       if (abortRef.current) return;
-
       const results = await Promise.all(tokens.map((token, idx) => fetchSubmission(token, idx)));
       const resultsMap: Record<number, ExecutionResult> = {};
       results.forEach((res, idx) => { if (res) resultsMap[idx] = res; });
       setExecutionResults(resultsMap);
-
-      if (results.length > 0) {
-          saveSubmissionToSupabase(resultsMap, code);
-      }
+      if (results.length > 0) saveSubmissionToSupabase(resultsMap, code);
     } catch (error) {
-      console.error('Error running code:', error);
       setExecutionResults({ 0: { status: { id: 13, description: 'Internal Error' }, stderr: 'Failed to initiate execution.' } });
     } finally {
       setIsRunning(false);
       setIsSubmitting(false);
     }
-  }, [fetchSubmission, isMobile, session, currentProblem.id, selectedLanguageId]);
+  }, [fetchSubmission, isMobile, userId, getClient, currentProblem.id, selectedLanguageId]);
 
   const handleRun = () => runCode(sourceCode, selectedLanguageId, [customInput], false);
   const handleSubmit = () => runCode(sourceCode, selectedLanguageId, currentProblem.testcases.map(tc => tc.input), true);
   const handleProblemListClick = () => setIsDrawerOpen(!isDrawerOpen);
 
-  if (initializing) return <div className="h-screen w-screen bg-[#0b0e14] flex items-center justify-center"><Loader2 className="animate-spin text-[#ff5a00]" size={48} /></div>;
-  if (!session) return <Auth />;
+  if (!isLoaded) return <div className="h-screen w-screen bg-[#0b0e14] flex items-center justify-center"><Loader2 className="animate-spin text-[#ff5a00]" size={48} /></div>;
+  if (!isSignedIn) return <Auth />;
 
   return (
     <div className="procode-app" style={{ height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--darker-bg)', color: 'var(--text-color)' }}>

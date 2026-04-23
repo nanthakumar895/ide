@@ -10,35 +10,34 @@ import {
   Loader2
 } from 'lucide-react';
 import { MOCK_PROBLEMS } from '../../data/mockProblems';
-import { supabase } from '../../lib/supabase';
-import { Session } from '@supabase/supabase-js';
+import { useAuth, useUser } from '@clerk/clerk-react';
+import { useSupabase } from '../../hooks/useSupabase';
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('Explore');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      if (session) fetchProfile(session.user.id);
-      else setLoading(false);
-    });
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      if (session) fetchProfile(session.user.id);
-      else { setProfile(null); setLoading(false); }
-    });
-    return () => subscription.unsubscribe();
-  }, []);
+  const { isLoaded, isSignedIn, userId } = useAuth();
+  const { user } = useUser();
+  const { getClient } = useSupabase();
 
-  const fetchProfile = async (userId: string) => {
+  useEffect(() => {
+    if (isLoaded) {
+       if (isSignedIn && userId) fetchProfile(userId);
+       else { setProfile(null); setLoading(false); }
+    }
+  }, [isLoaded, isSignedIn, userId]);
+
+  const fetchProfile = async (uid: string) => {
     setLoading(true);
-    const { data } = await supabase.from('profiles').select('*').eq('id', userId).single();
-    setProfile(data);
+    const supabase = await getClient();
+    if (supabase) {
+       const { data } = await supabase.from('profiles').select('*').eq('id', uid).single();
+       setProfile(data);
+    }
     setLoading(false);
   };
 
@@ -59,25 +58,22 @@ const App = () => {
     { id: 'Profile', icon: User, label: 'Account', link: '/profile.html' }
   ];
 
-  if (loading) return <div className="h-screen w-screen bg-[#0b0e14] flex items-center justify-center"><Loader2 className="animate-spin text-[#ff5a00]" size={48} /></div>;
+  if (!isLoaded || loading) return <div className="h-screen w-screen bg-[#0b0e14] flex items-center justify-center"><Loader2 className="animate-spin text-[#ff5a00]" size={48} /></div>;
 
   return (
     <div className="flex h-screen bg-[#0b0e14] text-slate-200 font-sans overflow-hidden relative">
       <aside className="hidden md:flex flex-col w-20 lg:w-64 bg-[#0b0e14] border-r border-white/5 z-50">
         <div className="p-6 mb-4 flex items-center gap-3 cursor-pointer" onClick={() => window.location.href = '/'}>
           <div className="w-9 h-9 bg-[#ff5a00] rounded-lg flex items-center justify-center font-black text-white shrink-0">P</div>
-          <h1 className="font-bold text-xl text-white hidden lg:block">ProCode</h1>
+          <h1 className="font-bold text-xl text-white hidden lg:block tracking-tight">ProCode</h1>
         </div>
         <nav className="flex-1 px-3 space-y-2">
-          {navItems.map((item) => {
-             const isActive = activeTab === item.id;
-             return (
-               <button key={item.id} onClick={() => { setActiveTab(item.id); if (item.link !== '/') window.location.href = item.link; }} className={`w-full flex items-center gap-4 p-3 rounded-2xl transition-all duration-300 group ${isActive ? 'bg-[#ff5a00]/10 text-[#ff5a00]' : 'text-slate-500 hover:bg-white/5'}`}>
-                 <item.icon size={24} strokeWidth={isActive ? 2.5 : 2} />
-                 <span className={`font-bold text-sm hidden lg:block tracking-tight ${isActive ? 'opacity-100' : 'opacity-80'}`}>{item.label}</span>
-               </button>
-             );
-          })}
+          {navItems.map((item) => (
+             <button key={item.id} onClick={() => { setActiveTab(item.id); if (item.link !== '/') window.location.href = item.link; }} className={`w-full flex items-center gap-4 p-3 rounded-2xl transition-all duration-300 group ${activeTab === item.id ? 'bg-[#ff5a00]/10 text-[#ff5a00]' : 'text-slate-500 hover:bg-white/5'}`}>
+                <item.icon size={24} strokeWidth={activeTab === item.id ? 2.5 : 2} />
+                <span className={`font-bold text-sm hidden lg:block tracking-tight ${activeTab === item.id ? 'opacity-100' : 'opacity-80'}`}>{item.label}</span>
+             </button>
+          ))}
         </nav>
       </aside>
 
@@ -89,12 +85,14 @@ const App = () => {
             <div className="hidden md:flex items-center gap-4"><div className="text-sm font-bold text-slate-400">Explore Problems</div></div>
           </div>
           <div className="flex items-center gap-4">
-             {!session ? (
+             {!isSignedIn ? (
                 <button onClick={() => window.location.href='/editor.html'} className="bg-[#ff5a00] text-white px-5 py-1.5 rounded-xl font-bold text-sm">Sign In</button>
              ) : (
                 <div className="flex items-center gap-4">
-                   <div className="text-xs font-bold text-slate-400 hidden sm:block">{profile?.username || 'User'}</div>
-                   <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-[10px] font-bold text-white cursor-pointer" onClick={() => window.location.href='/profile.html'}>{profile?.username?.[0]?.toUpperCase() || 'U'}</div>
+                   <div className="text-xs font-bold text-slate-400 hidden sm:block">{user?.username || user?.firstName || 'User'}</div>
+                   <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-[10px] font-bold text-white cursor-pointer overflow-hidden" onClick={() => window.location.href='/profile.html'}>
+                      {user?.imageUrl ? <img src={user.imageUrl} className="w-full h-full object-cover" /> : user?.firstName?.[0] || 'U'}
+                   </div>
                 </div>
              )}
           </div>
@@ -106,6 +104,7 @@ const App = () => {
               <div className="absolute top-1/2 -translate-y-1/2 right-8 opacity-[0.03] transition-opacity duration-500"><Trophy size={140} /></div>
               <div className="relative z-10">
                 <h2 className="text-2xl font-bold text-white mb-0.5">Level {profile?.level || 1}</h2>
+                <p className="text-xs text-slate-400 mb-6 font-medium italic opacity-70">"{profile?.title || 'Beginner'}"</p>
                 <div className="relative pt-1">
                   <div className="flex items-center justify-between mb-2">
                      <div className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em]">Progress</div>
@@ -144,16 +143,13 @@ const App = () => {
           </div>
         </main>
         <footer className="fixed bottom-0 left-0 right-0 bg-[#0b0e14]/90 backdrop-blur-2xl border-t border-white/5 px-4 pt-3 pb-8 z-[100] md:hidden">
-          <div className="max-w-lg mx-auto flex justify-between items-center">
-            {navItems.map((item) => {
-               const isActive = activeTab === item.id;
-               return (
-                <button key={item.id} onClick={() => { setActiveTab(item.id); if (item.link !== '/') window.location.href = item.link; }} className={`flex flex-col items-center justify-center w-14 transition-all duration-300 ${isActive ? 'text-[#ff5a00]' : 'text-slate-500'}`}>
-                  <div className={`p-1.5 rounded-xl transition-all duration-300 ${isActive ? 'bg-[#ff5a00]/10 scale-110' : ''}`}><item.icon size={22} strokeWidth={isActive ? 2.5 : 2} /></div>
-                  <span className={`text-[9px] font-bold mt-1.5 tracking-tight ${isActive ? 'opacity-100' : 'opacity-60'}`}>{item.label}</span>
+          <div className="max-w-lg mx-auto flex justify-between items-center relative">
+            {navItems.map((item) => (
+                <button key={item.id} onClick={() => { setActiveTab(item.id); if (item.link !== '/') window.location.href = item.link; }} className={`flex flex-col items-center justify-center w-14 transition-all duration-300 ${activeTab === item.id ? 'text-[#ff5a00]' : 'text-slate-500'}`}>
+                  <div className={`p-1.5 rounded-xl transition-all duration-300 ${activeTab === item.id ? 'bg-[#ff5a00]/10 scale-110' : ''}`}><item.icon size={22} strokeWidth={activeTab === item.id ? 2.5 : 2} /></div>
+                  <span className={`text-[9px] font-bold mt-1.5 tracking-tight ${activeTab === item.id ? 'opacity-100' : 'opacity-60'}`}>{item.label}</span>
                 </button>
-               );
-            })}
+            ))}
           </div>
         </footer>
       </div>
