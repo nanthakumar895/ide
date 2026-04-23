@@ -56,6 +56,7 @@ const App: React.FC = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const [customInput, setCustomInput] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmissionResult, setIsSubmissionResult] = useState(false)
   const [theme, setTheme] = useState<'dark' | 'light'>((localStorage.getItem('procode-theme') as 'dark' | 'light') || 'dark')
 
   const { isLoaded, isSignedIn, userId } = useAuth()
@@ -110,6 +111,9 @@ const App: React.FC = () => {
         setSourceCode(lang.defaultCode);
     }
     setExecutionResults({});
+    setIsSubmissionResult(false);
+    setIsSubmitting(false);
+    setIsRunning(false);
   }, [currentProblem, selectedLanguageId])
 
   const handleLanguageChange = (id: number) => setSelectedLanguageId(id)
@@ -177,6 +181,9 @@ const App: React.FC = () => {
     setIsRunning(true);
     setIsSubmitting(isSubmit);
     setExecutionResults({});
+    setIsSubmissionResult(false);
+    setIsSubmitting(false);
+    setIsRunning(false);
     if (isMobile) setActiveTab('testcase');
 
     const runTimeout = setTimeout(() => {
@@ -205,6 +212,7 @@ const App: React.FC = () => {
       const resultsMap: Record<number, ExecutionResult> = {};
       results.forEach((res: ExecutionResult | null, idx: number) => { if (res) resultsMap[idx] = res; });
       setExecutionResults(resultsMap);
+      setIsSubmissionResult(isSubmit);
       if (results.length > 0) saveSubmissionToSupabase(resultsMap, code);
     } catch (error) {
       setExecutionResults({ 0: { status: { id: 13, description: 'Internal Error' }, stderr: 'Failed to initiate execution.' } });
@@ -239,7 +247,7 @@ const App: React.FC = () => {
           <div className="mobile-layout" style={{ height: '100%', overflowY: 'auto', paddingBottom: '70px' }}>
             {activeTab === 'description' && <ProblemPanel problem={currentProblem} />}
             {activeTab === 'editor' && <EditorPanel code={sourceCode} onChange={(value) => setSourceCode(value || '')} selectedLanguageId={selectedLanguageId} onLanguageChange={handleLanguageChange} theme={theme} />}
-            {activeTab === 'testcase' && <TestResultsPanel results={executionResults} isRunning={isRunning} problem={currentProblem} customInput={customInput} setCustomInput={setCustomInput} isSubmitting={isSubmitting} />}
+            {activeTab === 'testcase' && <TestResultsPanel results={executionResults} isRunning={isRunning} problem={currentProblem} customInput={customInput} setCustomInput={setCustomInput} isSubmitting={isSubmitting} isSubmissionResult={isSubmissionResult} />}
           </div>
         ) : (
           <div className="desktop-layout" style={{ height: '100%' }}>
@@ -250,7 +258,7 @@ const App: React.FC = () => {
                 <Group orientation="vertical">
                   <Panel defaultSize={65} minSize={30}><EditorPanel code={sourceCode} onChange={(value) => setSourceCode(value || '')} selectedLanguageId={selectedLanguageId} onLanguageChange={handleLanguageChange} theme={theme} /></Panel>
                   <Separator className="resize-handle-v" />
-                  <Panel defaultSize={35} minSize={20}><TestResultsPanel results={executionResults} isRunning={isRunning} problem={currentProblem} customInput={customInput} setCustomInput={setCustomInput} isSubmitting={isSubmitting} /></Panel>
+                  <Panel defaultSize={35} minSize={20}><TestResultsPanel results={executionResults} isRunning={isRunning} problem={currentProblem} customInput={customInput} setCustomInput={setCustomInput} isSubmitting={isSubmitting} isSubmissionResult={isSubmissionResult} /></Panel>
                 </Group>
               </Panel>
             </Group>

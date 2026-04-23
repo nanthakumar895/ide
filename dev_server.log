@@ -31,3 +31,11 @@ Port 5174 is in use, trying another one...
 11:29:50 AM [vite] (client) hmr update /src/App.tsx, /src/index.css
 11:29:50 AM [vite] (client) hmr update /src/pages/home/App.tsx, /src/index.css
 11:29:50 AM [vite] (client) hmr update /src/components/Header.tsx, /src/index.css
+12:54:57 PM [vite] (client) hmr update /src/App.tsx, /src/index.css
+12:59:06 PM [vite] (client) hmr update /src/components/TestResultsPanel.tsx, /src/index.css
+12:59:06 PM [vite] (client) hmr update /src/components/TestResultsPanel.tsx, /src/index.css
+1:03:35 PM [vite] (client) hmr update /src/components/TestResultsPanel.tsx, /src/index.css
+1:05:52 PM [vite] (client) hmr update /src/App.tsx, /src/index.css
+1:05:52 PM [vite] (client) hmr update /src/components/TestResultsPanel.tsx, /src/index.css
+1:07:04 PM [vite] (client) hmr update /src/components/TestResultsPanel.tsx, /src/index.css
+1:08:07 PM [vite] (client) hmr update /src/components/TestResultsPanel.tsx, /src/index.css

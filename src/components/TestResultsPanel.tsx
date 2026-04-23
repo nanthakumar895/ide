@@ -9,6 +9,7 @@ interface TestResultsPanelProps {
   customInput: string
   setCustomInput: (val: string) => void
   isSubmitting?: boolean
+  isSubmissionResult?: boolean
 }
 
 const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
@@ -17,16 +18,18 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
   problem,
   customInput,
   setCustomInput,
-  isSubmitting = false
+  isSubmitting = false,
+  isSubmissionResult = false
 }) => {
   const [selectedTestCase, setSelectedTestCase] = useState(0)
-  const [activeMode, setActiveMode] = useState<'testcase' | 'result'>('testcase')
+  const [activeMode, setActiveMode] = useState<'testcase' | 'result'>(Object.keys(results).length > 0 ? 'result' : 'testcase')
 
+  const effectiveIsSubmitting = isRunning ? isSubmitting : isSubmissionResult;
   const resultsExist = Object.keys(results).length > 0
-  const currentResult = results[selectedTestCase]
+  const currentResult = results[selectedTestCase] ?? results[0]
 
   // Define what the current testcase metadata is for display
-  const testcase = isSubmitting
+  const testcase = effectiveIsSubmitting
     ? (problem.testcases[selectedTestCase] || problem.testcases[0])
     : { input: customInput, expected: problem.testcases[selectedTestCase]?.expected || "" }
 
@@ -51,13 +54,13 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
   const getStatusColor = (res: ExecutionResult | undefined, expected: string) => {
     if (!res) return 'var(--secondary-text)'
     if (res.status.id !== 3) return 'var(--error-color)'
-    if (!isSubmitting) return 'var(--success-color)' // Run mode is green if finished successfully
+    if (!effectiveIsSubmitting) return 'var(--success-color)' // Run mode is green if finished successfully
     return isPassed(res, expected) ? 'var(--success-color)' : 'var(--error-color)'
   }
 
   const getStatusLabel = (res: ExecutionResult, expected: string) => {
     if (res.status.id === 3) {
-      if (!isSubmitting) return 'Finished'
+      if (!effectiveIsSubmitting) return 'Finished'
       return isPassed(res, expected) ? 'Accepted' : 'Wrong Answer'
     }
     return res.status.description
@@ -66,14 +69,14 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
   const getStatusIcon = (res: ExecutionResult, expected: string) => {
     const color = getStatusColor(res, expected)
     if (res.status.id === 3) {
-      if (!isSubmitting || isPassed(res, expected)) {
+      if (!effectiveIsSubmitting || isPassed(res, expected)) {
         return <CheckCircle2 size={22} color={color} />
       }
     }
     return <XCircle size={22} color={color} />
   }
 
-  const allPassed = isSubmitting && problem.testcases.every((tc, idx) => results[idx] && isPassed(results[idx], tc.expected))
+  const allPassed = effectiveIsSubmitting && problem.testcases.every((tc, idx) => results[idx] && isPassed(results[idx], tc.expected))
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--panel-bg)', overflow: 'hidden' }}>
@@ -197,7 +200,7 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
               </div>
             ) : (
               <div>
-                {isSubmitting && (
+                { (effectiveIsSubmitting || resultsExist) && (
                   <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
                     {problem.testcases.map((tc, idx) => {
                       const res = results[idx];
@@ -281,13 +284,13 @@ const TestResultsPanel: React.FC<TestResultsPanelProps> = ({
                             fontFamily: "'JetBrains Mono', monospace",
                             fontSize: '0.85rem',
                             border: '1px solid var(--border-color)',
-                            color: (isSubmitting && !isPassed(currentResult, testcase.expected)) ? 'var(--error-color)' : 'var(--text-color)',
+                            color: (effectiveIsSubmitting && !isPassed(currentResult, testcase.expected)) ? 'var(--error-color)' : 'var(--text-color)',
                             lineHeight: '1.5'
                           }}>{currentResult.stdout || "(no output)"}</pre>
                         </div>
                       )}
 
-                      {isSubmitting && (
+                      { (effectiveIsSubmitting || resultsExist) && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                           <div style={{ color: 'var(--secondary-text)', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase' }}>Expected</div>
                           <pre style={{ backgroundColor: 'var(--darker-bg)', padding: '12px', borderRadius: '8px', margin: 0, color: 'var(--text-color)', fontFamily: "'JetBrains Mono', monospace", border: '1px solid var(--border-color)', fontSize: '0.85rem', lineHeight: '1.5', overflowX: 'auto' }}>{testcase.expected}</pre>
