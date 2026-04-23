@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://js.puter.com/v2/"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
+
+    <link type="text/css" rel="stylesheet" href="css/ide.css">
+    <link type="text/css" rel="stylesheet" href="css/semantic.css">
+    <link type="text/css" rel="stylesheet" href="css/site.css">
+    <link type="text/css" rel="stylesheet" href="css/modern.css">
+    <link rel="stylesheet" href="/src/pages/styles.css">
+
+    <title>ProCode IDE</title>
+</head>
+<body style="background-color: #0f0f0f; color: white; margin: 0; padding: 0; overflow: hidden; height: 100vh;">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js").then(() => console.log("Service Worker Registered"));
+        }
+    </script>
+</body>
+</html>

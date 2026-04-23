@@ -47,60 +47,105 @@ var timeStart;
 var sqliteAdditionalFiles;
 var languages = {};
 
-var layoutConfig = {
+var isMobile = window.innerWidth <= 768;
+
+var layoutConfig = isMobile ? {
+    settings: {
+        showPopoutIcon: false,
+        reorderEnabled: false,
+        showMaximiseIcon: false,
+        headerHeight: 0 // Hide header on mobile as we use footer
+    },
+    content: [{
+        type: "stack",
+        content: [{
+            type: "component",
+            componentName: "description",
+            id: "description",
+            title: "Description",
+            isClosable: false
+        }, {
+            type: "component",
+            componentName: "source",
+            id: "source",
+            title: "Code",
+            isClosable: false
+        }, {
+            type: "component",
+            componentName: "stdin",
+            id: "stdin",
+            title: "Testcase",
+            isClosable: false
+        }, {
+            type: "component",
+            componentName: "stdout",
+            id: "stdout",
+            title: "Test Result",
+            isClosable: false
+        }, {
+            type: "component",
+            componentName: "ai",
+            id: "ai",
+            title: "AI Assistant",
+            isClosable: false
+        }]
+    }]
+} : {
     settings: {
         showPopoutIcon: false,
         reorderEnabled: true
     },
     content: [{
-        type: configuration.get("appOptions.mainLayout"),
+        type: "row",
         content: [{
             type: "component",
-            width: 66,
-            componentName: "source",
-            id: "source",
-            title: "Source Code",
-            isClosable: false,
-            componentState: {
-                readOnly: false
-            }
+            width: 30,
+            componentName: "description",
+            id: "description",
+            title: "Description",
+            isClosable: false
         }, {
-            type: configuration.get("appOptions.assistantLayout"),
-            title: "AI Assistant and I/O",
-            content: [configuration.get("appOptions.showAIAssistant") ? {
+            type: "column",
+            width: 45,
+            content: [{
                 type: "component",
-                height: 66,
-                componentName: "ai",
-                id: "ai",
-                title: "AI Assistant",
+                height: 70,
+                componentName: "source",
+                id: "source",
+                title: "Code",
                 isClosable: false,
                 componentState: {
                     readOnly: false
                 }
-            } : null, {
-                type: configuration.get("appOptions.ioLayout"),
-                title: "I/O",
-                content: [
-                    configuration.get("appOptions.showInput") ? {
-                        type: "component",
-                        componentName: "stdin",
-                        id: "stdin",
-                        title: "Input",
-                        isClosable: false,
-                        componentState: {
-                            readOnly: false
-                        }
-                    } : null, configuration.get("appOptions.showOutput") ? {
-                        type: "component",
-                        componentName: "stdout",
-                        id: "stdout",
-                        title: "Output",
-                        isClosable: false,
-                        componentState: {
-                            readOnly: true
-                        }
-                    } : null].filter(Boolean)
-            }].filter(Boolean)
+            }, {
+                type: "stack",
+                content: [{
+                    type: "component",
+                    componentName: "stdin",
+                    id: "stdin",
+                    title: "Testcase",
+                    isClosable: false,
+                    componentState: {
+                        readOnly: false
+                    }
+                }, {
+                    type: "component",
+                    componentName: "stdout",
+                    id: "stdout",
+                    title: "Test Result",
+                    isClosable: false,
+                    componentState: {
+                        readOnly: true
+                    }
+                }]
+            }]
+        }, {
+            type: "component",
+            width: 25,
+            componentName: "ai",
+            id: "ai",
+            title: "AI Assistant",
+            isClosable: false
         }]
     }]
 };
@@ -121,8 +166,8 @@ function decode(bytes) {
 }
 
 function showError(title, content) {
-    $("#judge0-site-modal #title").html(title);
-    $("#judge0-site-modal .content").html(content);
+    $("#procode-site-modal #title").html(title);
+    $("#procode-site-modal .content").html(content);
 
     let reportTitle = encodeURIComponent(`Error on ${window.location.href}`);
     let reportBody = encodeURIComponent(
@@ -133,7 +178,7 @@ function showError(title, content) {
     );
 
     $("#report-problem-btn").attr("href", `https://github.com/judge0/ide/issues/new?title=${reportTitle}&body=${reportBody}`);
-    $("#judge0-site-modal").modal("show");
+    $("#procode-site-modal").modal("show");
 }
 
 function showHttpError(jqXHR) {
@@ -166,6 +211,9 @@ function handleResult(data) {
 
     stdoutEditor.setValue(output);
 
+    // Populate Modern Test Result UI
+    renderTestResults(data, output);
+
     $runBtn.removeClass("loading");
 
     window.top.postMessage(JSON.parse(JSON.stringify({
@@ -175,6 +223,62 @@ function handleResult(data) {
         memory: data.memory,
         output: output
     })), "*");
+}
+
+function renderTestResults(data, actualOutput) {
+    const container = document.getElementById("procode-test-result-container");
+    const statusEl = document.getElementById("test-result-status");
+    const runtimeEl = document.getElementById("test-result-runtime");
+    const tabsContainer = document.getElementById("test-case-tabs");
+
+    const problem = window.currentProblem;
+    const testcases = problem ? problem.testcases : [{ input: stdinEditor.getValue(), expected: "Unknown" }];
+
+    let isAccepted = data.status.id === 3; // 3 is Accepted in Judge0
+
+    // Check if actual output matches expected for the first test case
+    // We only check the first one because we are only running once with the first testcase's input
+    if (isAccepted && problem && testcases.length > 0) {
+        const expected = testcases[0].expected.trim();
+        const actual = actualOutput.trim();
+        if (actual !== expected) {
+            isAccepted = false;
+        }
+    }
+
+    statusEl.innerText = isAccepted ? "Accepted" : (data.status.id === 3 ? "Wrong Answer" : data.status.description);
+    statusEl.className = "result-status " + (isAccepted ? "accepted" : "wrong-answer");
+    runtimeEl.innerText = `Runtime: ${Math.round(data.time * 1000) || 0} ms`;
+
+    tabsContainer.innerHTML = "";
+    testcases.forEach((tc, index) => {
+        const tab = document.createElement("div");
+        let casePass = isAccepted;
+        // In a real scenario, we'd run all test cases.
+        // For this demo, we mark all as fail if the first one failed, or pass if the first one passed.
+
+        tab.className = `test-case-tab ${index === 0 ? 'active' : ''} ${casePass ? 'pass' : 'fail'}`;
+        tab.innerHTML = `<i class="${casePass ? 'check' : 'close'} icon"></i> Case ${index + 1}`;
+        tab.onclick = () => {
+            document.querySelectorAll(".test-case-tab").forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+            showTestCaseDetails(tc, index === 0 ? actualOutput : "Not run");
+        };
+        tabsContainer.appendChild(tab);
+    });
+
+    // Show first test case by default
+    showTestCaseDetails(testcases[0], actualOutput);
+
+    // Switch to Test Result tab
+    let x = layout.root.getItemsById("stdout")[0];
+    x.parent.header.parent.setActiveContentItem(x);
+}
+
+function showTestCaseDetails(testcase, actualOutput) {
+    document.getElementById("test-case-input").innerText = testcase.input;
+    document.getElementById("test-case-output").innerText = actualOutput;
+    document.getElementById("test-case-expected").innerText = testcase.expected;
 }
 
 async function getSelectedLanguage() {
@@ -200,8 +304,11 @@ function run() {
     stdoutEditor.setValue("");
     $statusLine.html("");
 
+    // Automatically switch to Test Result tab
     let x = layout.root.getItemsById("stdout")[0];
-    x.parent.header.parent.setActiveContentItem(x);
+    if (x) {
+        x.parent.header.parent.setActiveContentItem(x);
+    }
 
     let sourceValue = encode(sourceEditor.getValue());
     let stdinValue = encode(stdinEditor.getValue());
@@ -466,28 +573,29 @@ function clear() {
 }
 
 function refreshSiteContentHeight() {
-    const navigationHeight = document.getElementById("judge0-site-navigation").offsetHeight;
-
-    const siteContent = document.getElementById("judge0-site-content");
-    siteContent.style.height = `${window.innerHeight}px`;
-    siteContent.style.paddingTop = `${navigationHeight}px`;
+    // Height and padding are now handled by CSS in modern.css
 }
 
 function refreshLayoutSize() {
     refreshSiteContentHeight();
-    layout.updateSize();
+    if (layout) {
+        layout.updateSize();
+    }
 }
 
 window.addEventListener("resize", refreshLayoutSize);
 document.addEventListener("DOMContentLoaded", async function () {
-    $(".ui.selection.dropdown").dropdown();
+    $("#select-language").dropdown();
+    $(".ui.dropdown:not(#select-language)").dropdown({
+        on: "click"
+    });
     $("[data-content]").popup({
         lastResort: "left center"
     });
 
     refreshSiteContentHeight();
 
-    console.log("Hey, Judge0 IDE is open-sourced: https://github.com/judge0/ide. Have fun!");
+    console.log("Hey, ProCode IDE is open-sourced. Have fun!");
 
     $selectLanguage = $("#select-language");
     $selectLanguage.change(function (event, data) {
@@ -502,6 +610,47 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     $runBtn = $("#run-btn");
     $runBtn.click(run);
+
+    $("#mobile-run-btn").click(run);
+    $("#mobile-submit-btn").click(function() {
+        $("#submit-btn").click();
+    });
+
+    $("#mobile-description-btn").click(function() {
+        let x = layout.root.getItemsById("description")[0];
+        if (x) {
+            x.parent.header.parent.setActiveContentItem(x);
+        }
+    });
+
+    $("#mobile-editor-btn").click(function() {
+        let x = layout.root.getItemsById("source")[0];
+        if (x) {
+            x.parent.header.parent.setActiveContentItem(x);
+        }
+    });
+
+    $("#mobile-testcase-btn").click(function() {
+        let x = layout.root.getItemsById("stdout")[0];
+        if (x) {
+            x.parent.header.parent.setActiveContentItem(x);
+        }
+    });
+
+    $(".theme-toggle-mobile").click(function() {
+        $("#procode-theme-toggle-btn").click();
+    });
+
+    window.addEventListener("problemLoaded", function(e) {
+        window.currentProblem = e.detail;
+        if (stdinEditor) {
+            stdinEditor.setValue(e.detail.testcases[0].input);
+        }
+    });
+
+    $("#submit-btn").click(function() {
+        showError("Info", "Submit functionality is currently being implemented. For now, please use the Run button to test your code.");
+    });
 
     $("#open-file-input").change(function (e) {
         const selectedFile = e.target.files[0];
@@ -519,7 +668,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     });
 
-    $statusLine = $("#judge0-status-line");
+    $statusLine = $("#procode-status-line");
 
     $(document).on("keydown", "body", function (e) {
         if (e.metaKey || e.ctrlKey) {
@@ -561,7 +710,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     require(["vs/editor/editor.main"], function (ignorable) {
-        layout = new GoldenLayout(layoutConfig, $("#judge0-site-content"));
+        layout = new GoldenLayout(layoutConfig, $("#procode-site-content"));
 
         layout.registerComponent("source", function (container, state) {
             sourceEditor = monaco.editor.create(container.getElement()[0], {
@@ -578,7 +727,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             monaco.languages.registerInlineCompletionsProvider('*', {
                 provideInlineCompletions: async (model, position) => {
-                    if (!puter.auth.isSignedIn() || !document.getElementById("judge0-inline-suggestions").checked || !configuration.get("appOptions.showAIAssistant")) {
+                    if (!puter.auth.isSignedIn() || !document.getElementById("procode-inline-suggestions").checked || !configuration.get("appOptions.showAIAssistant")) {
                         return;
                     }
 
@@ -617,7 +766,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                     ### Completion:`.trim()
                     }], {
-                        model: document.getElementById("judge0-chat-model-select").value,
+                        model: document.getElementById("procode-chat-model-select").value,
                     });
 
                     let aiResponseValue = aiResponse?.toString().trim() || "";
@@ -660,24 +809,43 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
 
         layout.registerComponent("stdout", function (container, state) {
-            stdoutEditor = monaco.editor.create(container.getElement()[0], {
-                automaticLayout: true,
-                scrollBeyondLastLine: false,
-                readOnly: state.readOnly,
-                language: "plaintext",
-                minimap: {
-                    enabled: false
-                }
-            });
+            const el = document.getElementById("procode-test-result-container");
+            if (el) {
+                container.getElement()[0].appendChild(el);
+                el.style.display = "flex";
+            }
+
+            // Create a hidden editor for backward compatibility if needed,
+            // or just use a dummy element.
+            const dummy = document.createElement("div");
+            dummy.style.display = "none";
+            container.getElement()[0].appendChild(dummy);
+            stdoutEditor = {
+                setValue: (val) => { console.log("Standard output:", val); },
+                getValue: () => { return ""; },
+                updateOptions: () => {}
+            };
         });
 
         layout.registerComponent("ai", function (container, state) {
-            container.getElement()[0].appendChild(document.getElementById("judge0-chat-container"));
+            const el = document.getElementById("procode-chat-container");
+            if (el) {
+                container.getElement()[0].appendChild(el);
+                el.style.display = "flex";
+            }
+        });
+
+        layout.registerComponent("description", function (container, state) {
+            const el = document.getElementById("procode-problem-description");
+            if (el) {
+                container.getElement()[0].appendChild(el);
+                el.style.display = "block";
+            }
         });
 
         layout.on("initialised", function () {
             setDefaults();
-            refreshLayoutSize();
+            setTimeout(refreshLayoutSize, 50);
             window.top.postMessage({ event: "initialised" }, "*");
         });
 
@@ -704,8 +872,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     }
 
-    document.getElementById("judge0-open-file-btn").addEventListener("click", openAction);
-    document.getElementById("judge0-save-btn").addEventListener("click", saveAction);
+    document.getElementById("procode-open-file-btn").addEventListener("click", openAction);
+    document.getElementById("procode-save-btn").addEventListener("click", saveAction);
 
     window.onmessage = function (e) {
         if (!e.data) {

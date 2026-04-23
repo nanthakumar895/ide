@@ -10,12 +10,12 @@ const style = {
         Object.keys(config.styleOptions).forEach(styleOption => {
             const showOption = config.styleOptions[styleOption];
             if (showOption) {
-                document.querySelectorAll(`.judge0-${styleOption}`).forEach(e => {
-                    e.classList.remove("judge0-style-hidden");
+                document.querySelectorAll(`.procode-${styleOption}`).forEach(e => {
+                    e.classList.remove("procode-style-hidden");
                 });
             } else {
-                document.querySelectorAll(`.judge0-${styleOption}`).forEach(e => {
-                    e.classList.add("judge0-style-hidden");
+                document.querySelectorAll(`.procode-${styleOption}`).forEach(e => {
+                    e.classList.add("procode-style-hidden");
                 });
             }
         });
