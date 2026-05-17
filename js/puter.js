@@ -10,7 +10,10 @@ async function uiSignIn() {
     document.getElementById("judge0-sign-in-btn").classList.add("judge0-hidden");
     const signOutBtn = document.getElementById("judge0-sign-out-btn");
     signOutBtn.classList.remove("judge0-hidden");
-    signOutBtn.querySelector("#judge0-puter-username").innerText = (await puter.auth.getUser()).username;
+    const usernameElement = signOutBtn.querySelector("#judge0-puter-username");
+    if (usernameElement) {
+        usernameElement.innerText = (await puter.auth.getUser()).username;
+    }
 
     const modelSelect = document.getElementById("judge0-chat-model-select");
     modelSelect.closest(".ui.selection.dropdown").classList.remove("disabled");
@@ -27,7 +30,10 @@ function uiSignOut() {
     document.getElementById("judge0-sign-in-btn").classList.remove("judge0-hidden");
     const signOutBtn = document.getElementById("judge0-sign-out-btn");
     signOutBtn.classList.add("judge0-hidden");
-    signOutBtn.querySelector("#judge0-puter-username").innerText = "Sign out";
+    const usernameElement = signOutBtn.querySelector("#judge0-puter-username");
+    if (usernameElement) {
+        usernameElement.innerText = "Sign out";
+    }
 
     const modelSelect = document.getElementById("judge0-chat-model-select");
     modelSelect.closest(".ui.selection.dropdown").classList.add("disabled");
