@@ -9,8 +9,8 @@ const theme = {
 
         document.body.style.background = `url("./images/logo_${isLight ? "white" : "black"}.svg") center center / 33% no-repeat ${isLight ? "#f3f4f6" : "#111827"} `;
 
-        document.getElementById("judge0-golden-layout-dark-theme-stylesheet").disabled = isLight;
-        document.getElementById("judge0-golden-layout-light-theme-stylesheet").disabled = !isLight;
+        document.getElementById("procode-golden-layout-dark-theme-stylesheet").disabled = isLight;
+        document.getElementById("procode-golden-layout-light-theme-stylesheet").disabled = !isLight;
 
         monaco.editor.setTheme(isLight ? "vs-light" : "vs-dark");
 
@@ -30,8 +30,8 @@ const theme = {
             }
         });
 
-        document.getElementById("judge0-theme-toggle-btn").setAttribute("data-content", `Switch between dark, light, and system theme (currently ${resolvedName} theme)`);
-        const themeToggleBtnIcon = document.getElementById("judge0-theme-toggle-btn-icon");
+        document.getElementById("procode-theme-toggle-btn").setAttribute("data-content", `Switch between dark, light, and system theme (currently ${resolvedName} theme)`);
+        const themeToggleBtnIcon = document.getElementById("procode-theme-toggle-btn-icon");
         if (resolvedName === "dark") {
             themeToggleBtnIcon.classList = "moon icon";
         } else if (resolvedName === "light") {
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
     require(["vs/editor/editor.main"], function () {
         theme.set(configuration.get("theme"), false);
     });
-    document.getElementById("judge0-theme-toggle-btn").addEventListener("click", theme.toggle);
+    document.getElementById("procode-theme-toggle-btn").addEventListener("click", theme.toggle);
 });
 
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {

@@ -1,28 +1,28 @@
-.judge0-file-menu {
+.procode-file-menu {
     min-width: 15rem !important;
 }
 
-#judge0-chat-container {
+#procode-chat-container {
     display: flex;
     flex-direction: column;
     height: 100%;
     padding: 0;
 }
 
-#judge0-chat-container > .ui.menu {
+#procode-chat-container > .ui.menu {
     border-bottom: none;
 }
 
-#judge0-chat-messages {
+#procode-chat-messages {
     flex-grow: 1;
     overflow-y: auto;
 }
 
-#judge0-chat-messages pre {
+#procode-chat-messages pre {
     overflow-x: auto;
 }
 
-.judge0-user-message {
+.procode-user-message {
     margin-left: auto !important;
     margin-right: 1em !important;
     margin-top: 1em !important;
@@ -31,20 +31,20 @@
     width: fit-content;
 }
 
-#judge0-chat-input-container {
+#procode-chat-input-container {
     margin-top: 0;
 }
 
-#judge0-status-line:empty {
+#procode-status-line:empty {
     display: none;
 }
 
-.judge0-hidden, .judge0-style-hidden {
+.procode-hidden, .procode-style-hidden {
     display: none !important;
 }
 
 @media (display-mode: standalone) {
-    .judge0-standalone-hidden {
+    .procode-standalone-hidden {
         display: none !important;
     }
 }
