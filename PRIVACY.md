@@ -1,13 +1,13 @@
-# Privacy Policy for Judge0 IDE
+# Privacy Policy for ProCode IDE
 Effective Date: 2024-03-28
 
 ## 1. Introduction
-Welcome to Judge0 IDE, hosted by Judge0 d.o.o. ("we", "us", or "our").
+Welcome to ProCode IDE, hosted by Judge0 d.o.o. ("we", "us", or "our").
 We are committed to protecting your privacy and handling your data openly and transparently.
-This privacy policy explains how we collect, use, process, and disclose your information, including personal data, in connection with your access to and use of our website, https://ide.judge0.com.
+This privacy policy explains how we collect, use, process, and disclose your information, including personal data, in connection with your access to and use of our website, https://procode.example.com.
 
 ## 2. Data We Collect
-When you use Judge0 IDE, we collect and store the source code you submit for compilation and execution.
+When you use ProCode IDE, we collect and store the source code you submit for compilation and execution.
 Additionally, we utilize Plausible Analytics to collect anonymized web traffic data to understand how users interact with our site without compromising your privacy.
 This data includes information such as the type of device, browser used, and broad geographic location (e.g., country or city-level location).
 For more information about Plausible Analytics and their approach to privacy, please visit https://plausible.io.
@@ -43,4 +43,4 @@ We may update this privacy policy in response to changing legal, technical, or b
 When we update our policy, we will take appropriate measures to inform you, consistent with the significance of the changes we make.
 
 ## 10. Contact Us
-If you have any questions or concerns about our use of your information, please contact us at privacy@judge0.com.
+If you have any questions or concerns about our use of your information, please contact us at privacy@procode.example.com.

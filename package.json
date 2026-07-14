@@ -1,0 +1,46 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "[![ProCode IDE Screenshot](./.github/screenshot.png)](https://procode.example.com)",
+  "main": "sw.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adola-erp/ide.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/adola-erp/ide/issues"
+  },
+  "homepage": "https://github.com/adola-erp/ide#readme",
+  "devDependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "@tailwindcss/postcss": "^4.2.4",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "autoprefixer": "^10.5.0",
+    "lucide-react": "^1.8.0",
+    "postcss": "^8.5.10",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-resizable-panels": "^4.10.0",
+    "tailwindcss": "^4.2.4",
+    "terser": "^5.46.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.8"
+  },
+  "dependencies": {
+    "@clerk/clerk-react": "^5.61.6",
+    "@supabase/supabase-js": "^2.104.0"
+  }
+}
